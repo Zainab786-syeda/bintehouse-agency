@@ -7,6 +7,42 @@
     <link rel="stylesheet" href="style.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* لاگ ان فارم کو خوبصورت بنانے کے لیے عارضی ان لائن سٹائلنگ */
+        .auth-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            font-family: 'Poppins', sans-serif;
+        }
+        .auth-toggle {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .auth-toggle button {
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #666;
+            padding-bottom: 5px;
+        }
+        .auth-toggle button.active {
+            color: #000;
+            border-bottom: 2px solid #000;
+        }
+        .user-logged-in {
+            color: green;
+            font-weight: bold;
+            margin-left: 15px;
+        }
+        .hidden { display: none; }
+    </style>
 </head>
 <body>
 
@@ -17,7 +53,9 @@
             <nav>
                 <a href="#home">Home</a>
                 <a href="#services">Services</a>
-                <a href="#contact" class="btn-nav">Get Started</a>
+                <a href="#auth-section" id="nav-auth-btn" class="btn-nav">Login / Register</a>
+                <span id="user-display" class="user-logged-in hidden"></span>
+                <a href="#" id="logout-btn" class="hidden" style="margin-left:10px; color:red;">Logout</a>
             </nav>
         </div>
     </header>
@@ -28,6 +66,46 @@
             <h1>We Build Futuristic <br><span>Digital Experiences</span></h1>
             <p>Empowering brands with premium web development, AI automation, and cutting-edge software solutions.</p>
             <a href="#contact" class="btn-main">Launch Your Project</a>
+        </div>
+    </section>
+
+    <!-- Authentication Section (New) -->
+    <section id="auth-section" class="auth-section">
+        <div class="auth-container">
+            <div class="auth-toggle">
+                <button id="show-login" class="active">Login</button>
+                <button id="show-register">Register</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="contact-form">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="login-email" placeholder="Enter email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="login-password" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="btn-submit" style="width:100%; margin-top:15px;">Sign In</button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="register-form" class="contact-form hidden">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="reg-name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="reg-email" placeholder="Enter email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password (Min 6 characters)</label>
+                    <input type="password" id="reg-password" placeholder="Create password" required>
+                </div>
+                <button type="submit" class="btn-submit" style="width:100%; margin-top:15px;">Create Account</button>
+            </form>
         </div>
     </section>
 
@@ -86,6 +164,8 @@
     <!-- Firebase System Connection (CDN) -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <!-- Auth لائبریری شامل کی گئی ہے -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
 
     <script>
         // Aapka Firebase Configuration
@@ -102,17 +182,95 @@
         // Firebase Initialize
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
+        const auth = firebase.auth(); // Auth سروس شروع کی
 
-        // Form Submit listener
+        // Toggle UI Between Login and Register
+        document.getElementById('show-login').addEventListener('click', () => {
+            document.getElementById('login-form').classList.remove('hidden');
+            document.getElementById('register-form').classList.add('hidden');
+            document.getElementById('show-login').classList.add('active');
+            document.getElementById('show-register').classList.remove('active');
+        });
+
+        document.getElementById('show-register').addEventListener('click', () => {
+            document.getElementById('register-form').classList.remove('hidden');
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('show-register').classList.add('active');
+            document.getElementById('show-login').classList.remove('active');
+        });
+
+        // 1. SIGN UP / REGISTRATION LOGIC
+        document.getElementById('register-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-password').value;
+            const name = document.getElementById('reg-name').value;
+
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // یوزر کا نام فائر بیس پروفائل میں سیٹ کرنا
+                    return userCredential.user.updateProfile({ displayName: name });
+                })
+                .then(() => {
+                    alert("Account Created Successfully!");
+                    document.getElementById('register-form').reset();
+                })
+                .catch((error) => {
+                    alert("Error: " + error.message);
+                });
+        });
+
+        // 2. LOGIN LOGIC
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            auth.signInWithEmailAndPassword(email, password)
+                .then(() => {
+                    alert("Logged In Successfully!");
+                    document.getElementById('login-form').reset();
+                })
+                .catch((error) => {
+                    alert("Error: " + error.message);
+                });
+        });
+
+        // 3. LOGOUT LOGIC
+        document.getElementById('logout-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            auth.signOut().then(() => {
+                alert("Logged out successfully.");
+            });
+        });
+
+        // 4. CHECK USER STATE (صارف لاگ ان ہے یا نہیں)
+        auth.onAuthStateChanged((user) => {
+            const navAuthBtn = document.getElementById('nav-auth-btn');
+            const userDisplay = document.getElementById('user-display');
+            const logoutBtn = document.getElementById('logout-btn');
+
+            if (user) {
+                // اگر یوزر لاگ ان ہے
+                navAuthBtn.classList.add('hidden');
+                userDisplay.classList.remove('hidden');
+                userDisplay.innerText = "Welcome, " + (user.displayName || "User");
+                logoutBtn.classList.remove('hidden');
+            } else {
+                // اگر لاگ ان نہیں ہے
+                navAuthBtn.classList.remove('hidden');
+                userDisplay.classList.add('hidden');
+                logoutBtn.classList.add('hidden');
+            }
+        });
+
+        // Contact Form Logic (جو پہلے سے موجود تھی)
         document.getElementById('agency-contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
-
-            // Inputs se live data uthana
             const nameValue = document.getElementById('client-name').value;
             const emailValue = document.getElementById('client-email').value;
             const projectValue = document.getElementById('client-project').value;
 
-            // Firestore database mein safe save karna
             db.collection("agency_orders").add({
                 client_name: nameValue,
                 client_email: emailValue,
@@ -124,7 +282,6 @@
                 document.getElementById('agency-contact-form').reset();
             })
             .catch((error) => {
-                console.error("Firebase Error: ", error);
                 alert("Technical issue! Please try again later.");
             });
         });
