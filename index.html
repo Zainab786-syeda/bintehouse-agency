@@ -18,25 +18,30 @@
             background-color: #f4f7f6;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
 
         .btn-nav-auth {
             background: #000000;
             color: #ffffff;
             border: none;
-            padding: 8px 20px;
-            font-size: 14px;
+            padding: 12px 28px;
+            font-size: 15px;
             font-weight: 500;
             border-radius: 6px;
             cursor: pointer;
             font-family: 'Poppins', sans-serif;
-            transition: background 0.2s ease;
-            margin-left: 15px;
-            margin-top: 20px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .btn-nav-auth:hover {
             background: #222222;
+            transform: translateY(-2px);
         }
 
         .auth-modal {
@@ -49,6 +54,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            opacity: 1;
+            transition: opacity 0.2s ease;
         }
 
         .auth-modal-overlay {
@@ -69,6 +76,7 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             z-index: 10000;
             font-family: 'Poppins', sans-serif;
+            transition: transform 0.3s ease;
         }
 
         .close-modal {
@@ -163,24 +171,7 @@
             background: #222;
         }
 
-        .user-logged-in {
-            font-size: 14px;
-            font-weight: 600;
-            color: #000;
-            background: #f0f0f2;
-            padding: 6px 14px;
-            border-radius: 20px;
-            margin-left: 15px;
-        }
-
-        .logout-link {
-            color: #ff3333;
-            font-size: 14px;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        /* Agar aapko design ko chupana ho to is class ko use karein */
+        /* Shuru me modal ko chupane ke liye class */
         .hidden {
             display: none !important;
         }
@@ -188,17 +179,17 @@
 </head>
 <body>
 
-    <!-- Login Button (Sirf visual ke liye abhi rakha hai) -->
-    <button class="btn-nav-auth">Login / Register</button>
+    <!-- Main Navigation/Trigger Button -->
+    <button class="btn-nav-auth" id="openModalBtn">Login / Register</button>
 
-    <!-- Main Auth Modal -->
-    <div class="auth-modal">
+    <!-- Main Auth Modal (Shuru me hidden class di hai taake ye chupa rahe) -->
+    <div class="auth-modal hidden" id="authModal">
         <!-- Background Blur Overlay -->
-        <div class="auth-modal-overlay"></div>
+        <div class="auth-modal-overlay" id="modalOverlay"></div>
 
         <!-- Card Container -->
         <div class="auth-container">
-            <button class="close-modal">&times;</button>
+            <button class="close-modal" id="closeModalBtn">&times;</button>
 
             <!-- Login / Signup Toggle Buttons -->
             <div class="auth-toggle">
@@ -207,9 +198,8 @@
             </div>
 
             <!-- Login Form -->
-            <form class="auth-form">
-                
-                <!-- Email Group (Yahan Label ka 'for' aur Input ki 'id' connect hain, koi error nahi aayega) -->
+            <form class="auth-form" id="loginForm">
+                <!-- Email Group -->
                 <div class="form-group">
                     <label for="user-email">Email Address</label>
                     <input type="email" id="user-email" placeholder="name@company.com" required>
@@ -224,9 +214,39 @@
                 <!-- Submit Button -->
                 <button type="submit" class="btn-submit">Sign In</button>
             </form>
-
         </div>
     </div>
 
+    <!-- JavaScript code Jo Modal ko chalaye ga -->
+    <script>
+        // Elements ko select karna
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const authModal = document.getElementById('authModal');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const loginForm = document.getElementById('loginForm');
+
+        // 1. Modal Open karne ka function
+        openModalBtn.addEventListener('click', () => {
+            authModal.classList.remove('hidden');
+        });
+
+        // 2. Modal Close karne ka function (Cross button se)
+        closeModalBtn.addEventListener('click', () => {
+            authModal.classList.add('hidden');
+        });
+
+        // 3. Modal Close karne ka function (Bahar black screen par click karne se)
+        modalOverlay.addEventListener('click', () => {
+            authModal.classList.add('hidden');
+        });
+
+        // 4. Form submit hone par reload na ho uske liye
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('BinteHouse Agency me khushamdeed! Form data ready hai.');
+        });
+    </script>
+
 </body>
-</html>s
+</html>
