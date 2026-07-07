@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BinteHouse | Master Seller Center & Ad Manager</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Configuration Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f8fafc; color: #0f172a; line-height: 1.6; }
+        .dashboard-container { width: 92%; max-width: 1400px; margin: 0 auto; padding: 40px 0; }
+        
+        /* High-tech Top Metrics Rows */
+        .analytics-dashboard-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; margin-bottom: 40px; }
+        .dashboard-metric-card { background: #ffffff; border: 1px solid #e2e8f0; padding: 25px; border-radius: 14px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01); position: relative; overflow: hidden; }
+        .dashboard-metric-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: #e2e8f0; }
+        .dashboard-metric-card.accent-blue::after { background: #0070f3; }
+        .dashboard-metric-card.accent-green::after { background: #10b981; }
+        .dashboard-metric-card.accent-purple::after { background: #8b5cf6; }
+        .metric-label-text { font-size: 12px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .metric-value-display { font-size: 30px; font-weight: 700; color: #0f172a; margin-top: 5px; }
+        .metric-subtext { font-size: 12px; margin-top: 4px; display: block; }
+
+        /* Master Grid Split Workspace Layout */
+        .workspace-grid-split { display: grid; grid-template-columns: 1fr 1fr; gap: 35px; }
+        @media (max-width: 1024px) { .workspace-grid-split { grid-template-columns: 1fr; } }
+        
+        .panel-box-container { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01); }
+        .panel-header-title { font-size: 18px; font-weight: 700; color: #000000; margin-bottom: 20px; border-bottom: 2px solid #f1f5f9; padding-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+
+        /* Form Structure Elements Design */
+        .form-input-node { margin-bottom: 20px; display: flex; flex-direction: column; }
+        .form-input-node label { font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #334155; }
+        .control-input-field, .control-textarea-field { padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 8px; font-family: inherit; font-size: 14px; background: #f8fafc; outline: none; transition: all 0.2s; }
+        .control-input-field:focus, .control-textarea-field:focus { border-color: #0070f3; background: #ffffff; box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.1); }
+        .btn-action-execute { background: #000000; color: white; border: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; cursor: pointer; width: 100%; transition: background 0.2s; }
+        .btn-action-execute:hover { background: #0070f3; }
+
+        /* Ads Campaign Wizard Special Layout */
+        .ads-campaign-card-wizard { background: linear-gradient(135deg, #0f172a, #1e293b); color: white; border: none; position: relative; }
+        .ads-campaign-card-wizard .panel-header-title { color: #ffffff; border-color: #334155; }
+        .ads-campaign-card-wizard label { color: #cbd5e1; }
+        .ads-campaign-card-wizard input, .ads-campaign-card-wizard select { background: rgba(255,255,255,0.05); border: 1px solid #334155; color: white; }
+        .ads-campaign-card-wizard input:focus, .ads-campaign-card-wizard select:focus { background: rgba(255,255,255,0.1); border-color: #38bdf8; }
+        .btn-activate-ad-campaign { background: #0070f3; color: white; border: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 14px rgba(0, 112, 243, 0.3); transition: all 0.2s; }
+        .btn-activate-ad-campaign:hover { background: #38bdf8; color: #0f172a; transform: translateY(-1px); }
+
+        /* Dynamic Operations Activity Logs Grid */
+        .activity-log-list { display: flex; flex-direction: column; gap: 15px; margin-top: 15px; }
+        .activity-log-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 14px; }
+        .status-pill { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; }
+        .status-pill.active-ad { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
+        .status-pill.system-log { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        
+        <!-- Corporate Seller Heading Block -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-bottom: 1px solid #e2e8f0; padding-bottom: 25px;">
+            <div>
+                <h1 style="font-size: 32px; font-weight: 700; letter-spacing: -0.5px;">Seller Operations Control</h1>
+                <p style="color: #64748b; font-size: 14px;">Deploy global assets, manage paid advertising vectors, and review channel traffic analytics grids.</p>
+            </div>
+            <div style="text-align: right;">
+                <span style="font-size: 13px; font-weight: 600; background: #f1f5f9; padding: 8px 16px; border-radius: 20px; border: 1px solid #e2e8f0;">⚡ Vendor ID: VND-77042</span>
+            </div>
+        </div>
+
+        <!-- Real-time Analytics Performance Metric Matrix Grid Row -->
+        <section class="analytics-dashboard-row">
+            <div class="dashboard-metric-card accent-blue">
+                <span class="metric-label-text">Total Hosted Assets</span>
+                <div class="metric-value-display" id="metric-assets-count">3</div>
+                <span class="metric-subtext" style="color: #0070f3; font-weight: 600;">All nodes synchronized live</span>
+            </div>
+            <div class="dashboard-metric-card accent-green">
+                <span class="metric-label-text">Monthly Shop Traffic</span>
+                <div class="metric-value-display">1,840</div>
+                <span class="metric-subtext" style="color: #10b981; font-weight: 500;">📈 +14% traffic acceleration</span>
+            </div>
+            <div class="dashboard-metric-card accent-purple">
+                <span class="metric-label-text">Active Ad Campaigns</span>
+                <div class="metric-value-display" id="metric-ads-count">1</div>
+                <span class="metric-subtext" style="color: #8b5cf6; font-weight: 600;">Targeting global user slots</span>
+            </div>
+        </section>
+
+        <div class="workspace-grid-split">
+            
+            <!-- Left Pane Workspace: Advanced Product Deployment Wizard Form -->
+            <div class="panel-box-container">
+                <div class="panel-header-title">📦 Host New Premium AI Asset</div>
+                <form id="dashboard-asset-form" onsubmit="executeAssetHostingPipeline(event)">
+                    <div class="form-input-node">
+                        <label>Asset Architecture Title</label>
+                        <input type="text" id="asset-title-field" class="control-input-field" placeholder="e.g. Premium React Cyber UI Pack" required>
+                    </div>
+                    <div class="form-row" style="display: flex; gap: 20px;">
+                        <div class="form-input-node" style="flex: 1;">
+                            <label>Base Price Vector (PKR)</label>
+                            <input type="number" id="asset-price-field" class="control-input-field" placeholder="e.g. 5000" required>
+                        </div>
+                        <div class="form-input-node" style="flex: 1;">
+                            <label>Search Optimization Tags</label>
+                            <input type="text" id="asset-tags-field" class="control-input-field" placeholder="e.g. blue, nextjs, vector" required>
+                        </div>
+                    </div>
+                    <div class="form-input-node">
+                        <label>Product Presentation Image URL</label>
+                        <input type="url" id="asset-image-field" class="control-input-field" placeholder="https://example.com/mockup.jpg" required>
+                    </div>
+                    <div class="form-input-node">
+                        <label>Structural Scope Documentation / Description</label>
+                        <textarea id="asset-desc-field" rows="4" class="control-textarea-field" placeholder="Describe asset features, specifications, and code variables depth..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-action-execute">Deploy Asset to Global Marketplace</button>
+                </form>
+            </div>
+
+            <!-- Right Pane Workspace: High Visibility Paid Ads Setup Framework & Logs -->
+            <div class="panel-box-container ads-campaign-card-wizard">
+                <div class="panel-header-title">🚀 Launch High-Visibility Ad Campaign</div>
+                <p style="font-size: 12px; color: #94a3b8; margin-bottom: 20px; line-height: 1.4;">Apne kisi bhi product ko BinteHouse website ke top header carousel aur premium visibility zones mein push karein taake dunya bhar se unique buyers ke conversion click rates barhein.</p>
+                
+                <form id="dashboard-ad-form" onsubmit="executeAdCampaignPipeline(event)">
+                    <div class="form-input-node">
+                        <label>Select Target Asset for Ad Promotion</label>
+                        <select id="ad-target-select" class="control-input-field" style="width:100%; height:46px;" required>
+                            <option value="NextJS Premium Analytic Panel">NextJS Premium Analytic Panel</option>
+                            <option value="Corporate Business Hub Template">Corporate Business Hub Template</option>
+                            <option value="Futuristic Abstract Vector Pack">Futuristic Abstract Vector Pack</option>
+                        </select>
+                    </div>
+                    <div class="form-row" style="display: flex; gap: 20px;">
+                        <div class="form-input-node" style="flex: 1;">
+                            <label>Campaign Duration Loop</label>
+                            <select id="ad-duration-select" class="control-input-field" style="width:100%; height:46px;">
+                                <option value="7">7 Days Promotion Campaign</option>
+                                <option value="30">30 Days Pro Campaign</option>
+                            </select>
+                        </div>
+                        <div class="form-input-node" style="flex: 1;">
+                            <label>Budget Tier Configuration</label>
+                            <select id="ad-budget-select" class="control-input-field" style="width:100%; height:46px;">
+                                <option value="Standard">Standard Matrix Tier</option>
+                                <option value="Premium Fast-track">Premium Fast-track Tier</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-activate-ad-campaign">Initialize Paid Advertising Node</button>
+                </form>
+
+                <!-- Active Deployed Campaigns Ledger Output Stream Logs -->
+                <div style="margin-top: 30px; font-size: 14px; font-weight: 600; border-top: 1px solid #334155; padding-top: 20px; color: #38bdf8;">
+                    📋 Active Deployed Campaigns Matrix Logs
+                </div>
+                <div class="activity-log-list" id="activity-logs-target-box">
+                    <div class="activity-log-item" style="background:#1e293b; border-color:#334155;">
+                        <div>
+                            <strong style="color:white;">NextJS Premium Analytic Panel</strong><br>
+                            <span style="font-size: 11px; color:#94a3b8;">Duration: 7 Days Loop • Premium Fast-track Budget</span>
+                        </div>
+                        <span class="status-pill active-ad">Campaign Live</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Script Processing Automations -->
+    <script>
+        // Execution Block: Asset Hosting Processing Pipeline
+        function executeAssetHostingPipeline(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('asset-title-field').value.trim();
+            const price = document.getElementById('asset-price-field').value;
+            
+            // Simulation Notification Alert Block
+            alert(`Initializing Cloud Transmission Matrix... Injecting target data packet: "${title}" into global architecture arrays.`);
+            
+            setTimeout(() => {
+                // Update performance metric view counter indicators dynamically
+                const assetsCounter = document.getElementById('metric-assets-count');
+                let currentCount = parseInt(assetsCounter.innerText);
+                assetsCounter.innerText = currentCount + 1;
+
+                // Dynamically update the target selection options stream in the Ad Campaign Form Panel UI
+                const selectMenu = document.getElementById('ad-target-select');
+                const newOption = document.createElement('option');
+                newOption.value = title;
+                newOption.innerText = title;
+                selectMenu.appendChild(newOption);
+
+                alert("Mubarak ho! Your new technical asset has been hosted live globally. Public grids synchronized successfully.");
+                document.getElementById('dashboard-asset-form').reset();
+            }, 1000);
+        }
+
+        // Execution Block: Ad Campaign Deployment Logic
+        function executeAdCampaignPipeline(event) {
+            event.preventDefault();
+
+            const targetAsset = document.getElementById('ad-target-select').value;
+            const duration = document.getElementById('ad-duration-select').value;
+            const budget = document.getElementById('ad-budget-select').value;
+
+            alert("Connecting Sandbox Escrow Ledger balance validation modules... Initializing Ad Campaign.");
+
+            setTimeout(() => {
+                // Update active campaigns metrics counter counters display live
+                const adsCounter = document.getElementById('metric-ads-count');
+                let currentAds = parseInt(adsCounter.innerText);
+                adsCounter.innerText = currentAds + 1;
+
+                // Inject new activity tracking nodes display block into lower matrix data logs stream area container
+                const logsBox = document.getElementById('activity-logs-target-box');
+                const newLog = document.createElement('div');
+                newLog.className = 'activity-log-item';
+                newLog.style.background = '#1e293b';
+                newLog.style.borderColor = '#334155';
+                newLog.innerHTML = `
+                    <div>
+                        <strong style="color:white;">${targetAsset}</strong><br>
+                        <span style="font-size: 11px; color:#94a3b8;">Duration: ${duration} Days Loop • ${budget} Budget</span>
+                    </div>
+                    <span class="status-pill active-ad">Campaign Live</span>
+                `;
+                
+                logsBox.insertBefore(newLog, logsBox.firstChild);
+                alert(`Mubarak ho! Paid advertisement campaign for "${targetAsset}" is now fully operational across global slots.`);
+                document.getElementById('dashboard-ad-form').reset();
+            }, 1200);
+        }
+    </script>
+</body>
+</html>

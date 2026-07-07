@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BinteHouse | Global AI Marketplace & Image Engine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Embedded Architecture Styling */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f8fafc; color: #0f172a; line-height: 1.6; }
+        .container { width: 90%; max-width: 1300px; margin: 0 auto; padding: 40px 0; }
+        
+        /* Layout Grid Management */
+        .marketplace-layout { display: grid; grid-template-columns: 320px 1fr; gap: 40px; margin-top: 30px; }
+        @media (max-width: 991px) { .marketplace-layout { grid-template-columns: 1fr; } }
+
+        /* Left Side Panel: AI Image Search Engine Portal */
+        .ai-engine-sidebar { background: #ffffff; border-radius: 16px; padding: 24px; border: 1px solid #e2e8f0; height: fit-content; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); }
+        .sidebar-title { font-size: 18px; font-weight: 700; margin-bottom: 15px; color: #000000; display: flex; align-items: center; gap: 8px; }
+        
+        /* Drag and Drop Zone Container */
+        .drop-zone-container { border: 2px dashed #cbd5e1; border-radius: 12px; padding: 30px 15px; text-align: center; background: #f8fafc; cursor: pointer; transition: all 0.2s; position: relative; }
+        .drop-zone-container:hover, .drop-zone-container.dragover { border-color: #0070f3; background: #eff6ff; }
+        .drop-zone-text { font-size: 13px; color: #64748b; margin-bottom: 15px; }
+        
+        /* Camera Interface Matrix */
+        .camera-preview-window { width: 100%; height: 160px; background: #0f172a; border-radius: 8px; overflow: hidden; margin-bottom: 15px; position: relative; display: none; }
+        .camera-preview-window video { width: 100%; height: 100%; object-fit: cover; }
+        .btn-capture-snapshot { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); background: #ef4444; color: white; border: none; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 600; cursor: pointer; z-index: 5; }
+
+        .btn-trigger-hardware { background: #000000; color: white; border: none; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; width: 100%; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .btn-trigger-hardware:hover { background: #222222; }
+
+        /* Right Side Panel: Main Marketplace Display Feed */
+        .market-feed-display { display: flex; flex-direction: column; gap: 30px; }
+        .feed-header-bar { display: flex; justify-content: space-between; align-items: center; background: #ffffff; padding: 20px 30px; border-radius: 14px; border: 1px solid #e2e8f0; }
+        
+        /* Global Products Card Matrix Layout */
+        .products-showcase-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+        .product-market-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01); transition: all 0.3s ease; display: flex; flex-direction: column; }
+        .product-market-card:hover { transform: translateY(-5px); box-shadow: 0 12px 20px -3px rgba(0,0,0,0.06); }
+        .product-market-card.highlighted-match { border-color: #10b981; box-shadow: 0 0 15px rgba(16, 185, 129, 0.2); }
+        .product-market-card img { width: 100%; height: 190px; object-fit: cover; background: #f1f5f9; border-bottom: 1px solid #e2e8f0; }
+        .card-details-box { padding: 22px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .product-vendor-tag { font-size: 11px; color: #94a3b8; display: block; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+        .product-title-text { font-size: 17px; font-weight: 600; color: #0f172a; margin-bottom: 8px; }
+        .product-desc-text { font-size: 14px; color: #64748b; margin-bottom: 18px; line-height: 1.5; }
+        .card-action-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+        .price-tag-display { font-size: 18px; font-weight: 700; color: #0070f3; }
+        .btn-route-deal { background: #000000; color: #ffffff; text-decoration: none; padding: 9px 18px; border-radius: 6px; font-size: 13px; font-weight: 500; transition: background 0.2s ease; }
+        .btn-route-deal:hover { background: #0070f3; }
+
+        /* Dynamic Scan Loading Indicator Animation */
+        .ai-scanning-overlay { background: rgba(0, 112, 243, 0.05); border: 1px solid #0070f3; color: #0070f3; border-radius: 8px; padding: 12px; text-align: center; font-size: 13px; font-weight: 600; margin-top: 15px; display: none; }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Corporate Marketplace Header Title -->
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h1 style="font-size: 36px; font-weight: 700; letter-spacing: -1px;">Global AI Marketplace</h1>
+            <p style="color: #64748b; font-size: 16px;">Duniya ke har kone se upload kiye gaye software components aur premium digital tools arrays.</p>
+        </div>
+
+        <div class="marketplace-layout">
+            
+            <!-- Left Grid Pane: Multi-Modal AI Image Engine Control Panel -->
+            <aside class="ai-engine-sidebar">
+                <div class="sidebar-title">👁️ AI Multi-Modal Engine</div>
+                <p style="font-size: 12px; color: #64748b; margin-bottom: 20px; line-height: 1.4;">Koi bhi item screenshot, code architecture ya visual image upload/scan karein. AI global database se low prices aur specs match karega.</p>
+                
+                <!-- Active Uploader Core Drop Zone Frame -->
+                <div class="drop-zone-container" id="drop-zone-target" onclick="triggerSystemFileBrowser()">
+                    <div class="drop-zone-text" id="drop-text-prompt">📂 Drag & Drop Product Image or Click to Browse</div>
+                    <input type="file" id="hidden-market-file" class="hidden" accept="image/*" onchange="processLocalImageInput(event)">
+                </div>
+
+                <div style="text-align: center; margin: 15px 0; font-size: 12px; color: #94a3b8; font-weight: 600;">OR USE HARDWARE INTERFACE</div>
+
+                <!-- Live Integrated Video Hardware Stream View -->
+                <div class="camera-preview-window" id="camera-hardware-viewport">
+                    <video id="hardware-video-feed" autoplay playsinline muted></video>
+                    <button class="btn-capture-snapshot" onclick="captureEngineSnapshot()">Take Scan Photo</button>
+                </div>
+
+                <button class="btn-trigger-hardware" id="btn-toggle-cam" onclick="activateScanCamera()">📸 Initialize Device Camera</button>
+                
+                <!-- Scanning Notification Indicator Block -->
+                <div class="ai-scanning-overlay" id="scanning-indicator-node">
+                    ⏳ AI processing visual matrices... Matching vectors globally...
+                </div>
+            </aside>
+
+            <!-- Right Grid Pane: Active Products Stream Frame -->
+            <main class="market-feed-display">
+                
+                <div class="feed-header-bar">
+                    <div style="font-size: 15px; font-weight: 600;" id="feed-results-count">Showing 3 Live Cloud Assets</div>
+                    <div style="font-size: 13px; color: #94a3b8; font-weight: 500;">Real-time Index Stream Active</div>
+                </div>
+
+                <!-- Showcase Storage Array Grid -->
+                <div class="products-showcase-grid" id="products-showcase-grid-target">
+                    
+                    <!-- Prebuilt Static Asset Node 1 -->
+                    <div class="product-market-card" data-tags="dashboard framework data analytic matrix panel blue ui">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=500&q=80" alt="Dashboard Template Frame Grid View">
+                        <div class="card-details-box">
+                            <div>
+                                <span class="product-vendor-tag">By Matrix Systems</span>
+                                <h3 class="product-title-text">NextJS Premium Analytic Panel</h3>
+                                <p class="product-desc-text">Robust architecture monitoring system optimized for microservice integration endpoints globally.</p>
+                            </div>
+                            <div class="card-action-footer">
+                                <div class="price-tag-display">PKR 7,500</div>
+                                <a href="messages.html?prefill=Assalam-o-Alaikum, I want to inquire about the NextJS Premium Analytic Panel." class="btn-route-deal">Buy Asset</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Prebuilt Static Asset Node 2 -->
+                    <div class="product-market-card" data-tags="website code custom business portfolio orange luxury">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=80" alt="E-Commerce Visual Frame View">
+                        <div class="card-details-box">
+                            <div>
+                                <span class="product-vendor-tag">By CodeLabs Studio</span>
+                                <h3 class="product-title-text">Corporate Business Hub Template</h3>
+                                <p class="product-desc-text">Minimalist web front-end optimized for portfolio hosting arrays and structural layout management.</p>
+                            </div>
+                            <div class="card-action-footer">
+                                <div class="price-tag-display">PKR 4,200</div>
+                                <a href="messages.html?prefill=Assalam-o-Alaikum, I want to inquire about the Corporate Business Hub Template." class="btn-route-deal">Buy Asset</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Prebuilt Static Asset Node 3 -->
+                    <div class="product-market-card" data-tags="dark futuristic abstract design logo vector neon purple black">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=500&q=80" alt="Abstract Asset Vector Preview Visual">
+                        <div class="card-details-box">
+                            <div>
+                                <span class="product-vendor-tag">By Syeda Graphic Designs</span>
+                                <h3 class="product-title-text">Futuristic Abstract Vector Pack</h3>
+                                <p class="product-desc-text">High resolution branding illustrations featuring hyper-premium neon-mesh design nodes.</p>
+                            </div>
+                            <div class="card-action-footer">
+                                <div class="price-tag-display">PKR 3,000</div>
+                                <a href="messages.html?prefill=Assalam-o-Alaikum, I want to inquire about the Futuristic Abstract Vector Pack." class="btn-route-deal">Buy Asset</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Centralized Logic Automations -->
+    <script>
+        let streamInstance = null;
+        
+        function triggerSystemFileBrowser() {
+            document.getElementById('hidden-market-file').click();
+        }
+
+        // Processing Local File Binary Inputs
+        function processLocalImageInput(event) {
+            const file = event.target.files[0];
+            if(!file) return;
+
+            document.getElementById('drop-text-prompt').innerText = `Selected Asset: ${file.name}`;
+            triggerAIScanWorkflow();
+        }
+
+        // Hardware Device Cam Engine Access Handler
+        function activateScanCamera() {
+            const previewBox = document.getElementById('camera-hardware-viewport');
+            const videoElement = document.getElementById('hardware-video-feed');
+            const toggleBtn = document.getElementById('btn-toggle-cam');
+
+            if(previewBox.style.display === 'block') {
+                // If already open, shut it down gracefully
+                if(streamInstance) {
+                    streamInstance.getTracks().forEach(track => track.stop());
+                }
+                previewBox.style.display = 'none';
+                toggleBtn.innerText = "📸 Initialize Device Camera";
+                return;
+            }
+
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    streamInstance = stream;
+                    videoElement.srcObject = stream;
+                    previewBox.style.display = 'block';
+                    toggleBtn.innerText = "🛑 Shut Down Camera Stream";
+                })
+                .catch(err => {
+                    alert("Unable to reach video hardware arrays: " + err.message);
+                });
+        }
+
+        function captureEngineSnapshot() {
+            alert("Snapshot matrix captured successfully from device feed.");
+            triggerAIScanWorkflow();
+        }
+
+        // Multi-Modal Image Matching Evaluation Engine Simulator
+        function triggerAIScanWorkflow() {
+            const indicator = document.getElementById('scanning-indicator-node');
+            indicator.style.display = 'block';
+
+            // Simulate server network latency loop for vector data processing
+            setTimeout(() => {
+                indicator.style.display = 'none';
+                
+                const cards = document.querySelectorAll('.product-market-card');
+                const targetGrid = document.getElementById('products-showcase-grid-target');
+                
+                // Clear active styles
+                cards.forEach(card => card.classList.remove('highlighted-match'));
+                
+                // AI Matching Execution Simulation: Highlight asset card with the matching feature vectors
+                // For demonstration, we target card 3 ("Futuristic Abstract Vector Pack") as a perfect image match
+                const matchCard = cards[2]; 
+                matchCard.classList.add('highlighted-match');
+                
+                // Shift order array to bring lowest matched price card to front page top index position
+                targetGrid.insertBefore(matchCard, targetGrid.firstChild);
+                
+                document.getElementById('feed-results-count').innerHTML = `✨ AI Match Located! Best matched asset sorted to top row.`;
+                alert("Mubarak ho! AI Image Engine has matched your scan with our global database items.");
+            }, 2500);
+        }
+
+        // Dragover UI Enhancements Events Hooks
+        const dropZone = document.getElementById('drop-zone-target');
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                dropZone.classList.add('dragover');
+            }, false);
+        });
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('dragover');
+            }, false);
+        });
+        dropZone.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            if(files.length > 0) {
+                document.getElementById('drop-text-prompt').innerText = `Dropped Matrix: ${files[0].name}`;
+                triggerAIScanWorkflow();
+            }
+        });
+    </script>
+</body>
+</html>

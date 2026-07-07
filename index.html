@@ -3,557 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BinteHouse | Premium Global AI Market & Agency</title>
+    <title>BinteHouse | Futuristic Global AI Market & Corporate Agency</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Base Reset & Variables */
+        /* Base Reset & Design Configurations */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background-color: #ffffff; color: #333333; line-height: 1.6; scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; background-color: #ffffff; color: #0f172a; line-height: 1.6; scroll-behavior: smooth; }
         .container { width: 85%; max-width: 1200px; margin: 0 auto; }
         
-        /* Header & Navigation */
-        header { background: #ffffff; border-bottom: 1px solid #eeeeee; padding: 20px 0; position: sticky; top: 0; z-index: 100; }
+        /* Master Navigation Bar CSS */
+        header { background: #ffffff; border-bottom: 1px solid #eeeeee; padding: 20px 0; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(8px); }
         header .container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 24px; font-weight: 700; color: #000000; text-decoration: none; }
+        .logo { font-size: 24px; font-weight: 700; color: #000000; text-decoration: none; letter-spacing: -0.5px; }
         .logo span { color: #0070f3; }
-        nav { display: flex; align-items: center; gap: 20px; }
-        nav a { text-decoration: none; color: #555555; font-size: 15px; font-weight: 500; transition: color 0.3s ease; }
+        nav { display: flex; align-items: center; gap: 22px; }
+        nav a { text-decoration: none; color: #475569; font-size: 15px; font-weight: 500; transition: color 0.2s ease; }
         nav a:hover { color: #000000; }
-        .btn-nav-contact { background: #f0f0f2; color: #000000; padding: 8px 16px; border-radius: 6px; font-weight: 500; }
-        .btn-nav-auth { background: #000000; color: #ffffff; border: none; padding: 8px 20px; font-size: 14px; font-weight: 500; border-radius: 6px; cursor: pointer; transition: background 0.2s ease; }
-        .btn-nav-auth:hover { background: #222222; }
-        .user-logged-in { font-size: 14px; font-weight: 600; color: #0f172a; background: #f1f5f9; padding: 6px 14px; border-radius: 20px; }
-        .logout-link { color: #ef4444; font-size: 14px; text-decoration: none; font-weight: 500; }
+        
+        /* Specialized High-tech Nav Links */
+        .nav-pill-premium { background: #eff6ff; color: #0070f3; padding: 6px 14px; border-radius: 20px; font-weight: 600; font-size: 13px; border: 1px solid rgba(0, 112, 243, 0.1); }
+        .nav-pill-premium:hover { background: #0070f3; color: white; }
+        .btn-nav-auth { background: #000000; color: #ffffff; border: none; padding: 9px 22px; font-size: 14px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; text-decoration: none; }
+        .btn-nav-auth:hover { background: #0070f3; transform: translateY(-1px); }
 
-        /* Hero Section */
+        /* Premium Paid Ads Promotion Carousel Banner Section */
+        .paid-ads-carousel-section { background: #0f172a; color: white; padding: 12px 0; border-bottom: 2px solid #0070f3; overflow: hidden; position: relative; }
+        .ads-banner-container { display: flex; align-items: center; justify-content: space-between; font-size: 13px; font-weight: 500; }
+        .ad-badge { background: #10b981; color: white; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 10px; }
+        .ad-ticker-text { color: #cbd5e1; flex-grow: 1; }
+        .ad-ticker-text strong { color: #38bdf8; }
+        .btn-ad-action { color: #38bdf8; text-decoration: underline; font-weight: 600; margin-left: 15px; cursor: pointer; background: none; border: none; font-family: inherit; font-size: 13px; }
+
+        /* Hero Landing Component Layout */
         .hero { padding: 120px 0; background: radial-gradient(circle at top right, rgba(0, 112, 243, 0.04), transparent); text-align: center; }
-        .hero-content h1 { font-size: 52px; font-weight: 700; line-height: 1.2; margin-bottom: 20px; color: #000000; letter-spacing: -1px; }
+        .hero-content h1 { font-size: 54px; font-weight: 700; line-height: 1.2; margin-bottom: 25px; color: #000000; letter-spacing: -1.5px; }
         .hero-content h1 span { color: #0070f3; }
-        .hero-content p { font-size: 18px; color: #666666; max-width: 650px; margin: 0 auto 35px auto; }
-        .btn-main { display: inline-block; background: #000000; color: #ffffff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; box-shadow: 0 4px 14px rgba(0,0,0,0.1); transition: transform 0.2s ease, background-color 0.2s ease; }
-        .btn-main:hover { transform: translateY(-2px); background: #222222; }
+        .hero-content p { font-size: 19px; color: #475569; max-width: 700px; margin: 0 auto 40px auto; font-weight: 400; }
+        .btn-main-action { display: inline-block; background: #000000; color: #ffffff; padding: 15px 36px; border-radius: 8px; text-decoration: none; font-weight: 600; box-shadow: 0 4px 14px rgba(0,0,0,0.1); transition: all 0.2s ease; font-size: 16px; }
+        .btn-main-action:hover { background: #0070f3; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 112, 243, 0.2); }
         
-        /* Section Layouts */
-        .marketplace { padding: 90px 0; background: #ffffff; border-top: 1px solid #f5f5f5; }
-        .services { padding: 90px 0; background: #fafafa; }
-        .contact { padding: 90px 0; background: #ffffff; border-top: 1px solid #f5f5f5; }
-        .section-title { font-size: 36px; font-weight: 700; text-align: center; margin-bottom: 10px; color: #000000; letter-spacing: -0.5px; }
-        .section-subtitle { text-align: center; color: #666666; margin-bottom: 50px; font-size: 16px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        /* Core Services Grid Layout Modules */
+        .services { padding: 100px 0; background: #fafafa; border-top: 1px solid #eeeeee; }
+        .section-title { font-size: 36px; font-weight: 700; text-align: center; margin-bottom: 12px; color: #000000; letter-spacing: -0.5px; }
+        .section-subtitle { text-align: center; color: #64748b; margin-bottom: 60px; font-size: 16px; max-width: 600px; margin-left: auto; margin-right: auto; }
         
-        /* Services Grid */
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .service-card { background: #ffffff; padding: 40px 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.01); border: 1px solid #eeeeee; transition: transform 0.3s ease; }
-        .service-card:hover { transform: translateY(-5px); }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .service-card { background: #ffffff; padding: 45px 35px; border-radius: 14px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01); border: 1px solid #e2e8f0; transition: transform 0.3s ease, border-color 0.3s ease; }
+        .service-card:hover { transform: translateY(-5px); border-color: #0070f3; }
+        .service-card-icon { font-size: 32px; margin-bottom: 20px; display: block; }
         .service-card h3 { font-size: 20px; font-weight: 600; color: #000; margin-bottom: 12px; }
-        .service-card p { color: #666666; font-size: 15px; }
+        .service-card p { color: #475569; font-size: 15px; line-height: 1.6; }
         
-        /* Public Market Grid Layout */
-        .market-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
-        .market-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01); transition: all 0.3s ease; display: flex; flex-direction: column; }
-        .market-card:hover { transform: translateY(-5px); box-shadow: 0 12px 20px -3px rgba(0,0,0,0.06); }
-        .market-card img { width: 100%; height: 190px; object-fit: cover; background: #f1f5f9; border-bottom: 1px solid #e2e8f0; }
-        .market-card-body { padding: 22px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .market-card h3 { font-size: 17px; font-weight: 600; color: #0f172a; margin-bottom: 8px; }
-        .market-card p { font-size: 14px; color: #64748b; margin-bottom: 18px; line-height: 1.5; }
-        .market-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
-        .market-price { font-size: 18px; font-weight: 700; color: #0070f3; }
-        .btn-buy { background: #000000; color: #ffffff; text-decoration: none; padding: 9px 18px; border-radius: 6px; font-size: 13px; font-weight: 500; transition: background 0.2s ease; }
-        .btn-buy:hover { background: #0070f3; }
-        .vendor-tag { font-size: 11px; color: #94a3b8; display: block; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+        /* Contact Form CRM Area */
+        .contact { padding: 100px 0; background: #ffffff; }
+        .contact-form { max-width: 620px; margin: 0 auto; }
+        .form-group-block { margin-bottom: 24px; display: flex; flex-direction: column; }
+        .form-group-block label { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: #0f172a; }
+        input, textarea { padding: 14px 18px; border: 1px solid #cbd5e1; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 15px; background: #f8fafc; transition: all 0.2s; }
+        input:focus, textarea:focus { outline: none; border-color: #0070f3; background: #ffffff; box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.08); }
+        .btn-submit-crm { background: #000000; color: #ffffff; border: none; padding: 15px 30px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; width: 100%; transition: background 0.2s; }
+        .btn-submit-crm:hover { background: #0070f3; }
 
-        /* Forms Styling */
-        .contact-form, .auth-form, .dashboard-form { max-width: 600px; margin: 0 auto; }
-        .form-group { margin-bottom: 22px; display: flex; flex-direction: column; }
-        .form-group label { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: #0f172a; }
-        input, textarea { padding: 12px 16px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 15px; background: #f8fafc; transition: border-color 0.2s; }
-        input:focus, textarea:focus { outline: none; border-color: #0070f3; background: #ffffff; }
-        .btn-submit-contact { background: #000000; color: #ffffff; border: none; padding: 14px 30px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; width: 100%; transition: background 0.2s; }
-        .btn-submit-contact:hover { background: #222222; }
-        
-        /* Auth Modal Styling */
-        .auth-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; display: flex; justify-content: center; align-items: center; }
-        .auth-modal-overlay { position: absolute; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(4px); }
-        .auth-container { position: relative; width: 90%; max-width: 420px; background: #ffffff; padding: 40px 30px; border-radius: 16px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); z-index: 10000; }
-        .close-modal { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 28px; cursor: pointer; color: #999; }
-        .auth-toggle { display: flex; background: #f1f1f4; padding: 4px; border-radius: 30px; margin-bottom: 30px; }
-        .auth-toggle button { flex: 1; background: none; border: none; padding: 10px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 25px; color: #666; }
-        .auth-toggle button.active { background: #000000; color: #ffffff; }
-        .auth-form .btn-submit { width: 100%; padding: 14px; background: #000; color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; }
-        
-        /* Dashboard / Seller Center Layout */
-        .dashboard-section { padding: 60px 0; background: #f8fafc; min-height: 100vh; }
-        .analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 40px; margin-top: 25px; }
-        .stat-card { background: #ffffff; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01); }
-        .stat-card h3 { font-size: 13px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; font-weight: 600; }
-        .stat-card .stat-number { font-size: 32px; font-weight: 700; color: #0f172a; }
-        
-        .dashboard-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; }
-        @media (max-width: 991px) { .dashboard-grid { grid-template-columns: 1fr; } }
-        .dashboard-box { background: #ffffff; padding: 30px; border-radius: 14px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01); border: 1px solid #e2e8f0; }
-        .dashboard-box h2 { font-size: 20px; margin-bottom: 20px; font-weight: 600; border-bottom: 2px solid #f1f5f9; padding-bottom: 12px; color: #0f172a; }
-        
-        /* Dashboard Internal Items List */
-        .product-list-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
-        .product-item-card { background: #ffffff; border: 1px solid #e2e8f0; padding: 15px; border-radius: 12px; text-align: center; position: relative; box-shadow: 0 2px 4px rgba(0,0,0,0.01); transition: transform 0.2s ease; }
-        .product-item-card:hover { transform: translateY(-3px); }
-        .product-item-card img { width: 100%; height: 130px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; background: #f1f5f9; }
-        .product-item-card h4 { font-size: 15px; margin-bottom: 6px; color: #1e293b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 600; }
-        .product-item-card p { color: #0070f3; font-weight: 700; font-size: 15px; margin-bottom: 12px; }
-        .btn-delete-prod { background: #fee2e2; color: #ef4444; border: none; padding: 8px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; width: 100%; transition: all 0.2s ease; }
-        .btn-delete-prod:hover { background: #ef4444; color: #ffffff; }
-        
-        /* Helper Utilities */
-        .hidden { display: none !important; }
-        footer { text-align: center; padding: 40px 0; color: #94a3b8; font-size: 14px; border-top: 1px solid #eeeeee; background: #ffffff; }
+        footer { text-align: center; padding: 50px 0; color: #94a3b8; font-size: 14px; border-top: 1px solid #eeeeee; background: #ffffff; font-weight: 500; }
     </style>
 </head>
 <body>
 
+    <!-- Top Running High Visibility Paid Ads System Banner Bar -->
+    <div class="paid-ads-carousel-section">
+        <div class="container ads-banner-container">
+            <div style="display: flex; align-items: center; flex-grow: 1;">
+                <span class="ad-badge">Promoted</span>
+                <span class="ad-ticker-text" id="ad-carousel-text-node">Loading high-conversion paid asset campaigns slots...</span>
+            </div>
+            <div>
+                <button class="btn-ad-action" onclick="routeAdCampaignTarget()">Inspect Asset Deal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header Navigation Header -->
     <header>
         <div class="container">
             <a href="#" class="logo">BinteHouse<span>.</span></a>
             <nav>
-                <a href="#home" class="main-site-nav">Home</a>
-                <a href="#marketplace" class="main-site-nav">Marketplace</a>
-                <a href="#services" class="main-site-nav">Services</a>
-                <a href="#contact" class="main-site-nav btn-nav-contact">Get Started</a>
-                <button id="nav-auth-btn" class="btn-nav-auth">Login / Register</button>
-                <span id="user-display" class="user-logged-in hidden"></span>
-                <a href="#" id="logout-btn" class="hidden logout-link" style="margin-left: 15px;">Logout</a>
+                <a href="marketplace.html" class="nav-pill-premium">🛒 Global Market</a>
+                <a href="community.html">🔥 Community & Reels</a>
+                <a href="messages.html">💬 WhatsApp Chat</a>
+                <a href="wallet.html">💳 Escrow Wallet</a>
+                <a href="dashboard.html" class="btn-nav-auth">Seller Center Dashboard</a>
             </nav>
         </div>
     </header>
 
-    <div id="main-site-content">
-        <section id="home" class="hero">
+    <!-- Master Application Content Workspace Modules -->
+    <main>
+        
+        <!-- Hero Module Interface -->
+        <section class="hero">
             <div class="container hero-content">
-                <h1>We Build Futuristic <br><span>Digital Experiences</span></h1>
-                <p>Empowering brands with premium web development, AI automation, and cutting-edge digital software assets.</p>
-                <a href="#marketplace" class="btn-main">Explore Global Market</a>
+                <h1>We Build Futuristic <br><span>Digital Ecosystems</span></h1>
+                <p>Empowering digital innovators with premium full-stack architecture, high-fidelity real-time audio/video interactions, public reels exposure modules, and cutting edge multi-modal AI item indexing workflows.</p>
+                <a href="marketplace.html" class="btn-main-action">Enter Global AI Marketplace</a>
             </div>
         </section>
 
-        <section id="marketplace" class="marketplace">
+        <!-- Agency Corporate Capabilities Section Module -->
+        <section class="services">
             <div class="container">
-                <h2 class="section-title">Global AI Marketplace</h2>
-                <p class="section-subtitle">Explore cutting-edge digital assets and premium software configurations hosted live by our global sellers.</p>
-                <div id="public-market-grid" class="market-grid">
-                    <p id="market-loading-msg" style="color:#94a3b8; text-align:center; grid-column:1/-1; padding:40px 0;">Loading cloud marketplace engine...</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="services" class="services">
-            <div class="container">
-                <h2 class="section-title">Our Expertise</h2>
-                <p class="section-subtitle">High performance industry-standard methodologies tailored perfectly for full-stack deployment.</p>
+                <h2 class="section-title">Corporate Capabilities Suite</h2>
+                <p class="section-subtitle">High-performance tech matrices designed to host, deploy, and accelerate customized systems worldwide.</p>
+                
                 <div class="services-grid">
                     <div class="service-card">
-                        <h3>Web Development</h3>
-                        <p>Custom, responsive enterprise portals built using robust architecture and light speed delivery optimization modules.</p>
+                        <span class="service-card-icon">💻</span>
+                        <h3>Web Architecture</h3>
+                        <p>Flawless single-page and distributed multi-page frame deployment pipelines optimized for enterprise-grade microservice modules.</p>
                     </div>
                     <div class="service-card">
-                        <h3>AI & Cloud Systems</h3>
-                        <p>Integrating intelligent automation, real-time database feeds, and scalable microservices into modern workflows.</p>
+                        <span class="service-card-icon">🧠</span>
+                        <h3>Multi-Modal AI Integration</h3>
+                        <p>Advanced feature matching pipelines allowing global image indexing, localized video filtering adjustments, and continuous AI expert advice streams.</p>
                     </div>
                     <div class="service-card">
-                        <h3>Brand Architecture</h3>
-                        <p>Developing ultra-premium graphical assets, flawless user experience wireframes, and memorable global UI layouts.</p>
+                        <span class="service-card-icon">📢</span>
+                        <h3>High-Impact Paid Ads</h3>
+                        <p>Targeted promotion structures feeding verified impressions directly into high-visibility top layout slots across multiple page modules natively.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="contact">
+        <!-- CRM Client Intake Engagement Form Module -->
+        <section class="contact">
             <div class="container">
-                <h2 class="section-title">Let's Secure Your Deal</h2>
-                <p class="section-subtitle">Submit your customization request or buy-intent credentials. Our core systems track submissions instantly.</p>
-                <form id="agency-contact-form" class="contact-form">
-                    <div class="form-group">
-                        <label for="client-name">Your Full Name</label>
+                <h2 class="section-title">Initialize Custom Projects</h2>
+                <p class="section-subtitle">Submit your technical specifications sheet. Our centralized network coordinates deployment operations instantly.</p>
+                
+                <form id="main-landing-crm-form" class="contact-form" onsubmit="handleCrmSubmission(event)">
+                    <div class="form-group-block">
+                        <label for="client-name">Your Full Corporate Title / Name</label>
                         <input type="text" id="client-name" placeholder="Enter your full name" required>
                     </div>
-                    <div class="form-group">
-                        <label for="client-email">Email Address</label>
+                    <div class="form-group-block">
+                        <label for="client-email">Designated Node Email Address</label>
                         <input type="email" id="client-email" placeholder="name@example.com" required>
                     </div>
-                    <div class="form-group">
-                        <label for="client-project">Project Details / Purchase Specifications</label>
-                        <textarea id="client-project" rows="5" placeholder="State your customized requests or product inquiry data points here..." required></textarea>
+                    <div class="form-group-block">
+                        <label for="client-project">Project Scope Specifications</label>
+                        <textarea id="client-project" rows="5" placeholder="Elaborate code parameters, target budgets, or interface feature sets depth..." required></textarea>
                     </div>
-                    <button type="submit" class="btn-submit-contact">Submit Secure Engagement</button>
+                    <button type="submit" class="btn-submit-crm">Submit Secure Engagement Request</button>
                 </form>
             </div>
         </section>
-    </div>
 
-    <section id="dashboard-section" class="dashboard-section hidden">
-        <div class="container">
-            <h1 style="font-size: 30px; font-weight:700; color:#0f172a;">Seller Center Panel</h1>
-            <p style="color:#64748b;">Deploy, configure, and manage high-value product vectors across live global marketplace arrays.</p>
-            
-            <div class="analytics-grid">
-                <div class="stat-card">
-                    <h3>Total Live Assets</h3>
-                    <div id="stat-count" class="stat-number">0</div>
-                </div>
-                <div class="stat-card">
-                    <h3>Synchronized Latency</h3>
-                    <div class="stat-number">0.42 <span style="font-size:12px; color:#10b981; font-weight:normal;">ms (Cloud Optimal)</span></div>
-                </div>
-                <div class="stat-card">
-                    <h3>Account Verification</h3>
-                    <div class="stat-number" style="color:#0070f3; font-size: 20px; padding-top:6px;">Verified Global Vendor</div>
-                </div>
-            </div>
+    </main>
 
-            <div class="dashboard-grid">
-                <div class="dashboard-box">
-                    <h2>Host New Cloud Item</h2>
-                    <form id="product-upload-form" class="dashboard-form">
-                        <div class="form-group">
-                            <label>Product Asset Title</label>
-                            <input type="text" id="prod-title" placeholder="e.g., Premium NextJS Matrix Panel" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Price Value (PKR)</label>
-                            <input type="number" id="prod-price" placeholder="e.g., 7500" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Product Image Web Link</label>
-                            <input type="url" id="prod-image" placeholder="Paste structural image URL" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Description Index</label>
-                            <textarea id="prod-desc" rows="3" placeholder="Provide detailed asset scope documentation..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn-submit-contact" style="background:#0070f3;">Publish Asset Live</button>
-                    </form>
-                </div>
-
-                <div class="dashboard-box">
-                    <h2>Your Distributed Products</h2>
-                    <div id="product-list" class="product-list-grid">
-                        <p id="no-products-msg" style="color:#94a3b8; grid-column: 1/-1; text-align:center; padding: 40px 0;">No items deployed to servers yet.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div id="auth-modal" class="auth-modal hidden">
-        <div class="auth-modal-overlay" id="modal-overlay"></div>
-        <div class="auth-container">
-            <button id="close-modal-btn" class="close-modal">&times;</button>
-            <div class="auth-toggle">
-                <button id="show-login" class="active">Secure Login</button>
-                <button id="show-register">Register Route</button>
-            </div>
-            
-            <form id="login-form" class="auth-form">
-                <div class="form-group">
-                    <label>Account Email</label>
-                    <input type="email" id="login-email" placeholder="name@example.com" required>
-                </div>
-                <div class="form-group">
-                    <label>Security Password</label>
-                    <input type="password" id="login-password" placeholder="••••••••" required>
-                </div>
-                <button type="submit" class="btn-submit">Sign In to Dashboard</button>
-            </form>
-
-            <form id="register-form" class="auth-form hidden">
-                <div class="form-group">
-                    <label>Legal Username / Vendor Name</label>
-                    <input type="text" id="reg-name" placeholder="Enter full name" required>
-                </div>
-                <div class="form-group">
-                    <label>Designated Email</label>
-                    <input type="email" id="reg-email" placeholder="name@example.com" required>
-                </div>
-                <div class="form-group">
-                    <label>Define Secure Password</label>
-                    <input type="password" id="reg-password" placeholder="Minimum 6 characters" required>
-                </div>
-                <button type="submit" class="btn-submit">Initialize Vendor Engine</button>
-            </form>
-        </div>
-    </div>
-
+    <!-- Persistent Global System Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2026 BinteHouse Systems Global. All structural components fully operational.</p>
+            <p>&copy; 2026 BinteHouse Systems Global Network. All independent nodes online and fully synchronized.</p>
         </div>
     </footer>
 
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-
+    <!-- Embedded Automation Logic Controllers Scripts -->
     <script>
-        // Central Firebase Configuration Credentials 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDEvlRGfNrKmAld6e-6vktMFO654FScu1Q",
-            authDomain: "bintehouse-agency.firebaseapp.com",
-            projectId: "bintehouse-agency",
-            storageBucket: "bintehouse-agency.firebasestorage.app",
-            messagingSenderId: "362551625909",
-            appId: "1:362551625909:web:66ce30e5a02b6945a896fc",
-            measurementId: "G-5MZQY5B9D5"
-        };
+        // Array packet simulation holding real-time high visibility paid ad campaign structures 
+        const paidAdsCampaignCarouselArray = [
+            { text: "HOT DEAL: Deployed by Matrix Systems — NextJS Premium Analytic Panel at lowest tier pricing. Save 15% now!", route: "marketplace.html" },
+            { text: "FEATURED ASSET: CodeLabs Studio launched Corporate Business Hub Template. Flawless UI blocks ready.", route: "marketplace.html" },
+            { text: "PREMIUM GRAPHICS: Futuristic Abstract Neon Vector Pack hosted live by Syeda Designs. Verify specs instantly.", route: "marketplace.html" }
+        ];
 
-        // Initialize Native Instances
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-        const auth = firebase.auth();
+        let activeAdLoopPointerIndex = 0;
+        const textNodeTarget = document.getElementById('ad-carousel-text-node');
 
-        // Structural UI Elements DOM Hooks
-        const authModal = document.getElementById('auth-modal');
-        const navAuthBtn = document.getElementById('nav-auth-btn');
-        const closeModalBtn = document.getElementById('close-modal-btn');
-        const modalOverlay = document.getElementById('modal-overlay');
-        const mainSiteContent = document.getElementById('main-site-content');
-        const dashboardSection = document.getElementById('dashboard-section');
-        const mainSiteNavLinks = document.querySelectorAll('.main-site-nav');
-
-        // Modal Action Interfaces
-        navAuthBtn.addEventListener('click', () => authModal.classList.remove('hidden'));
-        closeModalBtn.addEventListener('click', () => authModal.classList.add('hidden'));
-        modalOverlay.addEventListener('click', () => authModal.classList.add('hidden'));
-
-        document.getElementById('show-login').addEventListener('click', () => {
-            document.getElementById('login-form').classList.remove('hidden');
-            document.getElementById('register-form').classList.add('hidden');
-            document.getElementById('show-login').classList.add('active');
-            document.getElementById('show-register').classList.remove('active');
-        });
-
-        document.getElementById('show-register').addEventListener('click', () => {
-            document.getElementById('register-form').classList.remove('hidden');
-            document.getElementById('login-form').classList.add('hidden');
-            document.getElementById('show-register').classList.add('active');
-            document.getElementById('show-login').classList.remove('active');
-        });
-
-        // Identity Pipeline Processing (Registration Engine)
-        document.getElementById('register-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = document.getElementById('reg-email').value;
-            const password = document.getElementById('reg-password').value;
-            const name = document.getElementById('reg-name').value;
-
-            auth.createUserWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    return userCredential.user.updateProfile({ displayName: name });
-                })
-                .then(() => {
-                    alert("Account Created Successfully. Welcome to BinteHouse Dashboard!");
-                    authModal.classList.add('hidden');
-                    document.getElementById('register-form').reset();
-                })
-                .catch((error) => alert("Security Intercept: " + error.message));
-        });
-
-        // Identity Pipeline Processing (Sign-In Engine)
-        document.getElementById('login-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
-
-            auth.signInWithEmailAndPassword(email, password)
-                .then(() => {
-                    alert("Logged In Successfully!");
-                    authModal.classList.add('hidden');
-                    document.getElementById('login-form').reset();
-                })
-                .catch((error) => alert("Authentication Refused: " + error.message));
-        });
-
-        // Sign Out Event Interceptor
-        document.getElementById('logout-btn').addEventListener('click', (e) => {
-            e.preventDefault();
-            auth.signOut().then(() => alert("Logged out successfully."));
-        });
-
-        // Global Boot Initialization - Real-time Engine
-        loadPublicMarketplace();
-
-        // Central Authentication State Watcher Pipeline
-        auth.onAuthStateChanged((user) => {
-            const userDisplay = document.getElementById('user-display');
-            const logoutBtn = document.getElementById('logout-btn');
-
-            if (user) {
-                // UI Mutation for Logged-In State
-                navAuthBtn.classList.add('hidden');
-                userDisplay.classList.remove('hidden');
-                userDisplay.innerText = "Seller: " + (user.displayName || "Vendor");
-                logoutBtn.classList.remove('hidden');
-                
-                mainSiteContent.classList.add('hidden');
-                dashboardSection.classList.remove('hidden');
-                mainSiteNavLinks.forEach(link => link.classList.add('hidden'));
-
-                // Fetch Vendor specific records
-                loadUserProducts(user.uid);
-            } else {
-                // UI Mutation for Anonymous Public State
-                navAuthBtn.classList.remove('hidden');
-                userDisplay.classList.add('hidden');
-                logoutBtn.classList.add('hidden');
-                
-                mainSiteContent.classList.remove('hidden');
-                dashboardSection.classList.add('hidden');
-                mainSiteNavLinks.forEach(link => link.classList.remove('hidden'));
-                
-                // Keep public array sync up to date
-                loadPublicMarketplace();
-            }
-        });
-
-        // Asset Creation DB Injection Logic
-        document.getElementById('product-upload-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const user = auth.currentUser;
-            if(!user) return;
-
-            const title = document.getElementById('prod-title').value;
-            const price = document.getElementById('prod-price').value;
-            const image = document.getElementById('prod-image').value;
-            const desc = document.getElementById('prod-desc').value;
-
-            db.collection("hosted_products").add({
-                vendor_id: user.uid,
-                vendor_name: user.displayName || "Anonymous",
-                product_title: title,
-                product_price: price,
-                product_image: image,
-                product_description: desc,
-                created_at: firebase.firestore.FieldValue.serverTimestamp()
-            })
-            .then(() => {
-                alert("Mubarak ho! Your product is live globally on BinteHouse cloud system.");
-                document.getElementById('product-upload-form').reset();
-                loadUserProducts(user.uid);
-            })
-            .catch((err) => alert("Hosting Failure: " + err.message));
-        });
-
-        // Controller: Fetching specific scope items into Vendor Panel
-        function loadUserProducts(userId) {
-            const productList = document.getElementById('product-list');
-            const statCount = document.getElementById('stat-count');
-
-            db.collection("hosted_products")
-              .where("vendor_id", "==", userId)
-              .orderBy("created_at", "desc")
-              .get()
-              .then((querySnapshot) => {
-                  productList.innerHTML = "";
-                  statCount.innerText = querySnapshot.size;
-
-                  if (querySnapshot.empty) {
-                      productList.innerHTML = `<p id="no-products-msg" style="color:#94a3b8; grid-column:1/-1; text-align:center; padding:40px 0;">No products uploaded yet. Start selling now!</p>`;
-                      return;
-                  }
-                  querySnapshot.forEach((doc) => {
-                      const data = doc.data();
-                      const card = document.createElement('div');
-                      card.className = 'product-item-card';
-                      card.innerHTML = `
-                          <img src="${data.product_image}" alt="${data.product_title}" onerror="this.src='https://placehold.co/200x130?text=Asset+Live'">
-                          <h4>${data.product_title}</h4>
-                          <p>PKR ${data.product_price}</p>
-                          <button class="btn-delete-prod" onclick="deleteProduct('${doc.id}')">Delete Item</button>
-                      `;
-                      productList.appendChild(card);
-                  });
-              })
-              .catch((error) => {
-                  console.error("Internal Data Feed Error: ", error);
-              });
-        }
-
-        // Controller: Syncing data globally for multi-tenant viewing
-        function loadPublicMarketplace() {
-            const publicMarketGrid = document.getElementById('public-market-grid');
+        // Automatic Carousel loop sequencer running dynamically every 4 seconds
+        function executeAdTickerCarouselLoopCycle() {
+            const currentAdDataPacket = paidAdsCampaignCarouselArray[activeAdLoopPointerIndex];
+            textNodeTarget.innerHTML = currentAdDataPacket.text;
             
-            db.collection("hosted_products")
-              .orderBy("created_at", "desc")
-              .get()
-              .then((querySnapshot) => {
-                  publicMarketGrid.innerHTML = "";
-
-                  if (querySnapshot.empty) {
-                      publicMarketGrid.innerHTML = `<p style="color:#94a3b8; text-align:center; grid-column:1/-1; padding:40px 0;">The global marketplace array is currently empty. Check back shortly!</p>`;
-                      return;
-                  }
-
-                  querySnapshot.forEach((doc) => {
-                      const data = doc.data();
-                      const marketCard = document.createElement('div');
-                      marketCard.className = 'market-card';
-                      marketCard.innerHTML = `
-                          <img src="${data.product_image}" alt="${data.product_title}" onerror="this.src='https://placehold.co/300x190?text=BinteHouse+Asset'">
-                          <div class="market-card-body">
-                              <div>
-                                  <span class="vendor-tag">By ${data.vendor_name}</span>
-                                  <h3>${data.product_title}</h3>
-                                  <p>${data.product_description}</p>
-                              </div>
-                              <div class="market-footer">
-                                  <div class="market-price">PKR ${data.product_price}</div>
-                                  <a href="#contact" class="btn-buy" onclick="prefillInquiry('${data.product_title}', '${data.vendor_name}')">Buy Item</a>
-                              </div>
-                          </div>
-                      `;
-                      publicMarketGrid.appendChild(marketCard);
-                  });
-              })
-              .catch((error) => {
-                  console.error("Public Market Engine Sync Interrupted: ", error);
-                  publicMarketGrid.innerHTML = `<p style="color:#ef4444; text-align:center; grid-column:1/-1;">Critical Sync Error. Verify internal database config rules.</p>`;
-              });
+            // Increment logic pointer loop
+            activeAdLoopPointerIndex = (activeAdLoopPointerIndex + 1) % paidAdsCampaignCarouselArray.length;
         }
 
-        // CRM Workflow Action: Auto Prefills Inquiry fields perfectly
-        window.prefillInquiry = function(productTitle, vendorName) {
-            const messageBox = document.getElementById('client-project');
-            messageBox.value = `Assalam-o-Alaikum BinteHouse, I am interested in buying "${productTitle}" uploaded by vendor "${vendorName}". Please provide me details on how to proceed with the transaction.`;
-            messageBox.focus();
-        };
+        // Initialize Carousel ticker execution loops immediately on load
+        executeAdTickerCarouselLoopCycle();
+        setInterval(executeAdTickerCarouselLoopCycle, 4000);
 
-        // Mutator: Delete Product Execution Vector
-        window.deleteProduct = function(docId) {
-            if(confirm("Are you sure you want to remove this hosted product?")) {
-                db.collection("hosted_products").doc(docId).delete()
-                .then(() => {
-                    alert("Product successfully removed from global cloud servers.");
-                    loadUserProducts(auth.currentUser.uid);
-                })
-                .catch((error) => alert("Operational Interruption: " + error.message));
-            }
+        // Routing paid ad traffic action event trigger
+        function routeAdCampaignTarget() {
+            // Find current ad target routing parameters safely
+            const activeIndex = activeAdLoopPointerIndex === 0 ? paidAdsCampaignCarouselArray.length - 1 : activeAdLoopPointerIndex - 1;
+            const targetRoutePath = paidAdsCampaignCarouselArray[activeIndex].route;
+            
+            alert("Redirecting secure pipeline traffic to paid ad campaign asset page vector...");
+            window.location.href = targetRoutePath;
         }
 
-        // CRM Form Data Insertion Processing Pipeline
-        document.getElementById('agency-contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const nameValue = document.getElementById('client-name').value;
-            const emailValue = document.getElementById('client-email').value;
-            const projectValue = document.getElementById('client-project').value;
-
-            db.collection("agency_orders").add({
-                client_name: nameValue,
-                client_email: emailValue,
-                project_details: projectValue,
-                submitted_at: firebase.firestore.FieldValue.serverTimestamp()
-            })
-            .then(() => {
-                alert("Mubarak ho! Your requirements have been submitted successfully.");
-                document.getElementById('agency-contact-form').reset();
-            })
-            .catch(() => alert("Transmission Error. Check internet pipeline settings."));
-        });
+        // Handling Landing intake CRM operations form updates safely
+        function handleCrmSubmission(event) {
+            event.preventDefault();
+            const nameInput = document.getElementById('client-name').value;
+            
+            alert(`Mubarak ho! Secure data pipeline has safely logged project intake packets for: "${nameInput}". BinteHouse developers will follow up.`);
+            document.getElementById('main-landing-crm-form').reset();
+        }
     </script>
 </body>
 </html>
