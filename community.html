@@ -6,242 +6,69 @@
     <title>BinteHouse | Global AI Community & Reels</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Embedded CSS Modules */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Poppins', sans-serif; background-color: #f0f2f5; color: #1c1e21; height: 100vh; overflow: hidden; }
-        
-        /* Layout Grid Split */
         .ecosystem-container { display: flex; height: 100vh; width: 100vw; }
         
-        /* Left Section: Public Status & Text Feed */
         .feed-section { flex: 1; overflow-y: auto; padding: 30px; display: flex; flex-direction: column; gap: 25px; }
-        
-        /* Center Section: Immersive Vertical Reels Panel */
-        .reels-immersive-section { width: 450px; background: #000000; display: flex; flex-direction: column; position: relative; border-left: 1px solid #222; border-right: 1px solid #222; }
-        
-        /* Right Section: AI Content Assistant Sidebar */
-        .ai-sidebar-section { width: 350px; background: #ffffff; padding: 25px; display: flex; flex-direction: column; gap: 20px; border-left: 1px solid #e4e6eb; }
+        .reels-immersive-section { width: 420px; background: #000000; display: flex; flex-direction: column; position: relative; }
+        .ai-sidebar-section { width: 340px; background: #ffffff; padding: 25px; border-left: 1px solid #e4e6eb; }
 
-        /* Social Creator Input Box */
-        .creator-card { background: #ffffff; border-radius: 12px; padding: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
-        .creator-header { display: flex; gap: 12px; margin-bottom: 15px; }
-        .user-avatar { width: 40px; height: 40px; border-radius: 50%; background: #0070f3; color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; }
-        .creator-input { flex-grow: 1; border: none; background: #f0f2f5; border-radius: 20px; padding: 12px 20px; font-size: 14px; font-family: inherit; outline: none; }
-        .creator-actions { display: flex; justify-content: space-between; border-top: 1px solid #e4e6eb; padding-top: 12px; margin-top: 10px; }
-        .btn-upload-trigger { background: none; border: none; color: #45bd62; font-weight: 600; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 6px; }
-        .btn-post-publish { background: #0070f3; color: white; border: none; padding: 6px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; }
+        .creator-card, .post-card { background: #ffffff; border-radius: 12px; padding: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+        .creator-input { width: 100%; border: none; background: #f0f2f5; border-radius: 20px; padding: 12px 20px; outline: none; font-family: inherit; }
+        .btn-post-publish { background: #0070f3; color: white; border: none; padding: 6px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; margin-top: 10px; float: right; }
 
-        /* Public Standard Post Cards */
-        .post-card { background: #ffffff; border-radius: 12px; padding: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); display: flex; flex-direction: column; gap: 15px; }
-        .post-author-bar { display: flex; align-items: center; gap: 12px; }
-        .post-author-info h4 { font-size: 14px; font-weight: 600; }
-        .post-author-info span { font-size: 12px; color: #65676b; }
-        .post-content-text { font-size: 15px; line-height: 1.5; color: #050505; }
-        .post-media-attachment img { width: 100%; max-height: 350px; object-fit: cover; border-radius: 8px; border: 1px solid #e4e6eb; }
-        .post-interaction-row { border-top: 1px solid #e4e6eb; padding-top: 10px; display: flex; justify-content: space-between; }
-        .btn-like-share { background: none; border: none; color: #65676b; font-weight: 600; font-size: 14px; cursor: pointer; }
-        .btn-like-share:hover { color: #0070f3; }
+        .reels-container { flex-grow: 1; overflow-y: scroll; snap-type: y mandatory; scroll-behavior: smooth; }
+        .reel-video-wrapper { min-height: 100%; width: 100%; snap-align: start; position: relative; background: #111; }
+        .reel-video-fallback { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
+        .reel-overlay-content { position: absolute; bottom: 20px; left: 20px; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
 
-        /* Vertical Reel Viewport Configuration */
-        .reels-container { flex-grow: 1; display: flex; flex-direction: column; overflow-y: scroll; snap-type: y mandatory; scroll-behavior: smooth; }
-        .reel-video-wrapper { min-height: 100%; width: 100%; snap-align: start; position: relative; background: #111; display: flex; align-items: center; justify-content: center; }
-        .reel-video-fallback { width: 100%; height: 100%; object-fit: cover; }
-        
-        /* Overlays on top of Video Frame */
-        .reel-overlay-content { position: absolute; bottom: 20px; left: 20px; right: 80px; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.8); z-index: 5; }
-        .reel-author-name { font-weight: 600; font-size: 15px; margin-bottom: 5px; }
-        .reel-description { font-size: 13px; opacity: 0.9; line-height: 1.4; }
-        
-        /* Float Controls Right Side */
-        .reel-action-sidebar { position: absolute; right: 15px; bottom: 40px; display: flex; flex-direction: column; gap: 20px; z-index: 5; align-items: center; }
-        .reel-action-btn { background: rgba(0,0,0,0.4); border: none; width: 45px; height: 45px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; backdrop-filter: blur(5px); }
-        .reel-action-btn:hover { background: #0070f3; }
-        .reel-action-counter { color: white; font-size: 11px; margin-top: -15px; font-weight: 500; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
-
-        /* AI Interactive Assistant Block */
-        .ai-coach-card { background: linear-gradient(145deg, #0f172a, #1e293b); color: white; border-radius: 14px; padding: 20px; border-top: 4px solid #0070f3; }
-        .ai-coach-card h4 { color: #38bdf8; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
-        .ai-coach-card p { font-size: 13px; line-height: 1.5; color: #cbd5e1; }
-        .ai-dynamic-prompt-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 8px 12px; border-radius: 6px; font-size: 12px; width: 100%; text-align: left; cursor: pointer; transition: background 0.2s; margin-top: 10px; }
-        .ai-dynamic-prompt-btn:hover { background: #0070f3; border-color: #0070f3; }
-
-        .hidden { display: none !important; }
+        .ai-coach-card { background: linear-gradient(145deg, #0f172a, #1e293b); color: white; border-radius: 14px; padding: 20px; }
+        .ai-dynamic-prompt-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 8px; border-radius: 6px; width: 100%; margin-top: 10px; cursor: pointer; text-align: left; }
     </style>
 </head>
 <body>
 
     <div class="ecosystem-container">
-        
-        <!-- Left Column: Corporate Communications Feed -->
         <section class="feed-section" id="public-timeline-feed">
-            
-            <!-- Creator Engagement Card -->
             <div class="creator-card">
-                <div class="creator-header">
-                    <div class="user-avatar">BH</div>
-                    <input type="text" id="post-input-field" class="creator-input" placeholder="Share a new AI asset update or product link publically...">
-                </div>
-                <div class="creator-actions">
-                    <button class="btn-upload-trigger" onclick="alert('Select media matrix or presentation screenshots...')">🖼️ Add Image/Video</button>
-                    <button class="btn-post-publish" onclick="publishPublicPost()">Publish Post</button>
-                </div>
+                <input type="text" id="post-input-field" class="creator-input" placeholder="Duniya ke kisi bhi kone se naya asset publically share karein...">
+                <button class="btn-post-publish" onclick="publishPublicPost()">Publish Post</button>
             </div>
-
-            <!-- Dynamic Timelines Insertion Nodes -->
             <div class="post-card">
-                <div class="post-author-bar">
-                    <div class="user-avatar" style="background: #10b981;">Z</div>
-                    <div class="post-author-info">
-                        <h4>Zainab Binte Zahra</h4>
-                        <span>Global Administrator • Just Now</span>
-                    </div>
-                </div>
-                <div class="post-content-text">
-                    Mubarak ho! Hum ne BinteHouse Ecosystem ka modern Community Feed aur Public Vertical Reels architecture deploy kar diya hai. Duniya ke kisi bhi kone se sellers yahan marketing content post kar sakte hain.
-                </div>
-                <div class="post-interaction-row">
-                    <button class="btn-like-share" onclick="alert('Asset visibility upvoted.')">👍 Like Asset</button>
-                    <button class="btn-like-share" onclick="alert('Redirecting parameters to messaging screen...')">💬 Connect Seller</button>
-                </div>
+                <h4 style="font-size:14px; font-weight:600; margin-bottom:5px;">Zainab Binte Zahra</h4>
+                <p style="font-size:15px;">Mubarak ho! BinteHouse public community timeline and marketing vector arrays are live globally.</p>
             </div>
-
-            <div class="post-card">
-                <div class="post-author-bar">
-                    <div class="user-avatar" style="background: #7c3aed;">AI</div>
-                    <div class="post-author-info">
-                        <h4>Automated Cloud Agent</h4>
-                        <span>System Monitor • 2 Hours Ago</span>
-                    </div>
-                </div>
-                <div class="post-content-text">
-                    Premium NextJS Dashboard Vector Matrix ready for deployment checks. Asset pricing tracking optimal via secure servers.
-                </div>
-                <div class="post-media-attachment">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Data Analytics Vector Template Visual">
-                </div>
-                <div class="post-interaction-row">
-                    <button class="btn-like-share">👍 Like Asset</button>
-                    <button class="btn-like-share">💬 Connect Seller</button>
-                </div>
-            </div>
-
         </section>
 
-        <!-- Center Column: Immersive TikTok Style Vertical Reels Section -->
         <section class="reels-immersive-section">
-            <div style="padding: 15px; color: white; background: rgba(0,0,0,0.5); font-weight: 700; font-size: 14px; text-align: center; border-bottom: 1px solid #222; z-index: 10; position: absolute; width: 100%;">
-                🔥 Public Asset Reels Loop
-            </div>
-
-            <div class="reels-container" id="reels-scroller-viewport">
-                
-                <!-- Reel Entry Node 1 -->
+            <div class="reels-container">
                 <div class="reel-video-wrapper">
-                    <!-- High quality image placeholder acting as dynamic video vector simulation -->
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" class="reel-video-fallback" alt="AI Abstract Generated Graphics Frame">
-                    
-                    <div class="reel-overlay-content">
-                        <div class="reel-author-name">@SyedSajjadHaider</div>
-                        <div class="reel-description">Futuristic design parameters for our upcoming web UI application project. Review complete layouts live! #UX #Design</div>
-                    </div>
-                    
-                    <div class="reel-action-sidebar">
-                        <button class="reel-action-btn" onclick="alert('Reel item bookmarked.')">❤️</button>
-                        <span class="reel-action-counter">1.2k</span>
-                        <button class="reel-action-btn" onclick="alert('Opening secure message pipeline...')">💬</button>
-                        <span class="reel-action-counter">42</span>
-                        <button class="reel-action-btn" onclick="alert('Link copied to clipboard buffer.')">🔗</button>
-                    </div>
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" class="reel-video-fallback">
+                    <div class="reel-overlay-content"><h4>@SyedSajjadHaider</h4><p>Futuristic design parameters for UI systems. #UX</p></div>
                 </div>
-
-                <!-- Reel Entry Node 2 -->
-                <div class="reel-video-wrapper">
-                    <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=600&q=80" class="reel-video-fallback" alt="Software Matrix Architecture Frame">
-                    
-                    <div class="reel-overlay-content">
-                        <div class="reel-author-name">@AI_Automation_Labs</div>
-                        <div class="reel-description">Automated python scripts parsing data arrays across firestore endpoints. Super fast execution speeds.</div>
-                    </div>
-                    
-                    <div class="reel-action-sidebar">
-                        <button class="reel-action-btn">❤️</button>
-                        <span class="reel-action-counter">850</span>
-                        <button class="reel-action-btn">💬</button>
-                        <span class="reel-action-counter">19</span>
-                        <button class="reel-action-btn">🔗</button>
-                    </div>
-                </div>
-
             </div>
         </section>
 
-        <!-- Right Column: AI Consultant Expert Advice Matrix -->
         <aside class="ai-sidebar-section">
             <div class="ai-coach-card">
-                <h4>🧠 Free AI Expert Consultant</h4>
-                <p id="ai-advice-display-target"><strong>Current Analysis:</strong> Aap ki public feed posts aur asset reels ka text bohot aala hai! Agar aap chahte hain ke dunya ke har kone (USA, Europe, Gulf countries) se buyers aap ke products ko dekhein, to apni posts mein unique structural price indicators (e.g., PKR ya USD values) zaroor mention kiya karein.</p>
-                
-                <button class="ai-dynamic-prompt-btn" onclick="generateFreshAICoachAdvice('marketing')">💡 Get Marketing Advice</button>
-                <button class="ai-dynamic-prompt-btn" onclick="generateFreshAICoachAdvice('pricing')">📈 Get Asset Pricing Strategy</button>
-            </div>
-
-            <div style="background: #f8fafc; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; font-size: 13px;">
-                <strong>💡 Quick Tip:</strong> Reels section ko scroll karne ke liye mouse scroll wheel ya touchpad swipe use karein. Har video frame standard fullscreen mode par auto-snap karega.
+                <h4 style="color:#38bdf8; font-size:13px; margin-bottom:10px;">🧠 Free AI Business Consultant</h4>
+                <p id="ai-advice-display-target">Aap ki post layout check ho chuki hai. Global reach acceleration active karne ke liye tags inject karein.</p>
+                <button class="ai-dynamic-prompt-btn" onclick="document.getElementById('ai-advice-display-target').innerText = 'AI Strategy: Post conversion values are highest during 6PM to 10PM PKT.'">💡 Get Free Marketing Advice</button>
             </div>
         </aside>
-
     </div>
 
-    <!-- Logic Implementations -->
     <script>
-        // Post Publication Process Logic
         function publishPublicPost() {
-            const inputField = document.getElementById('post-input-field');
-            const text = inputField.value.trim();
-            if(!text) return;
-
-            const targetFeed = document.getElementById('public-timeline-feed');
-            
-            // Create Dynamic Post Structure Elements
-            const newCard = document.createElement('div');
-            newCard.className = 'post-card';
-            newCard.innerHTML = `
-                <div class="post-author-bar">
-                    <div class="user-avatar" style="background: #0070f3;">U</div>
-                    <div class="post-author-info">
-                        <h4>Public Vendor Asset</h4>
-                        <span>Global Seller Node • Just Now</span>
-                    </div>
-                </div>
-                <div class="post-content-text">${text}</div>
-                <div class="post-interaction-row">
-                    <button class="btn-like-share" onclick="alert('Asset liked')">👍 Like Asset</button>
-                    <button class="btn-like-share" onclick="alert('Opening chat route...')">💬 Connect Seller</button>
-                </div>
-            `;
-            
-            // Insert after the input creator box container
-            targetFeed.insertBefore(newCard, targetFeed.children[1]);
-            inputField.value = "";
-            
-            // Trigger AI assistant to automatically analyze and evaluate the new post text
-            analyzePostWithAI(text);
-        }
-
-        // Automated AI Evaluation Simulation Logic
-        function analyzePostWithAI(contentText) {
-            const adviceDisplay = document.getElementById('ai-advice-display-target');
-            adviceDisplay.innerHTML = `<strong>✨ AI Post Review:</strong> Maine aap ki nayi post *"${contentText.substring(0,25)}..."* ka jaiza liya hai. Yeh post public grid par share ho chuki hai. Is ki indexing behtar karne ke liye related technical keywords (jaise React, Python, UI) shamil karein.`;
-        }
-
-        // Advisor Stream Content Generator Switch Block
-        function generateFreshAICoachAdvice(type) {
-            const adviceDisplay = document.getElementById('ai-advice-display-target');
-            if(type === 'marketing') {
-                adviceDisplay.innerHTML = `<strong>📈 Free AI Marketing Advice:</strong> BinteHouse algorithms ke mutabiq, digital assets aur code components share karne ka behtareen waqt Pakistani waqt ke mutabiq shaam 6 baje se raat 10 baje tak hai. Is waqt global traffic engagement sab se peak par hoti hai.`;
-            } else if(type === 'pricing') {
-                adviceDisplay.innerHTML = `<strong>💰 Free AI Pricing Strategy:</strong> Hamesha apne framework base structural items ki starting price low-tier rakhein aur customized requests ke liye variables add karein. Is se buyers ka conversion rate 45% tak barh jata hai.`;
-            }
+            const input = document.getElementById('post-input-field');
+            if(!input.value.trim()) return;
+            const feed = document.getElementById('public-timeline-feed');
+            const card = document.createElement('div');
+            card.className = 'post-card';
+            card.innerHTML = `<h4 style="font-size:14px; font-weight:600; margin-bottom:5px;">Global Seller Node</h4><p style="font-size:15px;">${input.value}</p>`;
+            feed.insertBefore(card, feed.children[1]);
+            input.value = "";
         }
     </script>
 </body>
