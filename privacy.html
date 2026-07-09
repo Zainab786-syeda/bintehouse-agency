@@ -3,170 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy & Disclosure - PromptHub Global</title>
-    
-    <!-- CSS Styling (Embedded Inside HTML) -->
+    <title>Privacy Policy - PromptHub Global</title>
     <style>
-        /* Reset & Global Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #0f172a; color: #cbd5e1; line-height: 1.8; padding-bottom: 60px; }
+        
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background-color: #1e293b; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; }
+        .navbar .logo { font-size: 1.4rem; font-weight: bold; color: #3b82f6; }
+        .navbar ul { display: flex; list-style: none; gap: 20px; }
+        .navbar ul li a { color: #94a3b8; text-decoration: none; font-weight: 500; transition: 0.3s; }
+        .navbar ul li a:hover, .navbar ul li a.active { color: #3b82f6; }
 
-        body {
-            background-color: #0f172a; /* Modern Dark Theme */
-            color: #cbd5e1;
-            line-height: 1.8;
-            padding-bottom: 60px;
-        }
-
-        /* Navigation Bar Component */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            background-color: #1e293b;
-            border-bottom: 1px solid #334155;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .navbar .logo {
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: #3b82f6;
-        }
-
-        .navbar ul {
-            display: flex;
-            list-style: none;
-        }
-
-        .navbar ul li {
-            margin-left: 20px;
-        }
-
-        .navbar ul li a {
-            color: #94a3b8;
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
-        .navbar ul li a:hover {
-            color: #3b82f6;
-        }
-
-        /* Legal Content Container */
-        .legal-container {
-            max-width: 800px;
-            margin: 50px auto;
-            background-color: #1e293b;
-            padding: 40px;
-            border-radius: 14px;
-            border: 1px solid #334155;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .legal-container h1 {
-            color: #f8fafc;
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-            border-bottom: 2px solid #334155;
-            padding-bottom: 15px;
-        }
-
-        .last-updated {
-            font-size: 0.85rem;
-            color: #64748b;
-            margin-bottom: 30px;
-            display: block;
-        }
-
-        .legal-container h2 {
-            color: #3b82f6;
-            font-size: 1.4rem;
-            margin-top: 30px;
-            margin-bottom: 15px;
-        }
-
-        .legal-container p {
-            margin-bottom: 20px;
-            font-size: 1rem;
-        }
-
-        /* Highlighted Disclosure Box */
-        .disclosure-box {
-            background-color: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid #3b82f6;
-            padding: 20px;
-            border-radius: 0 8px 8px 0;
-            margin: 30px 0;
-            color: #e2e8f0;
-        }
-
-        .disclosure-box strong {
-            color: #3b82f6;
-        }
-
-        .legal-container ul {
-            margin-left: 20px;
-            margin-bottom: 20px;
-        }
-
-        .legal-container ul li {
-            margin-bottom: 10px;
-        }
-
-        /* Footer Copyright Text */
-        .footer-text {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 0.85rem;
-            color: #64748b;
-        }
+        .legal-container { max-width: 800px; margin: 50px auto; background-color: #1e293b; padding: 40px; border-radius: 14px; border: 1px solid #334155; }
+        .legal-container h1 { color: #f8fafc; font-size: 2.2rem; margin-bottom: 10px; border-bottom: 2px solid #334155; padding-bottom: 15px; }
+        .last-updated { font-size: 0.85rem; color: #64748b; margin-bottom: 30px; display: block; }
+        .legal-container h2 { color: #3b82f6; font-size: 1.4rem; margin-top: 30px; margin-bottom: 15px; }
+        
+        .disclosure-box { background-color: rgba(59, 130, 246, 0.1); border-left: 4px solid #3b82f6; padding: 20px; border-radius: 0 8px 8px 0; margin: 30px 0; color: #e2e8f0; }
+        .disclosure-box strong { color: #3b82f6; }
+        .footer-text { text-align: center; margin-top: 40px; font-size: 0.85rem; color: #64748b; }
     </style>
 </head>
 <body>
 
-    <!-- 1. Navigation Bar -->
     <nav class="navbar">
         <div class="logo">🚀 PromptHub Global</div>
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="tools.html">AI Tools</a></li>
             <li><a href="submit.html">Submit Prompt</a></li>
+            <li><a href="privacy.html" class="active">Privacy Policy</a></li>
         </ul>
     </nav>
 
-    <!-- 2. Main Legal Document -->
     <main class="legal-container">
-        <h1>Privacy Policy & Affiliate Disclosure</h1>
+        <h1>Privacy Policy & Disclosure</h1>
         <span class="last-updated">Last Updated: July 2026</span>
 
-        <!-- Section 1: Affiliate Disclosure (Most Important for Trust) -->
         <div class="disclosure-box">
-            <strong>📢 Affiliate Disclosure:</strong> PromptHub Global is a participant in various AI software affiliate programs. This means some of the links on our "AI Tools" page are affiliate links. If you click on them and make a purchase, we may earn a small commission at zero extra cost to you. We only recommend software we trust.
+            <strong>📢 Affiliate Disclosure:</strong> PromptHub Global participates in dynamic AI software affiliate networks. Certain outgoing links on the "AI Tools" grid are conversion nodes that yield small performance commission payouts at zero overhead cost to our web users.
         </div>
 
-        <h2>1. Information We Collect</h2>
-        <p>At PromptHub Global, we value your privacy. We do not require users to create an account to copy prompts. However, if you choose to use our "Submit a Prompt" page, we may collect the data you provide in the form, including the prompt text, selected categories, and any uploaded image previews.</p>
+        <h2>1. Information Logging</h2>
+        <p>We perform no explicit login tracking actions for regular users accessing the clipboard rendering tools. Data entered during custom prompt asset submissions remains exclusively isolated inside our local server tracking frameworks.</p>
 
-        <h2>2. Cookies and Web Beacons</h2>
-        <p>Like any other website, we use 'cookies' to optimize user experience by remembering user preferences (such as dark mode settings). Furthermore, our monetization partners, including Google AdSense, may use cookies to serve personalized advertisements based on your visits to this and other websites across the internet.</p>
+        <h2>2. AdSense & Cookie Rules</h2>
+        <p>Our advertisement automation scripts, including Google AdSense systems, deploy tracking configurations to catalog platform layout views to deliver accurate display banners matches based on historic navigation logs.</p>
 
-        <h2>3. Third-Party Privacy Policies</h2>
-        <p>PromptHub Global's Privacy Policy does not apply to third-party AI tools or advertisers. We strongly advise you to consult the respective Privacy Policies of these third-party platforms (such as ElevenLabs, Midjourney, or Google AdSense) for more detailed information regarding their data practices.</p>
-
-        <h2>4. GDPR & CCPA Data Protection Rights</h2>
-        <p>We ensure that global users have full rights to their data. If you have submitted a prompt to our directory and wish for it to be updated or permanently deleted from our HTML repository, you can contact our administration team at any time, and we will fulfill the request within 24 hours.</p>
-
-        <h2>5. Consent</h2>
-        <p>By using our website, you hereby consent to our Privacy Policy and agree to its Terms and Conditions.</p>
+        <h2>3. Data Consent Protection</h2>
+        <p>By executing interactions across our web directory components, you provide complete operational validation parameters to match our technical data storage and logging layout requirements.</p>
 
         <p class="footer-text">© 2026 PromptHub Global. All rights reserved.</p>
     </main>
