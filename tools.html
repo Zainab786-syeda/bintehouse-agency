@@ -6,7 +6,7 @@
     <title>AI Tools Directory - PromptHub Global</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: #0f172a; color: #f8fafc; line-height: 1.6; }
+        body { background-color: #0f172a; color: #cbd5e1; line-height: 1.8; padding-bottom: 60px; scroll-behavior: smooth; }
         
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background-color: #1e293b; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; }
         .navbar .logo { font-size: 1.4rem; font-weight: bold; color: #3b82f6; }
@@ -14,42 +14,37 @@
         .navbar ul li a { color: #94a3b8; text-decoration: none; font-weight: 500; transition: 0.3s; }
         .navbar ul li a:hover, .navbar ul li a.active { color: #3b82f6; }
 
-        .directory-header { text-align: center; padding: 50px 20px 30px; background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%); }
-        .directory-header h1 { font-size: 2.2rem; margin-bottom: 10px; }
-        .directory-header span { color: #3b82f6; }
-        .directory-header p { color: #94a3b8; }
-
-        .directory-container { max-width: 1200px; margin: 30px auto; padding: 0 20px; display: flex; gap: 30px; }
+        .directory-layout { max-width: 1200px; margin: 50px auto; padding: 0 20px; display: flex; gap: 30px; }
         
-        /* Sidebar Filter System */
-        .sidebar-filters { flex: 1; background-color: #1e293b; padding: 20px; border-radius: 12px; border: 1px solid #334155; height: fit-content; position: sticky; top: 100px; }
-        .sidebar-filters h3 { font-size: 1.1rem; margin-bottom: 15px; color: #cbd5e1; border-bottom: 1px solid #334155; padding-bottom: 8px; }
-        .filter-list { list-style: none; }
-        .filter-item { padding: 10px 12px; color: #94a3b8; cursor: pointer; border-radius: 6px; margin-bottom: 5px; font-size: 0.95rem; transition: 0.2s; }
-        .filter-item.active, .filter-item:hover { background-color: #3b82f6; color: #fff; }
+        .sidebar-panel { flex: 1; background-color: #1e293b; padding: 25px; border-radius: 14px; border: 1px solid #334155; height: fit-content; }
+        .sidebar-panel h3 { color: #f8fafc; font-size: 1.1rem; margin-bottom: 15px; border-bottom: 1px solid #334155; padding-bottom: 8px; }
+        .panel-menu { list-style: none; }
+        .panel-link { padding: 12px; color: #94a3b8; cursor: pointer; border-radius: 8px; margin-bottom: 6px; font-weight: 500; transition: 0.2s; }
+        .panel-link.active, .panel-link:hover { background-color: #3b82f6; color: #fff; }
 
-        /* Tools Feed View */
-        .tools-feed { flex: 3; display: flex; flex-direction: column; gap: 20px; }
-        .tool-card { background-color: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 25px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
-        .tool-card:hover { transform: translateX(5px); border-color: #3b82f6; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
-        .tool-meta { display: flex; gap: 20px; align-items: center; flex: 2; }
-        .tool-icon-box { width: 65px; height: 65px; background-color: #0f172a; border-radius: 10px; border: 1px solid #334155; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
-        .tool-info h2 { font-size: 1.3rem; color: #f8fafc; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-        .pricing-badge { font-size: 0.75rem; background-color: rgba(16, 185, 129, 0.15); color: #10b981; padding: 2px 8px; border-radius: 4px; font-weight: bold; }
-        .pricing-badge.paid { background-color: rgba(239, 68, 68, 0.15); color: #ef4444; }
-        .pricing-badge.trial { background-color: rgba(245, 158, 11, 0.15); color: #f59e0b; }
-        .tool-info p { color: #94a3b8; font-size: 0.9rem; max-width: 500px; }
+        .feed-stack { flex: 3; display: flex; flex-direction: column; gap: 20px; }
+        .directory-node-card { background-color: #1e293b; border: 1px solid #334155; border-radius: 14px; padding: 25px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
+        .directory-node-card:hover { border-color: #3b82f6; transform: translateX(4px); }
         
-        .tool-action { flex: 1; text-align: right; }
-        .affiliate-cta-btn { display: inline-block; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: #fff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; font-size: 0.95rem; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2); white-space: nowrap; transition: 0.2s; }
-        .affiliate-cta-btn:hover { transform: translateY(-2px); background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); }
+        .meta-group { display: flex; gap: 20px; align-items: center; }
+        .icon-avatar { width: 60px; height: 60px; background-color: #0f172a; border-radius: 10px; border: 1px solid #334155; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; }
+        .info-block h2 { font-size: 1.25rem; color: #f8fafc; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
+        .status-pill { font-size: 0.75rem; background-color: rgba(16, 185, 129, 0.12); color: #10b981; padding: 2px 8px; border-radius: 4px; font-weight: bold; }
+        .info-block p { color: #94a3b8; font-size: 0.9rem; max-width: 550px; }
+        
+        .action-group { text-align: right; }
+        .cta-link-gate { display: inline-block; background-color: #3b82f6; color: #fff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; transition: 0.3s; }
+        .cta-link-gate:hover { background-color: #2563eb; }
+
+        .scroll-top-widget { position: fixed; bottom: 30px; right: 30px; background-color: #3b82f6; color: #fff; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; border: none; opacity: 0; visibility: hidden; transition: 0.3s; }
+        .scroll-top-widget.visible { opacity: 1; visibility: visible; }
+        .footer-text { text-align: center; margin-top: 50px; font-size: 0.85rem; color: #64748b; border-top: 1px solid #334155; padding-top: 20px; }
 
         @media (max-width: 850px) {
-            .directory-container { flex-direction: column; }
-            .sidebar-filters { position: static; }
-            .tool-card { flex-direction: column; align-items: flex-start; gap: 20px; }
-            .tool-action { width: 100%; text-align: left; }
-            .affiliate-cta-btn { width: 100%; text-align: center; }
+            .directory-layout { flex-direction: column; }
+            .directory-node-card { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .action-group { width: 100%; }
+            .cta-link-gate { width: 100%; text-align: center; }
             .navbar { flex-direction: column; gap: 15px; }
         }
     </style>
@@ -66,73 +61,63 @@
         </ul>
     </nav>
 
-    <header class="directory-header">
-        <h1>Vetted <span>25+ Premium AI Tools</span> Directory</h1>
-        <p>Explore high-performing software for graphics, writing, automation, and voice production.</p>
-    </header>
-
-    <main class="directory-container">
-        <aside class="sidebar-filters">
+    <main class="directory-layout">
+        <aside class="sidebar-panel">
             <h3>Categories</h3>
-            <ul class="filter-list">
-                <li class="filter-item active" onclick="filterTools('all', this)">All 25+ Software</li>
-                <li class="filter-item" onclick="filterTools('audio', this)">Audio & Voice</li>
-                <li class="filter-item" onclick="filterTools('image', this)">Image & Art</li>
-                <li class="filter-item" onclick="filterTools('video', this)">Video & Avatars</li>
-                <li class="filter-item" onclick="filterTools('writing', this)">Writing & SEO</li>
+            <ul class="panel-menu">
+                <li class="panel-link active" onclick="executeTabSwitch('all', this)">All Platforms</li>
+                <li class="panel-link" onclick="executeTabSwitch('audio', this)">Audio Architecture</li>
+                <li class="panel-link" onclick="executeTabSwitch('image', this)">Image Engines</li>
+                <li class="panel-link" onclick="executeTabSwitch('writing', this)">SEO & Text</li>
             </ul>
         </aside>
 
-        <section class="tools-feed" id="toolsFeed">
-            
-            <!-- 1. ElevenLabs -->
-            <div class="tool-card" data-cat="audio">
-                <div class="tool-meta"><div class="tool-icon-box">🗣️</div><div class="tool-info"><h2>ElevenLabs <span class="pricing-badge">Free Credits</span></h2><p>Top AI voice cloning and lifelike text-to-speech generation software.</p></div></div>
-                <div class="tool-action"><a href="https://elevenlabs.io" target="_blank" class="affiliate-cta-btn">Try Tool ➔</a></div>
+        <section class="feed-stack">
+            <div class="directory-node-card" data-cat="audio">
+                <div class="meta-group">
+                    <div class="icon-avatar">🗣️</div>
+                    <div class="info-block">
+                        <h2>ElevenLabs <span class="status-pill">Active Program</span></h2>
+                        <p>High tier multi-lingual speech generation modeling platform.</p>
+                    </div>
+                </div>
+                <div class="action-group"><a href="#" class="cta-link-gate" target="_blank">Access Node ➔</a></div>
             </div>
 
-            <!-- 2. Midjourney -->
-            <div class="tool-card" data-cat="image">
-                <div class="tool-meta"><div class="tool-icon-box">🎨</div><div class="tool-info"><h2>Midjourney <span class="pricing-badge paid">Paid Model</span></h2><p>High-end generative neural network producing high-quality cinematic art.</p></div></div>
-                <div class="tool-action"><a href="https://midjourney.com" target="_blank" class="affiliate-cta-btn">Try Tool ➔</a></div>
+            <div class="directory-node-card" data-cat="image">
+                <div class="meta-group">
+                    <div class="icon-avatar">🎨</div>
+                    <div class="info-block">
+                        <h2>Midjourney <span class="status-pill">Enterprise</span></h2>
+                        <p>Detailed textual to graphic rendering matrix infrastructure.</p>
+                    </div>
+                </div>
+                <div class="action-group"><a href="#" class="cta-link-gate" target="_blank">Access Node ➔</a></div>
             </div>
+        </section>
+    </main>
 
-            <!-- 3. Canva Pro -->
-            <div class="tool-card" data-cat="image">
-                <div class="tool-meta"><div class="tool-icon-box">📐</div><div class="tool-info"><h2>Canva Pro <span class="pricing-badge trial">30 Days Free</span></h2><p>All-in-one graphic layout engine integrated with AI design tools.</p></div></div>
-                <div class="tool-action"><a href="https://canva.com" target="_blank" class="affiliate-cta-btn">Try Tool ➔</a></div>
-            </div>
+    <button class="scroll-top-widget" id="dirScrollBtn" onclick="actionScrollToTop()">▲</button>
 
-            <!-- 4. Jasper AI -->
-            <div class="tool-card" data-cat="writing">
-                <div class="tool-meta"><div class="tool-icon-box">✍️</div><div class="tool-info"><h2>Jasper AI <span class="pricing-badge trial">Free Trial</span></h2><p>Premium writing assistant for enterprise marketing and SEO blog posts.</p></div></div>
-                <div class="tool-action"><a href="https://jasper.ai" target="_blank" class="affiliate-cta-btn">Try Tool ➔</a></div>
-            </div>
-
-            <!-- 5. HeyGen -->
-            <div class="tool-card" data-cat="video">
-                <div class="tool-meta"><div class="tool-icon-box">👤</div><div class="tool-info"><h2>HeyGen <span class="pricing-badge">Free Credits</span></h2><p>Create realistic talking AI spokesperson videos from raw script inputs.</p></div></div>
-                <div class="tool-action"><a href="https://heygen.com" target="_blank" class="affiliate-cta-btn">Try Tool ➔</a></div>
-            </div>
-
-            <!-- 6. Leonardo AI -->
-            <div class="tool-card" data-cat="image">
-                <div class="tool-meta"><div class="tool-icon-box">🦁</div><div class="tool-info"><h2>Leonardo AI <span class="pricing-badge">Free Tokens</span></h2><p>Excellent visual asset generator for character art and gaming layout elements.</p></div></div>
-                <div class="tool-action"><a href="https://leonardo.ai" target="_blank" class="affiliate-cta-btn">Try Tool ➔</a></div>
-            </div>
-
-            <!-- 7. WriteSonic (Completed) -->
-            <div class="tool-card" data-cat="writing">
-                <div class="tool-meta"><div class="tool-icon-box">🚀</div><div class="tool-info"><h2>WriteSonic <span class="pricing-badge">Free Plan</span></h2><p>AI copywriting tool that generates SEO-optimized content and blogs instantly.</p></div></div>
-                <div class="tool-action"><a href="https://writesonic.com" target="_blank" class="affiliate-cta-btn">Try Tool ➔</a></div>
-            </div>
-
-            <!-- 8. ChatGPT (GPT-4o) -->
-            <div class="tool-card" data-cat="writing">
-                <div class="tool-meta"><div class="tool-icon-box">🤖</div><div class="tool-info"><h2>ChatGPT <span class="pricing-badge">Free & Paid</span></h2><p>Industry standard Conversational AI expert in coding, analysis, and writing.</p></div></div>
-                <div class="tool-action"><a href="https://chatgpt.com" target="_blank" class="affiliate-cta-btn">Try Tool ➔</a></div>
-            </div>
-
-            <!-- 9. Claude 3.5 Sonnet -->
-            <div class="tool-card" data-cat="writing">
-                <div class="tool-meta"><div class="tool-icon-box">🧠</div><div class="tool-info"><h2>Claude AI <span class="pricing-badge">Free Tier</span></h2><p>Advanced writing assistant known for high-level logic, research, and coding.</p></div></div>
+    <script>
+        function executeTabSwitch(cat, target) {
+            document.querySelectorAll('.panel-link').forEach(l => l.classList.remove('active'));
+            target.classList.add('active');
+            const items = document.getElementsByClassName('directory-node-card');
+            for(let i=0; i<items.length; i++) {
+                if(cat === 'all' || items[i].getAttribute('data-cat') === cat) {
+                    items[i].style.display = "flex";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+        window.onscroll = function() {
+            const btn = document.getElementById('dirScrollBtn');
+            if (document.body.scrollTop > 250 || document.documentElement.scrollTop > 250) { btn.classList.add('visible'); } 
+            else { btn.classList.remove('visible'); }
+        };
+        function actionScrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    </script>
+</body>
+</html>
