@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 AI Tools Directory - PromptHub Global</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: #1e293b;
+            border-bottom: 1px solid #334155;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar .logo {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #3b82f6;
+        }
+
+        .navbar ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .navbar ul li {
+            margin-left: 20px;
+        }
+
+        .navbar ul li a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .navbar ul li a:hover, .navbar ul li a.active {
+            color: #3b82f6;
+        }
+
+        .directory-header {
+            text-align: center;
+            padding: 50px 20px 30px;
+            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+        }
+
+        .directory-header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .directory-header span {
+            color: #3b82f6;
+        }
+
+        .directory-header p {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        .directory-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 30px;
+        }
+
+        .sidebar-filters {
+            flex: 1;
+            background-color: #1e293b;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            height: fit-content;
+        }
+
+        .sidebar-filters h3 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #cbd5e1;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 8px;
+        }
+
+        .filter-list {
+            list-style: none;
+        }
+
+        .filter-item {
+            padding: 10px 12px;
+            color: #94a3b8;
+            cursor: pointer;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+            transition: 0.2s;
+        }
+
+        .filter-item:hover, .filter-item.active {
+            background-color: #3b82f6;
+            color: #fff;
+        }
+
+        .tools-feed {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .tool-card {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .tool-card:hover {
+            transform: translateX(5px);
+            border-color: #3b82f6;
+        }
+
+        .tool-meta {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex: 2;
+        }
+
+        .tool-icon-box {
+            width: 65px;
+            height: 65px;
+            background-color: #0f172a;
+            border-radius: 10px;
+            border: 1px solid #334155;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        .tool-info h2 {
+            font-size: 1.3rem;
+            color: #f8fafc;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pricing-badge {
+            font-size: 0.75rem;
+            background-color: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .tool-info p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            max-width: 500px;
+        }
+
+        .tool-action {
+            flex: 1;
+            text-align: right;
+        }
+
+        .affiliate-cta-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .affiliate-cta-btn:hover {
+            box-shadow: 0 6px 18px rgba(59, 130, 246, 0.4);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 850px) {
+            .directory-container { flex-direction: column; }
+            .tool-card { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .tool-action { width: 100%; text-align: left; }
+            .affiliate-cta-btn { width: 100%; text-align: center; }
+            .navbar { flex-direction: column; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">🚀 PromptHub Global</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#" class="active">AI Tools</a></li>
+            <li><a href="submit.html">Submit Prompt</a></li>
+        </ul>
+    </nav>
+
+    <header class="directory-header">
+        <h1>Vetted <span>Top 10 AI Tools</span> Directory</h1>
+        <p>Handpicked industry-leading AI tools for creators, developers, and marketers worldwide.</p>
+    </header>
+
+    <main class="directory-container">
+        
+        <aside class="sidebar-filters">
+            <h3>Categories</h3>
+            <ul class="filter-list">
+                <li class="filter-item active">All 10 Software</li>
+                <li class="filter-item">Audio & Voice</li>
+                <li class="filter-item">Image & Art</li>
+                <li class="filter-item">Video & Avatars</li>
+                <li class="filter-item">Writing & SEO</li>
+                <li class="filter-item">No-Code Developers</li>
+            </ul>
+        </aside>
+
+        <section class="tools-feed">
+            
+            <div class="tool-card">
+                <div class="tool-meta">
+                    <div class="tool-icon-box">🗣️</div>
+                    <div class="tool-info">
+                        <h2>ElevenLabs <span class="pricing-badge">Free Version</span></h2>
+                        <p>The global leader in AI voice cloning and lifelike text-to-speech generation. Ideal for faceless content creators.</p>
+                    </div>
+                </div>
+                <div class="tool-action">
+                    <a href="#" target="_blank" class="affiliate-cta-btn">Claim Free Trial ➔</a>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-meta">
+                    <div class="tool-icon-box">🎨</div>
+                    <div class="tool-info">
+                        <h2>Midjourney <span class="pricing-badge">Paid Model</span></h2>
+                        <p>The highest quality text-to-image generator in the world. Produces stunning cinematic, realistic, and artistic photos.</p>
+                    </div>
+                </div>
+                <div class="tool-action">
+                    <a href="#" target="_blank" class="affiliate-cta-btn">Explore Plans ➔</a>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-meta">
+                    <div class="tool-icon-box">📐</div>
+                    <div class="tool-info">
+                        <h2>Canva Pro <span class="pricing-badge">30 Days Free</span></h2>
+                        <p>All-in-one graphic design layout application heavily integrated with smart AI image editing and magic templates.</p>
+                    </div>
+                </div>
+                <div class="tool-action">
+                    <a href="#" target="_blank" class="affiliate-cta-btn">Get 30 Days Free ➔</a>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-meta">
+                    <div class="tool-icon-box">✍️</div>
+                    <div class="tool-info">
+                        <h2>Jasper AI <span class="pricing-badge">7-Day Free Trial</span></h2>
+                        <p>Premium AI writing assistant for enterprise and marketing content. Generates SEO blogs and ad copy instantly.</p>
+                    </div>
+                </div>
+                <div class="tool-action">
+                    <a href="#" target="_blank" class="affiliate-cta-btn">Try Jasper Free ➔</a>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-meta">
+                    <div class="tool-icon-box">👤</div>
+                    <div class="tool-info">
+                        <h2>HeyGen <span class="pricing-badge">Free Credits</span></h2>
+                        <p>Create realistic talking AI spokesperson videos in minutes. Perfect for marketing, tutorials, and presentation videos.</p>
+                    </div>
+                </div>
+                <div class="tool-action">
+                    <a href="#" target="_blank" class="affiliate-cta-btn">Create AI Avatar ➔</a>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-meta">
+                    <div class="tool-icon-box">🦁</div>
+                    <div class="tool-info">
+                        <h2>Leonardo AI <span class="pricing-badge">Free Daily Tokens</span></h2>
+                        <p>A phenomenal free alternative to Midjourney. Offers daily free tokens to generate high-quality game assets and art.</p>
+                    </div>
+                </div>
+                <div class="tool-action">
+                    <a href="#" target="_blank" class="affiliate-cta-btn">Generate Free Art ➔</a>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-meta">
+                    <div class="tool-icon-box">🚀</div>
+                    <div class="tool-info">
+                        <h2>WriteSonic <span class="pricing-badge">Free Basic Plan</span></h2>
+                        <p>An AI writing tool optimized for Google SEO. Built-in capabilities to generate long-form blogs with live internet data.</p>
+                    </div>
+                </div>
+                <div class="tool-action">
+                    <a href="#" target="_blank" class="affiliate-cta-btn">Start Writing ➔</a>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-meta">
+                    <div class="tool-icon-box">🎬</div>
+                    <div class="tool-info">
+                        <h2>Runway Gen-3 <span class="pricing-badge">Premium Tool</span></h2>
+                        <p>Next-generation AI video editing software. Translates normal text descriptions into Hollywood-level cinematic video clips.</p>
+                    </div>
+                </div>
+                <div class="tool-action">
+                    <a href="#" target="_blank" class="affiliate-cta-btn">Try Gen-3 Video ➔</a>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-meta">
+                    <div class="tool-icon-box">💻</div>
+                    <div class="tool-info">
+                        <h2>Framer AI <span class="pricing-badge">Free to Publish</span></h2>
+                        <p>A no-code website generator. Type out what website design you want, and Framer will generate a complete functional layout.</p>
+                    </div>
+                </div>
+                <div class="tool-action">
+                    <a href="#" target="_blank" class="affiliate-cta-btn">Build Website ➔</a>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-meta">
+                    <div class="tool-icon-box">📝</div>
+                    <div class="tool-info">
+                        <h2>Copy.ai <span class="pricing-badge">Forever Free Plan</span></h2>
+                        <p>Excellent AI tool for writing short-form text like high-converting product descriptions and viral social media captions.</p>
+                    </div>
+                </div>
+                <div class="tool-action">
+                    <a href="#" target="_blank" class="affiliate-cta-btn">Try Copy.ai Free ➔</a>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

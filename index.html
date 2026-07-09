@@ -3,212 +3,372 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BinteHouse | Futuristic Global AI Market & Corporate Agency</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Global AI Prompt Directory - Home Dashboard</title>
+    
+    <!-- CSS Styling (Embedded Inside HTML for Single File Setup) -->
     <style>
-        /* Base Reset & Design Configurations */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background-color: #ffffff; color: #0f172a; line-height: 1.6; scroll-behavior: smooth; }
-        .container { width: 85%; max-width: 1200px; margin: 0 auto; }
-        
-        /* Master Navigation Bar CSS */
-        header { background: #ffffff; border-bottom: 1px solid #eeeeee; padding: 20px 0; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(8px); }
-        header .container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 24px; font-weight: 700; color: #000000; text-decoration: none; letter-spacing: -0.5px; }
-        .logo span { color: #0070f3; }
-        nav { display: flex; align-items: center; gap: 22px; }
-        nav a { text-decoration: none; color: #475569; font-size: 15px; font-weight: 500; transition: color 0.2s ease; }
-        nav a:hover { color: #000000; }
-        
-        /* Specialized High-tech Nav Links */
-        .nav-pill-premium { background: #eff6ff; color: #0070f3; padding: 6px 14px; border-radius: 20px; font-weight: 600; font-size: 13px; border: 1px solid rgba(0, 112, 243, 0.1); }
-        .nav-pill-premium:hover { background: #0070f3; color: white; }
-        .btn-nav-auth { background: #000000; color: #ffffff; border: none; padding: 9px 22px; font-size: 14px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; text-decoration: none; }
-        .btn-nav-auth:hover { background: #0070f3; transform: translateY(-1px); }
+        /* Reset & Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-        /* Premium Paid Ads Promotion Carousel Banner Section */
-        .paid-ads-carousel-section { background: #0f172a; color: white; padding: 12px 0; border-bottom: 2px solid #0070f3; overflow: hidden; position: relative; }
-        .ads-banner-container { display: flex; align-items: center; justify-content: space-between; font-size: 13px; font-weight: 500; }
-        .ad-badge { background: #10b981; color: white; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 10px; }
-        .ad-ticker-text { color: #cbd5e1; flex-grow: 1; }
-        .ad-ticker-text strong { color: #38bdf8; }
-        .btn-ad-action { color: #38bdf8; text-decoration: underline; font-weight: 600; margin-left: 15px; cursor: pointer; background: none; border: none; font-family: inherit; font-size: 13px; }
+        body {
+            background-color: #0f172a; /* Modern Dark Theme */
+            color: #f8fafc;
+            line-height: 1.6;
+        }
 
-        /* Hero Landing Component Layout */
-        .hero { padding: 120px 0; background: radial-gradient(circle at top right, rgba(0, 112, 243, 0.04), transparent); text-align: center; }
-        .hero-content h1 { font-size: 54px; font-weight: 700; line-height: 1.2; margin-bottom: 25px; color: #000000; letter-spacing: -1.5px; }
-        .hero-content h1 span { color: #0070f3; }
-        .hero-content p { font-size: 19px; color: #475569; max-width: 700px; margin: 0 auto 40px auto; font-weight: 400; }
-        .btn-main-action { display: inline-block; background: #000000; color: #ffffff; padding: 15px 36px; border-radius: 8px; text-decoration: none; font-weight: 600; box-shadow: 0 4px 14px rgba(0,0,0,0.1); transition: all 0.2s ease; font-size: 16px; }
-        .btn-main-action:hover { background: #0070f3; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 112, 243, 0.2); }
-        
-        /* Core Services Grid Layout Modules */
-        .services { padding: 100px 0; background: #fafafa; border-top: 1px solid #eeeeee; }
-        .section-title { font-size: 36px; font-weight: 700; text-align: center; margin-bottom: 12px; color: #000000; letter-spacing: -0.5px; }
-        .section-subtitle { text-align: center; color: #64748b; margin-bottom: 60px; font-size: 16px; max-width: 600px; margin-left: auto; margin-right: auto; }
-        
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .service-card { background: #ffffff; padding: 45px 35px; border-radius: 14px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01); border: 1px solid #e2e8f0; transition: transform 0.3s ease, border-color 0.3s ease; }
-        .service-card:hover { transform: translateY(-5px); border-color: #0070f3; }
-        .service-card-icon { font-size: 32px; margin-bottom: 20px; display: block; }
-        .service-card h3 { font-size: 20px; font-weight: 600; color: #000; margin-bottom: 12px; }
-        .service-card p { color: #475569; font-size: 15px; line-height: 1.6; }
-        
-        /* Contact Form CRM Area */
-        .contact { padding: 100px 0; background: #ffffff; }
-        .contact-form { max-width: 620px; margin: 0 auto; }
-        .form-group-block { margin-bottom: 24px; display: flex; flex-direction: column; }
-        .form-group-block label { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: #0f172a; }
-        input, textarea { padding: 14px 18px; border: 1px solid #cbd5e1; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 15px; background: #f8fafc; transition: all 0.2s; }
-        input:focus, textarea:focus { outline: none; border-color: #0070f3; background: #ffffff; box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.08); }
-        .btn-submit-crm { background: #000000; color: #ffffff; border: none; padding: 15px 30px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; width: 100%; transition: background 0.2s; }
-        .btn-submit-crm:hover { background: #0070f3; }
+        /* Navigation Bar Component */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: #1e293b;
+            border-bottom: 1px solid #334155;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-        footer { text-align: center; padding: 50px 0; color: #94a3b8; font-size: 14px; border-top: 1px solid #eeeeee; background: #ffffff; font-weight: 500; }
+        .navbar .logo {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #3b82f6;
+        }
+
+        .navbar ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .navbar ul li {
+            margin-left: 20px;
+        }
+
+        .navbar ul li a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .navbar ul li a:hover, .navbar ul li a.active {
+            color: #3b82f6;
+        }
+
+        /* Hero Section Component */
+        .hero-section {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #3b82f6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-section p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        /* Interactive Search Bar Component */
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 25px;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 15px 25px;
+            border-radius: 30px;
+            border: 2px solid #334155;
+            background-color: #1e293b;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .search-container input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Horizontal Quick Filter Pills */
+        .quick-tags {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tag-btn {
+            background-color: #1e293b;
+            color: #94a3b8;
+            border: 1px solid #334155;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .tag-btn:hover, .tag-btn.active {
+            background-color: #3b82f6;
+            color: #fff;
+            border-color: #3b82f6;
+        }
+
+        /* Main Content Grid Layout */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .prompt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        /* Prompt Card UI/UX Component Design */
+        .prompt-card {
+            background-color: #1e293b;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid #334155;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .prompt-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-header {
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1a2333;
+            border-bottom: 1px solid #334155;
+        }
+
+        /* Badge Colors based on AI Brand Colors */
+        .badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .badge.flux { background-color: #e84393; color: #fff; }
+        .badge.midjourney { background-color: #8e44ad; color: #fff; }
+        .badge.elevenlabs { background-color: #10b981; color: #fff; }
+
+        .category {
+            font-size: 0.8rem;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #334155;
+        }
+
+        .card-body {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .prompt-text-box {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            background-color: #0f172a;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px dashed #334155;
+            word-wrap: break-word;
+        }
+
+        /* Double-Action Footer Buttons (Copy + Affiliate CTA) */
+        .card-footer {
+            padding: 15px 20px;
+            background-color: #1a2333;
+            border-top: 1px solid #334155;
+            display: flex;
+            gap: 10px;
+        }
+
+        .copy-btn {
+            flex: 2;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .copy-btn:hover {
+            background-color: #2563eb;
+        }
+
+        .try-btn {
+            flex: 1;
+            background-color: transparent;
+            color: #3b82f6;
+            border: 2px solid #3b82f6;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            text-align: center;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .try-btn:hover {
+            background-color: #3b82f6;
+            color: #fff;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; gap: 15px; }
+            .hero-section h1 { font-size: 2rem; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Top Running High Visibility Paid Ads System Banner Bar -->
-    <div class="paid-ads-carousel-section">
-        <div class="container ads-banner-container">
-            <div style="display: flex; align-items: center; flex-grow: 1;">
-                <span class="ad-badge">Promoted</span>
-                <span class="ad-ticker-text" id="ad-carousel-text-node">Loading high-conversion paid asset campaigns slots...</span>
-            </div>
-            <div>
-                <button class="btn-ad-action" onclick="routeAdCampaignTarget()">Inspect Asset Deal</button>
-            </div>
-        </div>
-    </div>
+    <!-- 1. Navbar -->
+    <nav class="navbar">
+        <div class="logo">🚀 PromptHub Global</div>
+        <ul>
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#">AI Tools</a></li>
+            <li><a href="#">Submit Prompt</a></li>
+        </ul>
+    </nav>
 
-    <!-- Main Navigation Header Navigation Header -->
-    <header>
-        <div class="container">
-            <a href="#" class="logo">BinteHouse<span>.</span></a>
-            <nav>
-                <a href="marketplace.html" class="nav-pill-premium">🛒 Global Market</a>
-                <a href="community.html">🔥 Community & Reels</a>
-                <a href="messages.html">💬 WhatsApp Chat</a>
-                <a href="wallet.html">💳 Escrow Wallet</a>
-                <a href="dashboard.html" class="btn-nav-auth">Seller Center Dashboard</a>
-            </nav>
+    <!-- 2. Hero Section & Filters -->
+    <header class="hero-section">
+        <h1>Global AI Prompt Directory</h1>
+        <p>Instant copy verified prompts for the world's top AI models and networks.</p>
+        
+        <div class="search-container">
+            <input type="text" placeholder="Search prompts (e.g., cinematic, cyberpunk, realistic)...">
+        </div>
+
+        <div class="quick-tags">
+            <button class="tag-btn active">All Prompts</button>
+            <button class="tag-btn">Flux AI</button>
+            <button class="tag-btn">Midjourney</button>
+            <button class="tag-btn">ElevenLabs</button>
         </div>
     </header>
 
-    <!-- Master Application Content Workspace Modules -->
-    <main>
-        
-        <!-- Hero Module Interface -->
-        <section class="hero">
-            <div class="container hero-content">
-                <h1>We Build Futuristic <br><span>Digital Ecosystems</span></h1>
-                <p>Empowering digital innovators with premium full-stack architecture, high-fidelity real-time audio/video interactions, public reels exposure modules, and cutting edge multi-modal AI item indexing workflows.</p>
-                <a href="marketplace.html" class="btn-main-action">Enter Global AI Marketplace</a>
-            </div>
-        </section>
-
-        <!-- Agency Corporate Capabilities Section Module -->
-        <section class="services">
-            <div class="container">
-                <h2 class="section-title">Corporate Capabilities Suite</h2>
-                <p class="section-subtitle">High-performance tech matrices designed to host, deploy, and accelerate customized systems worldwide.</p>
-                
-                <div class="services-grid">
-                    <div class="service-card">
-                        <span class="service-card-icon">💻</span>
-                        <h3>Web Architecture</h3>
-                        <p>Flawless single-page and distributed multi-page frame deployment pipelines optimized for enterprise-grade microservice modules.</p>
-                    </div>
-                    <div class="service-card">
-                        <span class="service-card-icon">🧠</span>
-                        <h3>Multi-Modal AI Integration</h3>
-                        <p>Advanced feature matching pipelines allowing global image indexing, localized video filtering adjustments, and continuous AI expert advice streams.</p>
-                    </div>
-                    <div class="service-card">
-                        <span class="service-card-icon">📢</span>
-                        <h3>High-Impact Paid Ads</h3>
-                        <p>Targeted promotion structures feeding verified impressions directly into high-visibility top layout slots across multiple page modules natively.</p>
-                    </div>
+    <!-- 3. Main Prompt Grid Container -->
+    <main class="main-container">
+        <div class="prompt-grid">
+            
+            <!-- Card 1: Flux AI Card -->
+            <div class="prompt-card">
+                <div class="card-header">
+                    <span class="badge flux">Flux AI</span>
+                    <span class="category">Cinematic 3D</span>
+                </div>
+                <!-- Sample Image Link (Aap badal sakti hain) -->
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=500" alt="Flux AI Result" class="card-img">
+                <div class="card-body">
+                    <p class="prompt-text-box" id="p1">A cinematic, hyper-realistic shot of a futuristic neon city street in rain, cyberpunk style, shot on 35mm lens, 8k resolution, highly detailed.</p>
+                </div>
+                <div class="card-footer">
+                    <button class="copy-btn" onclick="copyPrompt('p1', this)">📋 Copy Prompt</button>
+                    <!-- Yahan aap apna custom affiliate link lagayeingi -->
+                    <a href="https://example.com/flux-affiliate" target="_blank" class="try-btn">Try Tool</a>
                 </div>
             </div>
-        </section>
 
-        <!-- CRM Client Intake Engagement Form Module -->
-        <section class="contact">
-            <div class="container">
-                <h2 class="section-title">Initialize Custom Projects</h2>
-                <p class="section-subtitle">Submit your technical specifications sheet. Our centralized network coordinates deployment operations instantly.</p>
-                
-                <form id="main-landing-crm-form" class="contact-form" onsubmit="handleCrmSubmission(event)">
-                    <div class="form-group-block">
-                        <label for="client-name">Your Full Corporate Title / Name</label>
-                        <input type="text" id="client-name" placeholder="Enter your full name" required>
-                    </div>
-                    <div class="form-group-block">
-                        <label for="client-email">Designated Node Email Address</label>
-                        <input type="email" id="client-email" placeholder="name@example.com" required>
-                    </div>
-                    <div class="form-group-block">
-                        <label for="client-project">Project Scope Specifications</label>
-                        <textarea id="client-project" rows="5" placeholder="Elaborate code parameters, target budgets, or interface feature sets depth..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit-crm">Submit Secure Engagement Request</button>
-                </form>
+            <!-- Card 2: Midjourney Card -->
+            <div class="prompt-card">
+                <div class="card-header">
+                    <span class="badge midjourney">Midjourney</span>
+                    <span class="category">Anime Art</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=500" alt="Midjourney Result" class="card-img">
+                <div class="card-body">
+                    <p class="prompt-text-box" id="p2">Retro 90s anime aesthetic, a cozy bedroom with a large window, rain drops on glass, soft pastel colors, lo-fi vibe, highly detailed --ar 16:9 --v 6.0</p>
+                </div>
+                <div class="card-footer">
+                    <button class="copy-btn" onclick="copyPrompt('p2', this)">📋 Copy Prompt</button>
+                    <a href="https://example.com/midjourney-link" target="_blank" class="try-btn">Try Tool</a>
+                </div>
             </div>
-        </section>
 
+            <!-- Card 3: ElevenLabs Card (Audio Settings) -->
+            <div class="prompt-card">
+                <div class="card-header">
+                    <span class="badge elevenlabs">ElevenLabs</span>
+                    <span class="category">Voice Synthesis</span>
+                </div>
+                <!-- Audio Tools ke liye placeholder abstract image -->
+                <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd6a?q=80&w=500" alt="Audio Waveform" class="card-img">
+                <div class="card-body">
+                    <p class="prompt-text-box" id="p3">Deep cinematic male voiceover, high clarity, stability: 45%, clarity/similarity: 85%, style exaggeration: 10%. Perfect for historical or documentary trailers.</p>
+                </div>
+                <div class="card-footer">
+                    <button class="copy-btn" onclick="copyPrompt('p3', this)">📋 Copy Prompt</button>
+                    <!-- ElevenLabs Affiliate link yahan set hoga -->
+                    <a href="https://example.com/elevenlabs-affiliate" target="_blank" class="try-btn">Try Tool</a>
+                </div>
+            </div>
+
+        </div>
     </main>
 
-    <!-- Persistent Global System Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 BinteHouse Systems Global Network. All independent nodes online and fully synchronized.</p>
-        </div>
-    </footer>
-
-    <!-- Embedded Automation Logic Controllers Scripts -->
+    <!-- 4. Clipboard Functional JavaScript -->
     <script>
-        // Array packet simulation holding real-time high visibility paid ad campaign structures 
-        const paidAdsCampaignCarouselArray = [
-            { text: "HOT DEAL: Deployed by Matrix Systems — NextJS Premium Analytic Panel at lowest tier pricing. Save 15% now!", route: "marketplace.html" },
-            { text: "FEATURED ASSET: CodeLabs Studio launched Corporate Business Hub Template. Flawless UI blocks ready.", route: "marketplace.html" },
-            { text: "PREMIUM GRAPHICS: Futuristic Abstract Neon Vector Pack hosted live by Syeda Designs. Verify specs instantly.", route: "marketplace.html" }
-        ];
-
-        let activeAdLoopPointerIndex = 0;
-        const textNodeTarget = document.getElementById('ad-carousel-text-node');
-
-        // Automatic Carousel loop sequencer running dynamically every 4 seconds
-        function executeAdTickerCarouselLoopCycle() {
-            const currentAdDataPacket = paidAdsCampaignCarouselArray[activeAdLoopPointerIndex];
-            textNodeTarget.innerHTML = currentAdDataPacket.text;
+        function copyPrompt(id, button) {
+            // Target prompt text
+            const textToCopy = document.getElementById(id).innerText;
             
-            // Increment logic pointer loop
-            activeAdLoopPointerIndex = (activeAdLoopPointerIndex + 1) % paidAdsCampaignCarouselArray.length;
-        }
-
-        // Initialize Carousel ticker execution loops immediately on load
-        executeAdTickerCarouselLoopCycle();
-        setInterval(executeAdTickerCarouselLoopCycle, 4000);
-
-        // Routing paid ad traffic action event trigger
-        function routeAdCampaignTarget() {
-            // Find current ad target routing parameters safely
-            const activeIndex = activeAdLoopPointerIndex === 0 ? paidAdsCampaignCarouselArray.length - 1 : activeAdLoopPointerIndex - 1;
-            const targetRoutePath = paidAdsCampaignCarouselArray[activeIndex].route;
-            
-            alert("Redirecting secure pipeline traffic to paid ad campaign asset page vector...");
-            window.location.href = targetRoutePath;
-        }
-
-        // Handling Landing intake CRM operations form updates safely
-        function handleCrmSubmission(event) {
-            event.preventDefault();
-            const nameInput = document.getElementById('client-name').value;
-            
-            alert(`Mubarak ho! Secure data pipeline has safely logged project intake packets for: "${nameInput}". BinteHouse developers will follow up.`);
-            document.getElementById('main-landing-crm-form').reset();
+            // Web Clipboard API
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                // Instantly change button text to give confirmation
+                const oldContent = button.innerHTML;
+                button.innerHTML = "✅ Copied!";
+                button.style.backgroundColor = "#10b981"; // Change to emerald green on success
+                
+                // Revert back to original state after 2 seconds
+                setTimeout(() => {
+                    button.innerHTML = oldContent;
+                    button.style.backgroundColor = "#3b82f6"; // Back to accent blue
+                }, 1800);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
         }
     </script>
 </body>
