@@ -3,372 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global AI Prompt Directory - Home Dashboard</title>
-    
-    <!-- CSS Styling (Embedded Inside HTML for Single File Setup) -->
+    <title>PromptHub Global - Home Dashboard</title>
     <style>
-        /* Reset & Global Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #0f172a; color: #f8fafc; line-height: 1.6; }
+        
+        /* Navbar Component */
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background-color: #1e293b; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; }
+        .navbar .logo { font-size: 1.4rem; font-weight: bold; color: #3b82f6; }
+        .navbar ul { display: flex; list-style: none; gap: 20px; }
+        .navbar ul li a { color: #94a3b8; text-decoration: none; font-weight: 500; transition: 0.3s; }
+        .navbar ul li a:hover, .navbar ul li a.active { color: #3b82f6; }
 
-        body {
-            background-color: #0f172a; /* Modern Dark Theme */
-            color: #f8fafc;
-            line-height: 1.6;
-        }
+        /* Hero Section */
+        .hero-section { text-align: center; padding: 50px 20px 30px; background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%); }
+        .hero-section h1 { font-size: 2.5rem; margin-bottom: 10px; color: #3b82f6; }
+        .hero-section p { color: #94a3b8; margin-bottom: 25px; }
 
-        /* Navigation Bar Component */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            background-color: #1e293b;
-            border-bottom: 1px solid #334155;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+        /* Working Search Bar */
+        .search-container { width: 100%; max-width: 600px; margin: 0 auto 25px; }
+        .search-container input { width: 100%; padding: 14px 25px; border-radius: 30px; border: 2px solid #334155; background-color: #1e293b; color: #fff; font-size: 1rem; outline: none; }
+        .search-container input:focus { border-color: #3b82f6; }
 
-        .navbar .logo {
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: #3b82f6;
-        }
+        /* Filter Buttons */
+        .quick-tags { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+        .tag-btn { background-color: #1e293b; color: #94a3b8; border: 1px solid #334155; padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 500; }
+        .tag-btn.active, .tag-btn:hover { background-color: #3b82f6; color: #fff; border-color: #3b82f6; }
 
-        .navbar ul {
-            display: flex;
-            list-style: none;
-        }
+        /* Responsive Grid */
+        .main-container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .prompt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
 
-        .navbar ul li {
-            margin-left: 20px;
-        }
-
-        .navbar ul li a {
-            color: #94a3b8;
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
-        .navbar ul li a:hover, .navbar ul li a.active {
-            color: #3b82f6;
-        }
-
-        /* Hero Section Component */
-        .hero-section {
-            text-align: center;
-            padding: 60px 20px 40px;
-            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
-        }
-
-        .hero-section h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, #3b82f6, #60a5fa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-section p {
-            color: #94a3b8;
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-        }
-
-        /* Interactive Search Bar Component */
-        .search-container {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto 25px;
-        }
-
-        .search-container input {
-            width: 100%;
-            padding: 15px 25px;
-            border-radius: 30px;
-            border: 2px solid #334155;
-            background-color: #1e293b;
-            color: #fff;
-            font-size: 1rem;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .search-container input:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
-        }
-
-        /* Horizontal Quick Filter Pills */
-        .quick-tags {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .tag-btn {
-            background-color: #1e293b;
-            color: #94a3b8;
-            border: 1px solid #334155;
-            padding: 8px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
-        .tag-btn:hover, .tag-btn.active {
-            background-color: #3b82f6;
-            color: #fff;
-            border-color: #3b82f6;
-        }
-
-        /* Main Content Grid Layout */
-        .main-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 30px 20px;
-        }
-
-        .prompt-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        /* Prompt Card UI/UX Component Design */
-        .prompt-card {
-            background-color: #1e293b;
-            border-radius: 14px;
-            overflow: hidden;
-            border: 1px solid #334155;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .prompt-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
-        }
-
-        .card-header {
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #1a2333;
-            border-bottom: 1px solid #334155;
-        }
-
-        /* Badge Colors based on AI Brand Colors */
-        .badge {
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
+        /* Card Component */
+        .prompt-card { background-color: #1e293b; border-radius: 12px; overflow: hidden; border: 1px solid #334155; display: flex; flex-direction: column; transition: 0.3s; }
+        .prompt-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .card-header { padding: 15px; display: flex; justify-content: space-between; align-items: center; background-color: #1a2333; }
+        .badge { padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; }
         .badge.flux { background-color: #e84393; color: #fff; }
         .badge.midjourney { background-color: #8e44ad; color: #fff; }
         .badge.elevenlabs { background-color: #10b981; color: #fff; }
+        .category { font-size: 0.8rem; color: #64748b; font-weight: 600; }
+        .card-img { width: 100%; height: 180px; object-fit: cover; }
+        .card-body { padding: 15px; flex-grow: 1; }
+        .prompt-text-box { font-size: 0.9rem; color: #cbd5e1; background-color: #0f172a; padding: 10px; border-radius: 6px; border: 1px dashed #334155; height: 100%; }
+        
+        /* Action Buttons */
+        .card-footer { padding: 15px; background-color: #1a2333; display: flex; gap: 10px; }
+        .copy-btn { flex: 2; background-color: #3b82f6; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        .try-btn { flex: 1; background-color: transparent; color: #3b82f6; border: 2px solid #3b82f6; padding: 10px; border-radius: 6px; font-weight: bold; text-decoration: none; text-align: center; font-size: 0.85rem; }
+        .try-btn:hover { background-color: #3b82f6; color: #fff; }
 
-        .category {
-            font-size: 0.8rem;
-            color: #64748b;
-            font-weight: 600;
-        }
-
-        .card-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-bottom: 1px solid #334155;
-        }
-
-        .card-body {
-            padding: 20px;
-            flex-grow: 1;
-        }
-
-        .prompt-text-box {
-            font-size: 0.9rem;
-            color: #cbd5e1;
-            background-color: #0f172a;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px dashed #334155;
-            word-wrap: break-word;
-        }
-
-        /* Double-Action Footer Buttons (Copy + Affiliate CTA) */
-        .card-footer {
-            padding: 15px 20px;
-            background-color: #1a2333;
-            border-top: 1px solid #334155;
-            display: flex;
-            gap: 10px;
-        }
-
-        .copy-btn {
-            flex: 2;
-            background-color: #3b82f6;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .copy-btn:hover {
-            background-color: #2563eb;
-        }
-
-        .try-btn {
-            flex: 1;
-            background-color: transparent;
-            color: #3b82f6;
-            border: 2px solid #3b82f6;
-            padding: 10px;
-            border-radius: 8px;
-            font-weight: bold;
-            text-decoration: none;
-            text-align: center;
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-
-        .try-btn:hover {
-            background-color: #3b82f6;
-            color: #fff;
-        }
-
-        /* Responsive Breakpoints */
-        @media (max-width: 768px) {
-            .navbar { flex-direction: column; gap: 15px; }
-            .hero-section h1 { font-size: 2rem; }
-        }
+        @media (max-width: 768px) { .navbar { flex-direction: column; gap: 15px; } }
     </style>
 </head>
 <body>
 
-    <!-- 1. Navbar -->
     <nav class="navbar">
         <div class="logo">🚀 PromptHub Global</div>
         <ul>
-            <li><a href="#" class="active">Home</a></li>
-            <li><a href="#">AI Tools</a></li>
-            <li><a href="#">Submit Prompt</a></li>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="tools.html">AI Tools</a></li>
+            <li><a href="submit.html">Submit Prompt</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
         </ul>
     </nav>
 
-    <!-- 2. Hero Section & Filters -->
     <header class="hero-section">
         <h1>Global AI Prompt Directory</h1>
-        <p>Instant copy verified prompts for the world's top AI models and networks.</p>
-        
+        <p>Copy verified prompts for the world's top AI models in one click.</p>
         <div class="search-container">
-            <input type="text" placeholder="Search prompts (e.g., cinematic, cyberpunk, realistic)...">
+            <input type="text" id="searchInput" onkeyup="filterPrompts()" placeholder="Search prompts (e.g., cinematic, anime, voice)...">
         </div>
-
         <div class="quick-tags">
-            <button class="tag-btn active">All Prompts</button>
-            <button class="tag-btn">Flux AI</button>
-            <button class="tag-btn">Midjourney</button>
-            <button class="tag-btn">ElevenLabs</button>
+            <button class="tag-btn active" onclick="filterCategory('all', this)">All Prompts</button>
+            <button class="tag-btn" onclick="filterCategory('flux', this)">Flux AI</button>
+            <button class="tag-btn" onclick="filterCategory('midjourney', this)">Midjourney</button>
+            <button class="tag-btn" onclick="filterCategory('elevenlabs', this)">ElevenLabs</button>
         </div>
     </header>
 
-    <!-- 3. Main Prompt Grid Container -->
     <main class="main-container">
-        <div class="prompt-grid">
+        <div class="prompt-grid" id="promptGrid">
             
-            <!-- Card 1: Flux AI Card -->
-            <div class="prompt-card">
+            <!-- Card 1 -->
+            <div class="prompt-card" data-tool="flux">
                 <div class="card-header">
                     <span class="badge flux">Flux AI</span>
-                    <span class="category">Cinematic 3D</span>
+                    <span class="category">Cinematic</span>
                 </div>
-                <!-- Sample Image Link (Aap badal sakti hain) -->
-                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=500" alt="Flux AI Result" class="card-img">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=500" class="card-img" alt="AI Preview">
                 <div class="card-body">
-                    <p class="prompt-text-box" id="p1">A cinematic, hyper-realistic shot of a futuristic neon city street in rain, cyberpunk style, shot on 35mm lens, 8k resolution, highly detailed.</p>
+                    <p class="prompt-text-box" id="p1">A cinematic, hyper-realistic shot of a futuristic neon city street in rain, cyberpunk style, 8k resolution, highly detailed.</p>
                 </div>
                 <div class="card-footer">
                     <button class="copy-btn" onclick="copyPrompt('p1', this)">📋 Copy Prompt</button>
-                    <!-- Yahan aap apna custom affiliate link lagayeingi -->
-                    <a href="https://example.com/flux-affiliate" target="_blank" class="try-btn">Try Tool</a>
+                    <a href="tools.html" class="try-btn">Try Tool</a>
                 </div>
             </div>
 
-            <!-- Card 2: Midjourney Card -->
-            <div class="prompt-card">
+            <!-- Card 2 -->
+            <div class="prompt-card" data-tool="midjourney">
                 <div class="card-header">
                     <span class="badge midjourney">Midjourney</span>
-                    <span class="category">Anime Art</span>
+                    <span class="category">Anime</span>
                 </div>
-                <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=500" alt="Midjourney Result" class="card-img">
+                <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=500" class="card-img" alt="AI Preview">
                 <div class="card-body">
-                    <p class="prompt-text-box" id="p2">Retro 90s anime aesthetic, a cozy bedroom with a large window, rain drops on glass, soft pastel colors, lo-fi vibe, highly detailed --ar 16:9 --v 6.0</p>
+                    <p class="prompt-text-box" id="p2">Retro 90s anime aesthetic, a cozy bedroom with a large window, rain drops on glass, soft pastel colors, lo-fi vibe --ar 16:9</p>
                 </div>
                 <div class="card-footer">
                     <button class="copy-btn" onclick="copyPrompt('p2', this)">📋 Copy Prompt</button>
-                    <a href="https://example.com/midjourney-link" target="_blank" class="try-btn">Try Tool</a>
+                    <a href="tools.html" class="try-btn">Try Tool</a>
                 </div>
             </div>
 
-            <!-- Card 3: ElevenLabs Card (Audio Settings) -->
-            <div class="prompt-card">
+            <!-- Card 3 -->
+            <div class="prompt-card" data-tool="elevenlabs">
                 <div class="card-header">
                     <span class="badge elevenlabs">ElevenLabs</span>
-                    <span class="category">Voice Synthesis</span>
+                    <span class="category">Voice</span>
                 </div>
-                <!-- Audio Tools ke liye placeholder abstract image -->
-                <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd6a?q=80&w=500" alt="Audio Waveform" class="card-img">
+                <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd6a?q=80&w=500" class="card-img" alt="AI Preview">
                 <div class="card-body">
-                    <p class="prompt-text-box" id="p3">Deep cinematic male voiceover, high clarity, stability: 45%, clarity/similarity: 85%, style exaggeration: 10%. Perfect for historical or documentary trailers.</p>
+                    <p class="prompt-text-box" id="p3">Deep cinematic male voiceover, high clarity, stability: 45%, clarity/similarity: 85%, perfect for trailers.</p>
                 </div>
                 <div class="card-footer">
                     <button class="copy-btn" onclick="copyPrompt('p3', this)">📋 Copy Prompt</button>
-                    <!-- ElevenLabs Affiliate link yahan set hoga -->
-                    <a href="https://example.com/elevenlabs-affiliate" target="_blank" class="try-btn">Try Tool</a>
+                    <a href="tools.html" class="try-btn">Try Tool</a>
                 </div>
             </div>
 
         </div>
     </main>
 
-    <!-- 4. Clipboard Functional JavaScript -->
     <script>
+        // Copy Functional Logic
         function copyPrompt(id, button) {
-            // Target prompt text
-            const textToCopy = document.getElementById(id).innerText;
-            
-            // Web Clipboard API
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                // Instantly change button text to give confirmation
-                const oldContent = button.innerHTML;
+            const text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const oldText = button.innerHTML;
                 button.innerHTML = "✅ Copied!";
-                button.style.backgroundColor = "#10b981"; // Change to emerald green on success
-                
-                // Revert back to original state after 2 seconds
-                setTimeout(() => {
-                    button.innerHTML = oldContent;
-                    button.style.backgroundColor = "#3b82f6"; // Back to accent blue
-                }, 1800);
-            }).catch(err => {
-                console.error('Failed to copy: ', err);
+                button.style.backgroundColor = "#10b981";
+                setTimeout(() => { button.innerHTML = oldText; button.style.backgroundColor = "#3b82f6"; }, 1500);
             });
+        }
+
+        // Live Search Logic
+        function filterPrompts() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.getElementsByClassName('prompt-card');
+            for (let i = 0; i < cards.length; i++) {
+                const text = cards[i].querySelector('.prompt-text-box').innerText.toLowerCase();
+                cards[i].style.display = text.includes(input) ? "flex" : "none";
+            }
+        }
+
+        // Live Category Filter Logic
+        function filterCategory(category, btn) {
+            document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const cards = document.getElementsByClassName('prompt-card');
+            for (let i = 0; i < cards.length; i++) {
+                if (category === 'all' || cards[i].getAttribute('data-tool') === category) {
+                    cards[i].style.display = "flex";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
         }
     </script>
 </body>
