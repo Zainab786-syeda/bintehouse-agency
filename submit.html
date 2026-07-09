@@ -8,12 +8,14 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background-color: #0f172a; color: #f8fafc; line-height: 1.6; }
         
+        /* Consistent Navbar */
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background-color: #1e293b; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; }
         .navbar .logo { font-size: 1.4rem; font-weight: bold; color: #3b82f6; }
         .navbar ul { display: flex; list-style: none; gap: 20px; }
         .navbar ul li a { color: #94a3b8; text-decoration: none; font-weight: 500; transition: 0.3s; }
         .navbar ul li a:hover, .navbar ul li a.active { color: #3b82f6; }
 
+        /* Dashboard Flex Container */
         .main-container { max-width: 1100px; margin: 40px auto; padding: 0 20px; display: flex; gap: 40px; }
         .form-section { flex: 2; background-color: #1e293b; padding: 30px; border-radius: 14px; border: 1px solid #334155; }
         .form-section h2 { font-size: 1.8rem; margin-bottom: 10px; color: #3b82f6; }
@@ -21,22 +23,32 @@
 
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #cbd5e1; font-size: 0.9rem; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border-radius: 8px; border: 2px solid #334155; background-color: #0f172a; color: #fff; font-size: 0.95rem; outline: none; }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #3b82f6; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border-radius: 8px; border: 2px solid #334155; background-color: #0f172a; color: #fff; font-size: 0.95rem; outline: none; transition: 0.2s; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15); }
 
-        .file-drop-zone { border: 2px dashed #334155; padding: 30px; text-align: center; border-radius: 8px; background-color: #0f172a; cursor: pointer; }
+        /* Upgraded Interactive Drop Zone */
+        .file-drop-zone { border: 2px dashed #334155; padding: 35px 20px; text-align: center; border-radius: 8px; background-color: #0f172a; cursor: pointer; transition: all 0.3s ease; }
+        .file-drop-zone.dragover { border-color: #3b82f6; background-color: #141e33; transform: scale(1.01); }
         .file-drop-zone:hover { border-color: #3b82f6; background-color: #141e33; }
-        .file-drop-zone p { color: #64748b; }
+        .file-drop-zone p { color: #64748b; font-size: 0.9rem; }
         .file-drop-zone span { color: #3b82f6; font-weight: bold; }
 
-        .submit-btn { width: 100%; background-color: #3b82f6; color: white; border: none; padding: 14px; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; }
-        .submit-btn:hover { background-color: #2563eb; }
+        .submit-btn { width: 100%; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; border: none; padding: 14px; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2); }
+        .submit-btn:hover { transform: translateY(-1px); background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); }
 
+        /* Professional Guidelines Box */
         .guidelines-section { flex: 1; background-color: #1a2333; padding: 25px; border-radius: 14px; border: 1px solid #334155; height: fit-content; }
-        .guidelines-section h3 { font-size: 1.2rem; margin-bottom: 15px; }
+        .guidelines-section h3 { font-size: 1.2rem; margin-bottom: 15px; color: #f8fafc; display: flex; align-items: center; gap: 8px; }
         .guidelines-list { list-style: none; }
-        .guidelines-list li { color: #94a3b8; font-size: 0.9rem; margin-bottom: 12px; padding-left: 15px; position: relative; }
-        .guidelines-list li::before { content: "•"; color: #3b82f6; font-weight: bold; position: absolute; left: 0; }
+        .guidelines-list li { color: #94a3b8; font-size: 0.9rem; margin-bottom: 14px; padding-left: 18px; position: relative; line-height: 1.5; }
+        .guidelines-list li::before { content: "✓"; color: #10b981; font-weight: bold; position: absolute; left: 0; top: 0; }
+
+        /* Custom Modern Popup Toast Notification */
+        .toast-notification { position: fixed; bottom: -100px; right: 20px; background-color: #1e293b; border-left: 4px solid #10b981; padding: 15px 25px; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border-top: 1px solid #334155; border-right: 1px solid #334155; border-bottom: 1px solid #334155; display: flex; align-items: center; gap: 12px; z-index: 1000; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .toast-notification.show { bottom: 20px; }
+        .toast-icon { background-color: rgba(16, 185, 129, 0.15); color: #10b981; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        .toast-msg h4 { font-size: 0.95rem; color: #fff; }
+        .toast-msg p { font-size: 0.8rem; color: #94a3b8; }
 
         @media (max-width: 768px) { .main-container { flex-direction: column; } .navbar { flex-direction: column; gap: 15px; } }
     </style>
@@ -64,12 +76,39 @@
                     <input type="text" placeholder="e.g., Cyberpunk Character Portrait" required>
                 </div>
                 <div class="form-group">
-                    <label>Select AI Model</label>
+                    <label>Select Target AI Subsystem</label>
                     <select required>
-                        <option value="" disabled selected>Choose an AI Tool...</option>
-                        <option value="flux">Flux AI</option>
-                        <option value="midjourney">Midjourney</option>
-                        <option value="elevenlabs">ElevenLabs</option>
+                        <option value="" disabled selected>Choose the compatible tool...</option>
+                        <!-- Updated synchronized matching list of 25+ software engines -->
+                        <optgroup label="Text & Dialogue Models">
+                            <option value="chatgpt">ChatGPT (GPT-4o)</option>
+                            <option value="claude">Claude 3.5 Sonnet</option>
+                            <option value="gemini">Google Gemini</option>
+                            <option value="perplexity">Perplexity AI</option>
+                            <option value="deepseek">DeepSeek V3</option>
+                            <option value="copilot">MS Copilot</option>
+                        </optgroup>
+                        <optgroup label="Image Generators">
+                            <option value="midjourney">Midjourney v6</option>
+                            <option value="flux">Flux.1 AI</option>
+                            <option value="stable-diffusion">Stable Diffusion XL</option>
+                            <option value="leonardo">Leonardo AI</option>
+                            <option value="adobe-firefly">Adobe Firefly</option>
+                            <option value="canva">Canva AI</option>
+                        </optgroup>
+                        <optgroup label="Video & Animation Engines">
+                            <option value="sora">OpenAI Sora</option>
+                            <option value="runway">Runway Gen-3</option>
+                            <option value="pika">Pika Labs</option>
+                            <option value="luma">Luma Dream Machine</option>
+                            <option value="heygen">HeyGen Avatars</option>
+                        </optgroup>
+                        <optgroup label="Audio, UI & Assets">
+                            <option value="elevenlabs">ElevenLabs TTS</option>
+                            <option value="suno">Suno AI Music</option>
+                            <option value="udio">Udio Music</option>
+                            <option value="v0">v0.dev Frontend</option>
+                        </optgroup>
                     </select>
                 </div>
                 <div class="form-group">
@@ -77,10 +116,11 @@
                     <textarea rows="5" placeholder="Paste complete instruction text layout here..." required></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Upload Preview Image</label>
-                    <div class="file-drop-zone" onclick="document.getElementById('fInput').click()">
-                        <p id="dropZoneText">Click to <span>Browse</span> your AI art file</p>
-                        <input type="file" id="fInput" accept="image/*" style="display: none;" onchange="showFileName()">
+                    <label>Upload Preview Image / Output File</label>
+                    <!-- Enhanced drag drop functional container area -->
+                    <div class="file-drop-zone" id="dropZone" onclick="document.getElementById('fInput').click()">
+                        <p id="dropZoneText">Drag & Drop or click to <span>Browse</span> your AI art file</p>
+                        <input type="file" id="fInput" accept="image/*" style="display: none;" onchange="showFileName(this.files)">
                     </div>
                 </div>
                 <button type="submit" class="submit-btn">🚀 Submit Prompt for Review</button>
@@ -88,28 +128,28 @@
         </section>
 
         <aside class="guidelines-section">
-            <h3>⚠️ Submission Rules</h3>
+            <h3>🛡️ Submission Rules</h3>
             <ul class="guidelines-list">
-                <li>Verify that the prompt functions perfectly on native systems.</li>
-                <li>Ensure uploaded images match text commands cleanly.</li>
-                <li>Avoid custom user branding tags inside the prompt data text box.</li>
+                <li>Verify that the prompt functions perfectly on native systems before sharing.</li>
+                <li>Ensure uploaded preview images match your exact text commands cleanly.</li>
+                <li>Avoid adding custom user social handles or branding inside text parameters.</li>
+                <li>Duplicated or low-quality generic outputs will fail validation filters.</li>
             </ul>
         </aside>
     </main>
 
+    <!-- Professional Popup Dialog Alert (Replaces old gray default alert) -->
+    <div class="toast-notification" id="successToast">
+        <div class="toast-icon">✓</div>
+        <div class="toast-msg">
+            <h4>Submission Received!</h4>
+            <p>Your prompt data has been securely queued for review.</p>
+        </div>
+    </div>
+
     <script>
-        function showFileName() {
-            const input = document.getElementById('fInput');
-            if(input.files.length > 0) {
-                document.getElementById('dropZoneText').innerHTML = "Selected File: <span>" + input.files[0].name + "</span>";
-            }
-        }
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            alert("Success! Your prompt data has been safely logged and sent to administration queue for verification.");
-            document.getElementById("promptForm").reset();
-            document.getElementById('dropZoneText').innerHTML = "Click to <span>Browse</span> your AI art file";
-        }
-    </script>
-</body>
-</html>
+        const dropZone = document.getElementById('dropZone');
+        const dropZoneText = document.getElementById('dropZoneText');
+
+        // Drag and Drop Modern States Event Handlers
+        ['dragenter', 'dragover'].forEach(eventName => {

@@ -6,22 +6,42 @@
     <title>Privacy Policy - PromptHub Global</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: #0f172a; color: #cbd5e1; line-height: 1.8; padding-bottom: 60px; }
+        body { background-color: #0f172a; color: #cbd5e1; line-height: 1.8; padding-bottom: 60px; scroll-behavior: smooth; }
         
+        /* Consistent Global Navbar */
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background-color: #1e293b; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; }
         .navbar .logo { font-size: 1.4rem; font-weight: bold; color: #3b82f6; }
         .navbar ul { display: flex; list-style: none; gap: 20px; }
         .navbar ul li a { color: #94a3b8; text-decoration: none; font-weight: 500; transition: 0.3s; }
         .navbar ul li a:hover, .navbar ul li a.active { color: #3b82f6; }
 
-        .legal-container { max-width: 800px; margin: 50px auto; background-color: #1e293b; padding: 40px; border-radius: 14px; border: 1px solid #334155; }
+        /* Legal Center Canvas Layout */
+        .legal-container { max-width: 800px; margin: 50px auto; background-color: #1e293b; padding: 40px; border-radius: 14px; border: 1px solid #334155; box-shadow: 0 4px 25px rgba(0,0,0,0.2); }
         .legal-container h1 { color: #f8fafc; font-size: 2.2rem; margin-bottom: 10px; border-bottom: 2px solid #334155; padding-bottom: 15px; }
-        .last-updated { font-size: 0.85rem; color: #64748b; margin-bottom: 30px; display: block; }
-        .legal-container h2 { color: #3b82f6; font-size: 1.4rem; margin-top: 30px; margin-bottom: 15px; }
+        .last-updated { font-size: 0.85rem; color: #64748b; margin-bottom: 30px; display: block; font-weight: 600; }
+        .legal-container h2 { color: #3b82f6; font-size: 1.4rem; margin-top: 35px; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
         
-        .disclosure-box { background-color: rgba(59, 130, 246, 0.1); border-left: 4px solid #3b82f6; padding: 20px; border-radius: 0 8px 8px 0; margin: 30px 0; color: #e2e8f0; }
+        /* Premium Disclosure Alert Block */
+        .disclosure-box { background-color: rgba(59, 130, 246, 0.07); border-left: 4px solid #3b82f6; padding: 20px; border-radius: 0 8px 8px 0; margin: 30px 0; color: #e2e8f0; border-top: 1px solid rgba(59, 130, 246, 0.15); border-right: 1px solid rgba(59, 130, 246, 0.15); border-bottom: 1px solid rgba(59, 130, 246, 0.15); }
         .disclosure-box strong { color: #3b82f6; }
-        .footer-text { text-align: center; margin-top: 40px; font-size: 0.85rem; color: #64748b; }
+
+        /* Modern Accordion Interactive Policy Component */
+        .accordion-wrapper { border: 1px solid #334155; border-radius: 8px; margin: 20px 0; overflow: hidden; background-color: #0f172a; }
+        .accordion-header { background-color: #151f32; padding: 15px 20px; color: #f8fafc; font-weight: 600; font-size: 0.95rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; user-select: none; }
+        .accordion-header:hover { background-color: #1a263d; color: #3b82f6; }
+        .accordion-icon { font-size: 0.8rem; transition: transform 0.3s ease; color: #64748b; }
+        .accordion-content { padding: 0 20px; max-height: 0; overflow: hidden; transition: all 0.3s cubic-bezier(0, 1, 0, 1); color: #94a3b8; font-size: 0.9rem; line-height: 1.7; }
+        .accordion-wrapper.open .accordion-content { padding: 20px; max-height: 1000px; transition: all 0.3s cubic-bezier(1, 0, 1, 0); border-top: 1px solid #334155; }
+        .accordion-wrapper.open .accordion-icon { transform: rotate(180deg); color: #3b82f6; }
+
+        /* Floating Dynamic Scroll Assistance Element */
+        .scroll-top-widget { position: fixed; bottom: 30px; right: 30px; background-color: #3b82f6; color: #fff; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3); border: none; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 500; }
+        .scroll-top-widget.visible { opacity: 1; visibility: visible; }
+        .scroll-top-widget:hover { background-color: #2563eb; transform: translateY(-3px); }
+
+        .footer-text { text-align: center; margin-top: 50px; font-size: 0.85rem; color: #64748b; border-top: 1px solid #334155; padding-top: 20px; }
+        
+        @media (max-width: 768px) { .legal-container { padding: 25px; margin: 20px; } .navbar { flex-direction: column; gap: 15px; } }
     </style>
 </head>
 <body>
@@ -44,17 +64,53 @@
             <strong>📢 Affiliate Disclosure:</strong> PromptHub Global participates in dynamic AI software affiliate networks. Certain outgoing links on the "AI Tools" grid are conversion nodes that yield small performance commission payouts at zero overhead cost to our web users.
         </div>
 
-        <h2>1. Information Logging</h2>
+        <h2>🔒 1. Information Logging</h2>
         <p>We perform no explicit login tracking actions for regular users accessing the clipboard rendering tools. Data entered during custom prompt asset submissions remains exclusively isolated inside our local server tracking frameworks.</p>
 
-        <h2>2. AdSense & Cookie Rules</h2>
+        <h2>🍪 2. AdSense & Cookie Rules</h2>
         <p>Our advertisement automation scripts, including Google AdSense systems, deploy tracking configurations to catalog platform layout views to deliver accurate display banners matches based on historic navigation logs.</p>
 
-        <h2>3. Data Consent Protection</h2>
+        <!-- Upgraded Dynamic Accordion for Interactive Legal Compliance Reading -->
+        <div class="accordion-wrapper" id="cookieAccordion">
+            <div class="accordion-header" onclick="toggleAccordion()">
+                <span>How to Manage & Disable Tracking Cookies?</span>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                You can easily restrict or block cookies completely through your native device web browser privacy panel configurations (such as Google Chrome settings or Safari Preferences). Please remember that erasing technical storage authorization identifiers may slightly disrupt layout filter memory speeds across our local directories.
+            </div>
+        </div>
+
+        <h2>⚖️ 3. Data Consent Protection</h2>
         <p>By executing interactions across our web directory components, you provide complete operational validation parameters to match our technical data storage and logging layout requirements.</p>
 
         <p class="footer-text">© 2026 PromptHub Global. All rights reserved.</p>
     </main>
 
+    <!-- Scroll Assistance Utility Trigger Widget Button -->
+    <button class="scroll-top-widget" id="scrollTopBtn" onclick="scrollToTop()">▲</button>
+
+    <script>
+        // 1. Accordion Component Interactive Toggle Utility
+        function toggleAccordion() {
+            const accordion = document.getElementById('cookieAccordion');
+            accordion.classList.toggle('open');
+        }
+
+        // 2. Scroll Top Visibility Monitor Framework
+        window.onscroll = function() {
+            const scrollBtn = document.getElementById('scrollTopBtn');
+            if (document.body.scrollTop > 250 || document.documentElement.scrollTop > 250) {
+                scrollBtn.classList.add('visible');
+            } else {
+                scrollBtn.classList.remove('visible');
+            }
+        };
+
+        // 3. Scroll Execution Function
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>
