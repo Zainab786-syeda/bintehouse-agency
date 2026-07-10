@@ -3,187 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PromptHub Global - Home Dashboard</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: #0f172a; color: #cbd5e1; line-height: 1.8; padding-bottom: 60px; scroll-behavior: smooth; }
-        
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background-color: #1e293b; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; }
-        .navbar .logo { font-size: 1.4rem; font-weight: bold; color: #3b82f6; }
-        .navbar ul { display: flex; list-style: none; gap: 20px; }
-        .navbar ul li a { color: #94a3b8; text-decoration: none; font-weight: 500; transition: 0.3s; }
-        .navbar ul li a:hover, .navbar ul li a.active { color: #3b82f6; }
-
-        .dashboard-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-        .hero-banner { text-align: center; margin-bottom: 40px; }
-        .hero-banner h1 { color: #f8fafc; font-size: 2.5rem; margin-bottom: 10px; }
-        .hero-banner span { color: #3b82f6; }
-        
-        .search-box-wrapper { max-width: 600px; margin: 0 auto 30px; }
-        .search-box-wrapper input { width: 100%; padding: 15px 25px; border-radius: 30px; border: 2px solid #334155; background-color: #1e293b; color: #fff; font-size: 1rem; outline: none; transition: 0.3s; }
-        .search-box-wrapper input:focus { border-color: #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.2); }
-
-        .filter-tags-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
-        .tag-pill { background-color: #1e293b; color: #94a3b8; border: 1px solid #334155; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: 500; transition: 0.3s; }
-        .tag-pill.active, .tag-pill:hover { background-color: #3b82f6; color: #fff; border-color: #3b82f6; }
-
-        .prompt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
-        .prompt-node-card { background-color: #1e293b; border-radius: 14px; overflow: hidden; border: 1px solid #334155; display: flex; flex-direction: column; transition: transform 0.3s, border-color 0.3s; }
-        .prompt-node-card:hover { transform: translateY(-5px); border-color: #3b82f6; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
-        
-        .node-img-header { position: relative; width: 100%; height: 200px; overflow: hidden; }
-        .node-img-header img { width: 100%; height: 100%; object-fit: cover; }
-        .brand-badge { position: absolute; top: 15px; left: 15px; padding: 4px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
-        .brand-badge.flux { background-color: #e84393; color: #fff; }
-        .brand-badge.midjourney { background-color: #8e44ad; color: #fff; }
-        .brand-badge.elevenlabs { background-color: #10b981; color: #fff; }
-
-        .node-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; gap: 15px; }
-        .node-meta-row { display: flex; justify-content: space-between; align-items: center; }
-        .node-cat { font-size: 0.8rem; color: #64748b; font-weight: 600; text-transform: uppercase; }
-        
-        .upvote-action-trigger { display: flex; align-items: center; gap: 6px; cursor: pointer; color: #94a3b8; font-size: 0.85rem; font-weight: 600; background: #0f172a; padding: 5px 12px; border-radius: 20px; border: 1px solid #334155; transition: 0.2s; user-select: none; }
-        .upvote-action-trigger:hover, .upvote-action-trigger.voted { background-color: #3b82f6; color: #fff; border-color: #3b82f6; }
-
-        .text-render-box { font-size: 0.9rem; color: #cbd5e1; background-color: #0f172a; padding: 14px; border-radius: 8px; border: 1px dashed #334155; line-height: 1.5; min-height: 80px; }
-        
-        .node-footer-actions { padding: 15px 20px; background-color: #151f32; border-top: 1px solid #334155; display: flex; gap: 10px; }
-        .action-btn-copy { flex: 2; background-color: #3b82f6; color: white; border: none; padding: 11px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; }
-        .action-btn-copy:hover { background-color: #2563eb; }
-        .action-btn-redirect { flex: 1; background-color: transparent; color: #3b82f6; border: 2px solid #3b82f6; padding: 11px; border-radius: 8px; font-weight: bold; text-decoration: none; text-align: center; font-size: 0.85rem; transition: 0.3s; }
-        .action-btn-redirect:hover { background-color: #3b82f6; color: #fff; }
-
-        .scroll-top-widget { position: fixed; bottom: 30px; right: 30px; background-color: #3b82f6; color: #fff; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; border: none; opacity: 0; visibility: hidden; transition: 0.3s; z-index: 500; }
-        .scroll-top-widget.visible { opacity: 1; visibility: visible; }
-        .footer-text { text-align: center; margin-top: 50px; font-size: 0.85rem; color: #64748b; border-top: 1px solid #334155; padding-top: 20px; }
-    </style>
+    <title>SmartAI Hub - Best AI Tools Directory</title>
+    <!-- اوپر والی CSS فائل کو یہاں لنک کیا گیا ہے -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="logo">🚀 PromptHub Global</div>
-        <ul>
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="tools.html">AI Tools</a></li>
-            <li><a href="submit.html">Submit Prompt</a></li>
-            <li><a href="privacy.html">Privacy Policy</a></li>
-        </ul>
-    </nav>
+    <!-- Header Section -->
+    <header>
+        <a href="index.html" class="logo">SmartAI<span>Hub</span></a>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="index.html">AI Tools</a></li>
+                <li><a href="blog.html">History Blog</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <main class="dashboard-container">
-        <div class="hero-banner">
-            <h1>Global AI <span>Prompt Grid</span></h1>
-            <p>One-click copy production ready instructions verified by engineering benchmarks.</p>
+    <!-- Search Section -->
+    <div class="hero">
+        <h1>Discover Top AI Tools & Expert Guides</h1>
+        <p>Your premium directory to explore artificial intelligence and global historical insights.</p>
+        <div class="search-wrapper">
+            <input type="text" class="search-box" placeholder="Search AI tools or history articles...">
         </div>
+    </div>
 
-        <div class="search-box-wrapper">
-            <input type="text" id="mainSearch" onkeyup="executeSearch()" placeholder="Search node listings by tag parameters...">
-        </div>
-
-        <div class="filter-tags-row">
-            <button class="tag-pill active" onclick="executeCategoryFilter('all', this)">All Datasets</button>
-            <button class="tag-pill" onclick="executeCategoryFilter('flux', this)">Flux AI</button>
-            <button class="tag-pill" onclick="executeCategoryFilter('midjourney', this)">Midjourney</button>
-            <button class="tag-pill" onclick="executeCategoryFilter('elevenlabs', this)">ElevenLabs</button>
-        </div>
-
-        <div class="prompt-grid" id="listingGrid">
-            <!-- Node 1 -->
-            <div class="prompt-node-card" data-brand="flux">
-                <div class="node-img-header">
-                    <span class="brand-badge flux">Flux AI</span>
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=500" alt="Preview Visual">
-                </div>
-                <div class="node-body">
-                    <div class="node-meta-row">
-                        <span class="node-cat">Cinematic 3D</span>
-                        <div class="upvote-action-trigger" onclick="handleUpvoteIncrement(this)">👍 <span class="count">314</span></div>
+    <!-- Main Content Container -->
+    <div class="main-container">
+        
+        <!-- Left Column: AI Tools Grid -->
+        <main>
+            <div class="section-title">Trending AI Tools</div>
+            <div class="tools-grid">
+                
+                <!-- Card 1 -->
+                <div class="tool-card">
+                    <h3>ChatGPT</h3>
+                    <p>Excellent for generating articles, debugging code, and brainstorming innovative business ideas instantly.</p>
+                    <div class="tool-footer">
+                        <span class="tag">Free / Paid</span>
+                        <a href="https://chatgpt.com" target="_blank" class="visit-btn">Use Tool</a>
                     </div>
-                    <p class="text-render-box" id="str1">A cinematic, hyper-realistic shot of a futuristic neon city street in rain, cyberpunk style, highly detailed.</p>
                 </div>
-                <div class="node-footer-actions">
-                    <button class="action-btn-copy" onclick="executeClipboardCopy('str1', this)">📋 Copy Instruction</button>
-                    <a href="tools.html" class="action-btn-redirect">Try Tool</a>
-                </div>
-            </div>
 
-            <!-- Node 2 -->
-            <div class="prompt-node-card" data-brand="midjourney">
-                <div class="node-img-header">
-                    <span class="brand-badge midjourney">Midjourney</span>
-                    <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=500" alt="Preview Visual">
-                </div>
-                <div class="node-body">
-                    <div class="node-meta-row">
-                        <span class="node-cat">Anime Illustration</span>
-                        <div class="upvote-action-trigger" onclick="handleUpvoteIncrement(this)">👍 <span class="count">198</span></div>
+                <!-- Card 2 -->
+                <div class="tool-card">
+                    <h3>Midjourney</h3>
+                    <p>An elite text-to-image generator that creates hyper-realistic graphics and artistic designs.</p>
+                    <div class="tool-footer">
+                        <span class="tag">Paid</span>
+                        <a href="https://midjourney.com" target="_blank" class="visit-btn">Use Tool</a>
                     </div>
-                    <p class="text-render-box" id="str2">Retro 90s anime aesthetic, a cozy bedroom window scene, soft lighting, lo-fi color configurations.</p>
                 </div>
-                <div class="node-footer-actions">
-                    <button class="action-btn-copy" onclick="executeClipboardCopy('str2', this)">📋 Copy Instruction</button>
-                    <a href="tools.html" class="action-btn-redirect">Try Tool</a>
+
+                <!-- Card 3 -->
+                <div class="tool-card">
+                    <h3>Claude AI</h3>
+                    <p>A highly sophisticated conversational model optimized for accurate, analytical writing and task tracking.</p>
+                    <div class="tool-footer">
+                        <span class="tag">Free / Paid</span>
+                        <a href="https://claude.ai" target="_blank" class="visit-btn">Use Tool</a>
+                    </div>
                 </div>
+
             </div>
-        </div>
+        </main>
 
-        <p class="footer-text">© 2026 PromptHub Global. All rights reserved.</p>
-    </main>
+        <!-- Right Column: Featured Blog Peek -->
+        <aside>
+            <div class="section-title">Featured Knowledge</div>
+            <div class="blog-sidebar-card">
+                <h2>The American Civil War</h2>
+                <div class="blog-meta">By Admin | Category: History</div>
+                <p style="color: #9ca3af; font-size: 14px;">The American Civil War (1861–1865) was a massive internal conflict fought between the Union and the Confederacy that completely reshaped the modern US nation...</p>
+                <!-- یہ لنک کلک کرنے پر دوسرے پیج پر لے جائے گا -->
+                <a href="blog.html" class="blog-link">Read Full Article &rarr;</a>
+            </div>
+        </aside>
 
-    <button class="scroll-top-widget" id="topScrollBtn" onclick="actionScrollToTop()">▲</button>
+    </div>
 
-    <script>
-        function executeClipboardCopy(id, btn) {
-            const data = document.getElementById(id).innerText;
-            navigator.clipboard.writeText(data).then(() => {
-                const label = btn.innerHTML;
-                btn.innerHTML = "✅ String Logged";
-                btn.style.backgroundColor = "#10b981";
-                setTimeout(() => { btn.innerHTML = label; btn.style.backgroundColor = "#3b82f6"; }, 1500);
-            });
-        }
+    <footer>
+        &copy; 2026 SmartAI Hub. All rights reserved. Created with passion for tech and history.
+    </footer>
 
-        function executeSearch() {
-            const query = document.getElementById('mainSearch').value.toLowerCase();
-            const units = document.getElementsByClassName('prompt-node-card');
-            for(let i=0; i<units.length; i++) {
-                let context = units[i].querySelector('.text-render-box').innerText.toLowerCase();
-                units[i].style.display = context.includes(query) ? "flex" : "none";
-            }
-        }
-
-        function executeCategoryFilter(brand, pill) {
-            document.querySelectorAll('.tag-pill').forEach(p => p.classList.remove('active'));
-            pill.classList.add('active');
-            const units = document.getElementsByClassName('prompt-node-card');
-            for(let i=0; i<units.length; i++) {
-                if(brand === 'all' || units[i].getAttribute('data-brand') === brand) {
-                    units[i].style.display = "flex";
-                } else {
-                    units[i].style.display = "none";
-                }
-            }
-        }
-
-        function handleUpvoteIncrement(widget) {
-            let num = widget.querySelector('.count');
-            let current = parseInt(num.innerText);
-            if(!widget.classList.contains('voted')) {
-                num.innerText = current + 1;
-                widget.classList.add('voted');
-            } else {
-                num.innerText = current - 1;
-                widget.classList.remove('voted');
-            }
-        }
-
-        window.onscroll = function() {
-            const btn = document.getElementById('topScrollBtn');
-            if (document.body.scrollTop > 250 || document.documentElement.scrollTop > 250) { btn.classList.add('visible'); } 
-            else { btn.classList.remove('visible'); }
-        };
-
-        function actionScrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-    </script>
 </body>
 </html>
