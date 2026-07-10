@@ -1,0 +1,12 @@
+# پرائیویسی اور ایس ای او (SEO) کے لیے گوگل کو گائیڈ کرنا
+User-agent: *
+Allow: /index.html
+Allow: /blog.html
+Allow: /style.css
+Allow: /script.js
+
+# اگر آپ فیوچر میں ایڈمن پینل بنائیں تو اسے یہاں بلاک کر سکتی ہیں
+Disallow: /admin/
+
+# گوگل کو آپ کی ویب سائٹ کا نقشہ بتانے کے لیے
+Sitemap: https://bintehouse.com
