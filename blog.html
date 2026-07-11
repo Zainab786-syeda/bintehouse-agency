@@ -2,58 +2,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The American Civil War - SmartAI Hub Blog</title>
-    <!-- ڈیزائن یکساں رکھنے کے لیے وہی CSS یہاں بھی لنک ہے -->
+    <title>History Blog - bintehouse</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .blog-container { max-width: 800px; margin: 40px auto; padding: 20px; }
+        .blog-post { background: #111827; border: 1px solid #1f2937; padding: 25px; border-radius: 12px; margin-bottom: 20px; }
+        .blog-post h2 { color: #38bdf8; margin-top: 0; }
+        .blog-post p { color: #cbd5e1; line-height: 1.6; }
+    </style>
 </head>
 <body>
-
-    <!-- Header Section -->
     <header>
-        <a href="index.html" class="logo">SmartAI<span>Hub</span></a>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html">AI Tools</a></li>
-                <li><a href="blog.html" class="active">History Blog</a></li>
-            </ul>
-        </nav>
+        <a href="/" class="logo">SmartAI<span>Hub</span></a>
     </header>
 
-    <!-- Full Article Area -->
-    <div class="full-article-wrap">
-        <article class="article-body">
-            <h1>The American Civil War: A Complete Guide to the Historic Conflict</h1>
-            <div class="blog-meta">Published: July 2026 | Author: History Specialist | Reading Time: 4 mins</div>
-            
-            <p>The American Civil War is arguably the most crucial turning point in United States history. Fought from <strong>1861 to 1865</strong>, this brutal and bloody internal war was waged between the Northern states (known as the Union) and the Southern states (known as the Confederacy). The war not only cost hundreds of thousands of lives but also redefined the concept of human freedom globally.</p>
-            
-            <h4>1. Root Causes of the Conflict</h4>
-            <p>While economic issues played a role, the fundamental driver behind the split was slavery. The Southern economy relied extensively on massive agricultural fields (cotton and tobacco) maintained by enslaved labor. Conversely, the North was heavily industrialized and vehemently pushed to stop the expansion of slavery into new territories.</p>
-            
-            <ul>
-                <li><strong>States' Rights:</strong> The South argued that individual states should hold supreme authority over federal laws.</li>
-                <li><strong>Lincoln's Election:</strong> The victory of Abraham Lincoln in the 1860 presidential election, a known opponent of slavery's growth, triggered 11 Southern states to formally secede from the country.</li>
-            </ul>
-
-            <h4>2. Emancipation and Change of Scope</h4>
-            <p>Initially, the Union fought simply to keep the country together as one piece. However, in 1863, President Abraham Lincoln historically issued the <em>Emancipation Proclamation</em>. This executive order declared all enslaved individuals in Confederate-held lands to be free under federal law, shifting the moral landscape of the war completely from a political dispute to a fight for universal human rights.</p>
-            
-            <h4>3. The Road to Peace</h4>
-            <p>After decisive and catastrophic battles like the Battle of Gettysburg, the superior industrial resources and manpower of the Union wore down the South. In April 1865, Confederate General Robert E. Lee officially surrendered to Union General Ulysses S. Grant at Appomattox Court House, ending the four-year struggle.</p>
-
-            <h4>Conclusion</h4>
-            <p>The Northern victory preserved the United States as a single country. Shortly after the war, the <strong>13th Amendment</strong> was officially ratified, permanently outlawing slavery across every state. Today, this war remains essential to studying the social and cultural framework of modern America.</p>
-            
-            <br>
-            <a href="index.html" style="color: #38bdf8; text-decoration: none; font-weight: 500;">&larr; Back to Home and AI Tools</a>
-        </article>
+    <div class="blog-container">
+        <h1 style="color: white; margin-bottom: 30px;">Latest History Articles</h1>
+        
+        <!-- یہاں ڈیٹا بیس سے آنے والے آرٹیکلز ظاہر ہوں گے -->
+        <div id="blog-posts-container">
+            <p style="color: #6b7280;">Loading articles...</p>
+        </div>
     </div>
 
-    <footer>
-        &copy; 2026 SmartAI Hub. All rights reserved. Created with passion for tech and history.
-    </footer>
+    <script>
+        // پائیتھون API سے ڈیٹا منگوانے کا فنکشن
+        async function loadArticles() {
+            try {
+                const response = await fetch('/api/articles');
+                const articles = await response.json();
+                const container = document.getElementById('blog-posts-container');
+                
+                if (articles.length === 0) {
+                    container.innerHTML = "<p style='color: #6b7280;'>No articles found.</p>";
+                    return;
+                }
 
+                container.innerHTML = ''; // لوڈنگ میسج صاف کریں
+                articles.forEach(article => {
+                    const postDiv = document.createElement('div');
+                    postDiv.className = 'blog-post';
+                    postDiv.innerHTML = `
+                        <h2>${article.title}</h2>
+                        <p>${article.content}</p>
+                    `;
+                    container.appendChild(postDiv);
+                });
+            } catch (error) {
+                console.error('Error fetching articles:', error);
+            }
+        }
+
+        // پیج لوڈ ہوتے ہی فنکشن چلائیں
+        window.onload = loadArticles;
+    </script>
 </body>
 </html>

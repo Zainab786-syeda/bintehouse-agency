@@ -1,14 +1,18 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify, send_from_directory
 import sqlite3
+from flask import Flask, render_template, request, redirect, url_for, jsonify, send_from_directory
 
 app = Flask(__name__, static_folder='.', static_url_path='')
 
-# 1. ڈیٹا بیس اور ٹیبل بنانے کا فنکشن
-def init_db():
+# ڈیٹا بیس کنکشن کا فنکشن
+def get_db_connection():
     conn = sqlite3.connect('database.db')
-    cursor = conn.cursor()
-    # یہاں ہم ایک ٹیبل بنا رہے ہیں جس میں آرٹیکلز کا ڈیٹا سیو ہوگا
-    cursor.execute('''
+    conn.row_factory = sqlite3.Row  # ڈیٹا کو ڈکشنری کی شکل میں حاصل کرنے کے لیے
+    return conn
+
+# ڈیٹا بیس اور ٹیبل کی ابتدائی ترتیب
+def init_db():
+    conn = get_db_connection()
+    conn.execute('''
         CREATE TABLE IF NOT EXISTS articles (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL,
@@ -18,39 +22,38 @@ def init_db():
     conn.commit()
     conn.close()
 
-# ڈیٹا بیس کو شروع کرنا
 init_db()
 
-# 2. ہوم پیج کا راستہ
 @app.route('/')
-def home():
+def index():
     return send_from_directory('.', 'index.html')
 
-# 3. بلاگ پیج کا راستہ (یہاں ڈیٹا بیس سے آرٹیکلز نظر آئیں گے)
-@app.route('/blog')
-def blog():
-    return send_from_directory('.', 'blog.html')
+# بلاگ پیج کے لیے ڈیٹا بیس سے آرٹیکلز حاصل کرنا
+@app.route('/api/articles')
+def get_articles():
+    conn = get_db_connection()
+    articles = conn.execute('SELECT * FROM articles ORDER BY id DESC').fetchall()
+    conn.close()
+    
+    # ڈیٹا کو لسٹ میں تبدیل کرنا تاکہ JavaScript اسے پڑھ سکے
+    output =
+    for article in articles:
+        output.append({'title': article['title'], 'content': article['content']})
+    return jsonify(output)
 
-# 4. خفیہ اپلوڈ پیج کا راستہ (جہاں آپ فارم کھولیں گی)
-@app.route('/admin-upload')
-def admin_page():
-    return send_from_directory('.', 'upload.html')
-
-# 5. فارم کا ڈیٹا وصول کر کے ڈیٹا بیس میں سیو کرنے کا راستہ
+# نیا آرٹیکل اپ لوڈ کرنے کا راستہ
 @app.route('/add-article', methods=['POST'])
 def add_article():
     title = request.form.get('title')
     content = request.form.get('content')
     
     if title and content:
-        conn = sqlite3.connect('database.db')
-        cursor = conn.cursor()
-        cursor.execute('INSERT INTO articles (title, content) VALUES (?, ?)', (title, content))
+        conn = get_db_connection()
+        conn.execute('INSERT INTO articles (title, content) VALUES (?, ?)', (title, content))
         conn.commit()
         conn.close()
-        return "<h1>Success! Article uploaded to Database.</h1><br><a href='/admin-upload'>Upload Another</a>"
+        return "<h1>Success! Article uploaded.</h1><br><a href='/admin-upload'>Back</a>"
     return "Error: Title and Content are required!"
 
 if __name__ == '__main__':
-    print("Bintehouse Python Backend with Database is starting...")
     app.run(debug=True, port=5000)
