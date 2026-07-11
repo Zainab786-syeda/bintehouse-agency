@@ -2,49 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Upload Content</title>
+    <title>Admin - Upload Content</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .form-container { max-width: 600px; margin: 60px auto; background: #111827; padding: 40px; border-radius: 16px; border: 1px solid #1f2937; }
-        .form-group { margin-bottom: 20px; display: flex; flex-direction: column; }
-        .form-group label { margin-bottom: 8px; color: #38bdf8; font-weight: 600; }
-        .form-group input, .form-group textarea { padding: 12px; background: #1f2937; border: 1px solid #374151; color: white; border-radius: 8px; font-size: 16px; outline: none; }
-        .form-group input:focus, .form-group textarea:focus { border-color: #38bdf8; }
-        .submit-btn { background: #38bdf8; color: #0b0f19; font-weight: bold; padding: 14px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; transition: 0.3s; }
-        .submit-btn:hover { background: #0ea5e9; }
-    </style>
 </head>
 <body>
-
-    <header>
-        <a href="/" class="logo">SmartAI<span>Hub</span> Admin</a>
-        <nav>
-            <ul>
-                <li><a href="/">View Site</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="form-container">
-        <h2 style="margin-bottom: 20px; color: white;">Upload New History Article</h2>
-        
-        <!-- یہ فارم ڈیٹا کو پائیتھون بیک اینڈ کے پاس بھیجے گا -->
-        <form action="/add-article" methods="POST" method="post">
-            <div class="form-group">
-                <label for="title">Article Title</label>
-                <input type="text" id="title" name="title" placeholder="e.g., World War 2 Overview" required>
+    <div style="max-width: 600px; margin: 50px auto; background: #111827; padding: 30px; border-radius: 12px; color: white; border: 1px solid #1f2937;">
+        <h2>Upload History Article</h2>
+        <form action="/add-article" method="POST" enctype="multipart/form-data">
+            <div style="margin-bottom: 15px;">
+                <label>Article Title:</label><br>
+                <input type="text" name="title" style="width:100%; padding:10px; background:#1f2937; color:white; border:1px solid #374151; border-radius:5px;" required>
             </div>
-            
-            <div class="form-group">
-                <label for="content">Article Content</label>
-                <textarea id="content" name="content" rows="8" placeholder="Write your full English content here..." required></textarea>
+            <div style="margin-bottom: 15px;">
+                <label>Content:</label><br>
+                <textarea name="content" rows="6" style="width:100%; padding:10px; background:#1f2937; color:white; border:1px solid #374151; border-radius:5px;" required></textarea>
             </div>
-            
-            <button type="submit" class="submit-btn">Publish to Website</button>
+            <div style="margin-bottom: 20px;">
+                <label>Select Image:</label><br>
+                <input type="file" name="image" accept="image/*" style="color:white;">
+            </div>
+            <button type="submit" style="background:#38bdf8; color:#0b0f19; padding:12px 25px; border:none; border-radius:8px; font-weight:bold; cursor:pointer; width:100%;">Publish Now</button>
         </form>
     </div>
-
 </body>
 </html>
-

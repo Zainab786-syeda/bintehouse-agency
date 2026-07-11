@@ -2,59 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>History Blog - bintehouse</title>
+    <title>Blog - SmartAI Hub</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .blog-container { max-width: 800px; margin: 40px auto; padding: 20px; }
-        .blog-post { background: #111827; border: 1px solid #1f2937; padding: 25px; border-radius: 12px; margin-bottom: 20px; }
-        .blog-post h2 { color: #38bdf8; margin-top: 0; }
-        .blog-post p { color: #cbd5e1; line-height: 1.6; }
-    </style>
 </head>
 <body>
     <header>
         <a href="/" class="logo">SmartAI<span>Hub</span></a>
     </header>
 
-    <div class="blog-container">
-        <h1 style="color: white; margin-bottom: 30px;">Latest History Articles</h1>
+    <div style="max-width: 900px; margin: 40px auto; padding: 0 20px;">
+        <h1 style="color: white; border-bottom: 2px solid #38bdf8; padding-bottom: 10px; margin-bottom: 30px;">Latest History Articles</h1>
         
-        <!-- یہاں ڈیٹا بیس سے آنے والے آرٹیکلز ظاہر ہوں گے -->
         <div id="blog-posts-container">
-            <p style="color: #6b7280;">Loading articles...</p>
+            <p style="color: #9ca3af;">Loading articles...</p>
         </div>
     </div>
 
     <script>
-        // پائیتھون API سے ڈیٹا منگوانے کا فنکشن
-        async function loadArticles() {
-            try {
-                const response = await fetch('/api/articles');
-                const articles = await response.json();
+        // ڈیٹا بیس سے ڈیٹا فیچ (fetch) کرنا
+        fetch('/api/articles')
+            .then(response => response.json())
+            .then(data => {
                 const container = document.getElementById('blog-posts-container');
-                
-                if (articles.length === 0) {
-                    container.innerHTML = "<p style='color: #6b7280;'>No articles found.</p>";
+                container.innerHTML = ''; 
+
+                if (data.length === 0) {
+                    container.innerHTML = '<p style="color: #9ca3af;">No articles found yet.</p>';
                     return;
                 }
 
-                container.innerHTML = ''; // لوڈنگ میسج صاف کریں
-                articles.forEach(article => {
-                    const postDiv = document.createElement('div');
-                    postDiv.className = 'blog-post';
-                    postDiv.innerHTML = `
-                        <h2>${article.title}</h2>
-                        <p>${article.content}</p>
-                    `;
-                    container.appendChild(postDiv);
+                data.forEach(article => {
+                    // اگر تصویر موجود ہے تو اسے دکھائیں
+                    const imageTag = article.image_path ? `<img src="/static/uploads/${article.image_path}" style="width:100%; border-radius:10px; margin-bottom:20px;">` : '';
+                    
+                    const postHTML = `
+                        <div style="background:#111827; border:1px solid #1f2937; padding:30px; border-radius:15px; margin-bottom:30px;">
+                            ${imageTag}
+                            <h2 style="color:#ffffff; margin-bottom:15px;">${article.title}</h2>
+                            <p style="color:#cbd5e1; line-height:1.7;">${article.content}</p>
+                        </div>`;
+                    container.innerHTML += postHTML;
                 });
-            } catch (error) {
-                console.error('Error fetching articles:', error);
-            }
-        }
-
-        // پیج لوڈ ہوتے ہی فنکشن چلائیں
-        window.onload = loadArticles;
+            })
+            .catch(error => console.error('Error:', error));
     </script>
 </body>
 </html>
