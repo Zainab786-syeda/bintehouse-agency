@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartAI Hub - Best AI Tools Directory</title>
-    <!-- اوپر والی CSS فائل کو یہاں لنک کیا گیا ہے -->
+    <!-- CSS file connection -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -33,41 +33,13 @@
     <!-- Main Content Container -->
     <div class="main-container">
         
-        <!-- Left Column: AI Tools Grid -->
+        <!-- Left Column: Dynamic AI Tools Grid -->
         <main>
             <div class="section-title">Trending AI Tools</div>
-            <div class="tools-grid">
-                
-                <!-- Card 1 -->
-                <div class="tool-card">
-                    <h3>ChatGPT</h3>
-                    <p>Excellent for generating articles, debugging code, and brainstorming innovative business ideas instantly.</p>
-                    <div class="tool-footer">
-                        <span class="tag">Free / Paid</span>
-                        <a href="https://chatgpt.com" target="_blank" class="visit-btn">Use Tool</a>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="tool-card">
-                    <h3>Midjourney</h3>
-                    <p>An elite text-to-image generator that creates hyper-realistic graphics and artistic designs.</p>
-                    <div class="tool-footer">
-                        <span class="tag">Paid</span>
-                        <a href="https://midjourney.com" target="_blank" class="visit-btn">Use Tool</a>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="tool-card">
-                    <h3>Claude AI</h3>
-                    <p>A highly sophisticated conversational model optimized for accurate, analytical writing and task tracking.</p>
-                    <div class="tool-footer">
-                        <span class="tag">Free / Paid</span>
-                        <a href="https://claude.ai" target="_blank" class="visit-btn">Use Tool</a>
-                    </div>
-                </div>
-
+            
+            <!-- Is div ke andar database se aane wale tools automatic render honge -->
+            <div class="tools-grid" id="tools-container">
+                <p style="color: #9ca3af; font-style: italic;">Loading amazing AI tools from cloud database...</p>
             </div>
         </main>
 
@@ -78,7 +50,6 @@
                 <h2>The American Civil War</h2>
                 <div class="blog-meta">By Admin | Category: History</div>
                 <p style="color: #9ca3af; font-size: 14px;">The American Civil War (1861–1865) was a massive internal conflict fought between the Union and the Confederacy that completely reshaped the modern US nation...</p>
-                <!-- یہ لنک کلک کرنے پر دوسرے پیج پر لے جائے گا -->
                 <a href="blog.html" class="blog-link">Read Full Article &rarr;</a>
             </div>
         </aside>
@@ -88,7 +59,9 @@
     <footer>
         &copy; 2026 SmartAI Hub. All rights reserved. Created with passion for tech and history.
     </footer>
-<script src="script.js"></script>
+
+    <!-- JavaScript Connection -->
+    <script src="script.js"></script>
 
 </body>
 </html>

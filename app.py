@@ -1,37 +1,22 @@
 import os
-import sqlite3
 from flask import Flask, request, jsonify, send_from_directory
+from supabase import create_client, Client
 
 app = Flask(__name__, static_folder='static')
 
-# تصاویر محفوظ کرنے کا فولڈر
-UPLOAD_FOLDER = os.path.join('/tmp', 'uploads')
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-os.makedirs(UPLOAD_FOLDER, exist_ok=True) 
+# -----------------------------------------------------------------
+# 1. SUPABASE INTEGRATION (CLOUD DATABASE)
+# -----------------------------------------------------------------
+# Apne Supabase Dashboard se URL aur Anon Key yahan paste karein
+SUPABASE_URL = "https://supabase.co"
+SUPABASE_KEY = "YOUR_SUPABASE_ANON_KEY"  # <-- Apni real anon key yahan likhein
 
-# کلاؤڈ کے لیے ڈیٹا بیس کا راستہ
-DB_PATH = os.path.join('/tmp', 'database.db')
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-def init_db():
-    try:
-        conn = sqlite3.connect(DB_PATH)
-        cursor = conn.cursor()
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS articles (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                title TEXT NOT NULL,
-                content TEXT NOT NULL,
-                image_path TEXT
-            )
-        ''')
-        conn.commit()
-        conn.close()
-    except Exception as e:
-        print(f"Database init error: {e}")
 
-# ایپ لوڈ ہونے پر ڈیٹا بیس سیٹ کریں
-init_db()
-
+# -----------------------------------------------------------------
+# 2. HTML PAGES ROUTES
+# -----------------------------------------------------------------
 @app.route('/')
 def home():
     return send_from_directory('.', 'index.html')
@@ -44,55 +29,78 @@ def blog():
 def admin_page():
     return send_from_directory('.', 'upload.html')
 
+
+# -----------------------------------------------------------------
+# 3. ARTICLES / BLOGS ACTIONS (DATA STORAGE & FETCHING)
+# -----------------------------------------------------------------
+
+# Naya Article Add Karne ka Route (Admin Page Se Data Cloud Par Bhejne K Liye)
 @app.route('/add-article', methods=['POST'])
 def add_article():
     title = request.form.get('title')
     content = request.form.get('content')
-    file = request.files.get('image')
     
-    filename = ""
+    # Image name handle karna (Baad mein aap isay Supabase Storage se connect kar sakti hain)
+    filename = "" 
+    file = request.files.get('image')
     if file and file.filename != '':
         from werkzeug.utils import secure_filename
         filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
     if title and content:
         try:
-            conn = sqlite3.connect(DB_PATH)
-            cursor = conn.cursor()
-            cursor.execute('INSERT INTO articles (title, content, image_path) VALUES (?, ?, ?)', 
-                           (title, content, filename))
-            conn.commit()
-            conn.close()
-            return "<h1>Success! Article Uploaded.</h1><br><a href='/admin-upload'>Upload Another</a>"
+            # Supabase ke 'blogs' table mein data insert karein
+            data = {
+                "title": title,
+                "content": content,
+                "image_url": filename  # Aap ke database column ka naam image_url hai
+            }
+            supabase.table("blogs").insert(data).execute()
+            
+            return "<h1>Success! Article Uploaded to Cloud Database.</h1><br><a href='/admin-upload'>Upload Another</a>"
         except Exception as e:
-            return f"Database Error: {str(e)}", 500
+            return f"Supabase Cloud Error: {str(e)}", 500
+            
     return "Error: Title and Content are required!", 400
 
+
+# Frontend Blog Page Par Articles Dikhane Ki API
 @app.route('/api/articles')
 def get_articles():
     try:
-        if not os.path.exists(DB_PATH):
-            return jsonify([])
-        conn = sqlite3.connect(DB_PATH)
-        conn.row_factory = sqlite3.Row
-        cursor = conn.cursor()
-        cursor.execute('SELECT * FROM articles ORDER BY id DESC')
-        articles = cursor.fetchall()
+        # Supabase ke 'blogs' table se saara data load karein (Naye articles pehle ayen ge)
+        response = supabase.table("blogs").select("*").order("id", desc=True).execute()
+        articles = response.data
         
         output = []
         for article in articles:
             output.append({
-                'title': article['title'], 
-                'content': article['content'],
-                'image_path': article['image_path']
+                'title': article.get('title'), 
+                'content': article.get('content'),
+                'image_path': article.get('image_url')  # Frontend JS ko purana format hi bhej rahe hain
             })
-        conn.close()
+            
         return jsonify(output)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# Vercel کلاؤڈ کے لیے انٹری پوائنٹ فراہم کرنا
+
+# -----------------------------------------------------------------
+# 4. AI TOOLS ACTIONS (WEBSITE DIRECTORY K LIYE)
+# -----------------------------------------------------------------
+
+# AI Tools Ko Website Par Render/Dikhane Ki API
+@app.route('/api/ai-tools')
+def get_ai_tools():
+    try:
+        # Supabase ke 'ai-tools' table se saara data utha kar lao
+        response = supabase.table("ai-tools").select("*").execute()
+        return jsonify(response.data)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+# Vercel cloud architecture k liye application entrance entry 
 app.wsgi_app = app.wsgi_app 
 
 if __name__ == '__main__':
