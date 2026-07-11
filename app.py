@@ -2,7 +2,7 @@ import os
 import sqlite3
 from flask import Flask, request, jsonify, send_from_directory, render_template
 from werkzeug.utils import secure_filename
-from flask_admin import Admin # Flask-Admin امپورٹ کریں
+from flask_admin import Admin  # Flask-Admin امپورٹ کریں
 
 app = Flask(__name__, static_folder='static')
 
@@ -37,7 +37,6 @@ def home():
 
 @app.route('/blog')
 def blog():
-    # بلاگ دکھانے کے لیے آپ render_template بھی استعمال کر سکتی ہیں
     return send_from_directory('.', 'blog.html')
 
 @app.route('/admin-upload')
@@ -75,7 +74,8 @@ def get_articles():
     cursor.execute('SELECT * FROM articles ORDER BY id DESC')
     articles = cursor.fetchall()
     
-    output = # یہاں بریکٹ کا اضافہ کر کے سنٹیکس ایرر ٹھیک کیا گیا ہے
+    # یہاں سنٹیکس ایرر کو [] لگا کر ٹھیک کر دیا گیا ہے
+    output = []
     for article in articles:
         output.append({
             'title': article['title'], 
