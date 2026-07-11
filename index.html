@@ -4,19 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartAI Hub - Best AI Tools Directory</title>
-    <!-- CSS file connection -->
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- FIX: Flask static folder configuration path for CSS styling -->
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 
     <!-- Header Section -->
     <header>
-        <a href="index.html" class="logo">SmartAI<span>Hub</span></a>
+        <!-- FIX: Absolute paths to prevent 404 Not Found errors on click -->
+        <a href="/" class="logo">SmartAI<span>Hub</span></a>
         <nav>
             <ul>
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="index.html">AI Tools</a></li>
-                <li><a href="blog.html">History Blog</a></li>
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/">AI Tools</a></li>
+                <li><a href="/blog">History Blog</a></li>
             </ul>
         </nav>
     </header>
@@ -37,9 +39,9 @@
         <main>
             <div class="section-title">Trending AI Tools</div>
             
-            <!-- Is div ke andar database se aane wale tools automatic render honge -->
+            <!-- Is container div ke andar database se data load hoga -->
             <div class="tools-grid" id="tools-container">
-                <p style="color: #9ca3af; font-style: italic;">Loading amazing AI tools from cloud database...</p>
+                <p style="color: #9ca3af; font-style: italic; padding: 20px;">Loading amazing AI tools from cloud database...</p>
             </div>
         </main>
 
@@ -50,7 +52,9 @@
                 <h2>The American Civil War</h2>
                 <div class="blog-meta">By Admin | Category: History</div>
                 <p style="color: #9ca3af; font-size: 14px;">The American Civil War (1861–1865) was a massive internal conflict fought between the Union and the Confederacy that completely reshaped the modern US nation...</p>
-                <a href="blog.html" class="blog-link">Read Full Article &rarr;</a>
+                
+                <!-- FIX: Path linked according to new Flask routing structure -->
+                <a href="/blog" class="blog-link">Read Full Article &rarr;</a>
             </div>
         </aside>
 
@@ -60,8 +64,8 @@
         &copy; 2026 SmartAI Hub. All rights reserved. Created with passion for tech and history.
     </footer>
 
-    <!-- JavaScript Connection -->
-    <script src="script.js"></script>
+    <!-- FIX: Flask static layout connection path for Javascript functionality -->
+    <script src="/static/script.js"></script>
 
 </body>
 </html>
