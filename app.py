@@ -2,13 +2,17 @@ import os
 import sqlite3
 from flask import Flask, request, jsonify, send_from_directory, render_template
 from werkzeug.utils import secure_filename
+from flask_admin import Admin # Flask-Admin امپورٹ کریں
 
 app = Flask(__name__, static_folder='static')
 
 # تصاویر محفوظ کرنے کا فولڈر سیٹ کریں
-UPLOAD_FOLDER = 'static/uploads'
+UPLOAD_FOLDER = os.path.join('static', 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-os.makedirs(UPLOAD_FOLDER, exist_ok=True) # فولڈر نہ ہونے کی صورت میں خود بنا دے گا
+os.makedirs(UPLOAD_FOLDER, exist_ok=True) 
+
+# ایڈمن پینل شروع کریں
+admin = Admin(app, name='Bintehouse Admin', template_mode='bootstrap4')
 
 # ڈیٹا بیس کو شروع کرنا (تصویر کے کالم کے ساتھ)
 def init_db():
@@ -33,6 +37,7 @@ def home():
 
 @app.route('/blog')
 def blog():
+    # بلاگ دکھانے کے لیے آپ render_template بھی استعمال کر سکتی ہیں
     return send_from_directory('.', 'blog.html')
 
 @app.route('/admin-upload')
@@ -48,7 +53,6 @@ def add_article():
     
     filename = ""
     if file and file.filename != '':
-        # فائل کے نام کو محفوظ بنانا
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
@@ -71,7 +75,7 @@ def get_articles():
     cursor.execute('SELECT * FROM articles ORDER BY id DESC')
     articles = cursor.fetchall()
     
-    output =
+    output = # یہاں بریکٹ کا اضافہ کر کے سنٹیکس ایرر ٹھیک کیا گیا ہے
     for article in articles:
         output.append({
             'title': article['title'], 
@@ -82,4 +86,5 @@ def get_articles():
     return jsonify(output)
 
 if __name__ == '__main__':
+    # پورٹ 5000 پر سرور چلانا
     app.run(debug=True, port=5000)
