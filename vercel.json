@@ -1,15 +1,4 @@
-{
-  "version": 2,
-  "builds": [
-    {
-      "src": "app.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "app.py"
-    }
-  ]
-}
+Flask==3.0.3
+supabase==2.4.1
+python-dotenv==1.0.1
+werkzeug==3.0.3

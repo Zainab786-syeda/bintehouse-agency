@@ -1,18 +1,21 @@
-import os
+import os  # <-- Ye line zaroor check karein ke upar add ho
 from flask import Flask, request, jsonify, send_from_directory
 from supabase import create_client, Client
+from dotenv import load_dotenv  # <-- .env file read karne ke liye
 
-# Static folder ko explicit path dena taake CSS/JS block na ho
+# Local computer par testing ke liye .env file load karna
+load_dotenv()
+
 app = Flask(__name__, static_url_path='/static', static_folder='static')
 
 # -----------------------------------------------------------------
-# 1. SUPABASE INTEGRATION (CLOUD DATABASE)
+# 1. SUPABASE INTEGRATION (CLOUD DATABASE) - UPDATED CODE
 # -----------------------------------------------------------------
-SUPABASE_URL = "https://supabase.co"
-SUPABASE_KEY = "YOUR_SUPABASE_ANON_KEY"  # <-- Apni real anon key yahan likhein
+# Ab ye direct keys ke bajaye aapki .env file ya Vercel settings se automatic uthayega
+SUPABASE_URL = os.environ.get("SUPABASE_URL")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
-
 
 # -----------------------------------------------------------------
 # 2. FIX HARD NAVIGATION ROUTES (404 Error Solved)

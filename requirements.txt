@@ -1,3 +1,15 @@
-Flask==3.0.3
-Werkzeug==3.0.3
-supabase==2.31.0
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "app.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "app.py"
+    }
+  ]
+}
